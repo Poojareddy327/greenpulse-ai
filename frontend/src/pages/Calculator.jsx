@@ -31,7 +31,10 @@ const Calculator = () => {
 
   const calculateImpact = async () => {
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      // Use environment variable for API URL, fallback to production URL
+      const API_URL = import.meta.env.VITE_API_URL || 'https://greenpulse-api-wv14.onrender.com'
+      
+      console.log('Connecting to API:', API_URL) // Debug log
       
       const response = await fetch(`${API_URL}/api/calculate-impact`, {
         method: 'POST',
@@ -52,33 +55,54 @@ const Calculator = () => {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to calculate impact')
+        throw new Error(`API Error: ${response.status}`)
       }
 
       const data = await response.json()
       setResult(data)
     } catch (error) {
       console.error('Error calculating impact:', error)
-      // Fallback to client-side calculation
+      
+      // Enhanced client-side calculation with all factors
       const carbon = (
-        (parseFloat(formData.carMiles) || 0) * 0.4 +
-        (parseFloat(formData.flights) || 0) * 90 +
-        (parseFloat(formData.electricity) || 0) * 0.5
+        (parseFloat(formData.carMiles) || 0) * 0.4 * 4 + // weekly to monthly
+        (parseFloat(formData.flights) || 0) * 90 / 12 + // annual to monthly
+        (parseFloat(formData.electricity) || 0) * 0.5 +
+        (parseFloat(formData.heating) || 0) * 5.3
       )
+      
+      const dietFactors = { vegan: 1.5, vegetarian: 1.7, mixed: 2.5, 'meat-heavy': 3.3 }
+      const carbonDiet = (dietFactors[formData.diet] || 2.5) * 30
+      const totalCarbon = carbon + carbonDiet
       
       const water = (
         (parseFloat(formData.showerMinutes) || 0) * 9 * 30 +
-        (parseFloat(formData.laundry) || 0) * 40
+        (parseFloat(formData.laundry) || 0) * 40 * 4 +
+        (dietFactors[formData.diet] || 2.5) * 1000
       )
 
-      const score = Math.max(0, 100 - (carbon / 10 + water / 1000))
+      const carbonPenalty = Math.min(totalCarbon / 10, 50)
+      const waterPenalty = Math.min(water / 1000, 30)
+      const recyclingBonus = { always: 10, often: 7, sometimes: 3, rarely: 0 }[formData.recycling] || 0
+      const score = Math.max(0, 100 - carbonPenalty - waterPenalty + recyclingBonus)
+
+      const recommendations = []
+      if ((parseFloat(formData.carMiles) || 0) * 0.4 * 4 > 50) {
+        recommendations.push('Consider using public transport or carpooling to reduce emissions')
+      }
+      if ((parseFloat(formData.electricity) || 0) * 0.5 > 150) {
+        recommendations.push('Switch to LED bulbs and energy-efficient appliances')
+      }
+      if ((parseFloat(formData.showerMinutes) || 0) * 9 * 30 > 3000) {
+        recommendations.push('Reduce shower time to 5-7 minutes to save water')
+      }
 
       setResult({
-        carbon: carbon.toFixed(1),
+        carbon: totalCarbon.toFixed(1),
         water: water.toFixed(0),
         score: score.toFixed(0),
         rating: score > 80 ? 'Excellent' : score > 60 ? 'Good' : score > 40 ? 'Fair' : 'Needs Improvement',
-        recommendations: ['Unable to connect to server. Please try again.']
+        recommendations: recommendations.length > 0 ? recommendations : ['Great job! Keep up the good work.']
       })
     }
   }

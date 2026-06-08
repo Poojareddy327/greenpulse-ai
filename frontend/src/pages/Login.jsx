@@ -13,14 +13,14 @@ const Login = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (user) {
-      navigate('/dashboard')
+      navigate('/calculator')
     }
   }, [user, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     await login(email, password)
-    navigate('/dashboard')
+    navigate('/calculator')
   }
 
   return (

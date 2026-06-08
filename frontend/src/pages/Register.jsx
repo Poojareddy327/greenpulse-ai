@@ -14,14 +14,14 @@ const Register = () => {
   // Redirect if already logged in
   useEffect(() => {
     if (user) {
-      navigate('/dashboard')
+      navigate('/calculator')
     }
   }, [user, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     await register(email, password, name)
-    navigate('/dashboard')
+    navigate('/calculator')
   }
 
   return (
