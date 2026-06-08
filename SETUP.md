@@ -1,4 +1,4 @@
-# 🛠️ GreenPulse AI - Local Development Setup
+# Local Development Setup
 
 ## Prerequisites
 

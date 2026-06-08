@@ -1,4 +1,4 @@
-# 🚀 GreenPulse AI Deployment Guide
+# Deployment Guide
 
 ## Frontend Deployment (Vercel)
 
