@@ -1,47 +1,22 @@
-# 🌍 GreenPulse AI
+# GreenPulse AI
 
-A modern carbon footprint awareness platform that helps users measure, understand, and reduce their environmental impact.
+An AI-powered platform to measure, track, and reduce your carbon footprint.
 
 ## Features
 
-- 📊 **Carbon Calculator** - Calculate your CO₂ emissions from daily activities
-- 📈 **Analytics Dashboard** - Track your progress with interactive charts
-- 🌍 **Global Comparisons** - See how you compare worldwide
-- 🛒 **Carbon Offsets** - Support verified climate projects
-- 🤖 **AI Advisor** - Get personalized sustainability recommendations
-- 🎯 **Challenges** - Complete eco-friendly missions
-- 📚 **Learning Hub** - Explore climate education content
+- **Carbon Calculator** - Calculate your personal CO₂ emissions
+- **Analytics Dashboard** - Track your environmental impact over time
+- **Global Comparison** - Compare with worldwide carbon averages
+- **Carbon Offsets** - Support verified climate projects
+- **AI Advisor** - Get personalized sustainability tips
+- **Challenges** - Complete eco-friendly challenges
+- **Learning Hub** - Climate education content
 
-## 🎨 Design Theme: NeoGreen Dark
+## Tech Stack
 
-- Primary: `#22C55E` (Green)
-- Secondary: `#14B8A6` (Teal)
-- Background: `#030712` (Deep Dark)
-- Cards: `#0F172A` (Dark Slate)
-- Accent: `#10B981` (Emerald)
-- Text: `#F8FAFC` (Light)
-
-## 🛠️ Tech Stack
-
-### Frontend
-- React.js with Vite
-- Tailwind CSS
-- Framer Motion
-- React Router
-- Recharts
-
-### Backend
-- FastAPI (Python)
-- PostgreSQL
-- Firebase Authentication
-
-### AI Integration
-- Gemini API / OpenAI API
-
-### Deployment
-- Vercel (Frontend)
-- Render (Backend)
-- Neon PostgreSQL
+**Frontend:** React, Vite, Tailwind CSS, Framer Motion, Recharts  
+**Backend:** FastAPI, Python  
+**Deployment:** Vercel, Render
 
 ## Getting Started
 
@@ -59,17 +34,15 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-## Deployment
+## Project Structure
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for production deployment guide.
+```
+greenpulse-ai/
+├── frontend/          # React application
+├── backend/           # FastAPI server
+└── README.md
+```
 
-## Tech Stack
+## License
 
-- **Frontend**: React, Vite, Tailwind CSS, Framer Motion
-- **Backend**: FastAPI, Python
-- **Visualization**: Recharts, CSS animations
-- **Deployment**: Vercel (frontend), Render (backend)
-
-## 📄 License
-
-MIT License
+MIT
