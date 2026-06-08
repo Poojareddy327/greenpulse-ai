@@ -29,27 +29,58 @@ const Calculator = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const calculateImpact = () => {
-    // Simple calculation logic (replace with actual API call)
-    const carbon = (
-      (parseFloat(formData.carMiles) || 0) * 0.4 +
-      (parseFloat(formData.flights) || 0) * 90 +
-      (parseFloat(formData.electricity) || 0) * 0.5
-    )
-    
-    const water = (
-      (parseFloat(formData.showerMinutes) || 0) * 9 * 30 +
-      (parseFloat(formData.laundry) || 0) * 40
-    )
+  const calculateImpact = async () => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      
+      const response = await fetch(`${API_URL}/api/calculate-impact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          carMiles: parseFloat(formData.carMiles) || 0,
+          publicTransport: parseFloat(formData.publicTransport) || 0,
+          flights: parseFloat(formData.flights) || 0,
+          electricity: parseFloat(formData.electricity) || 0,
+          heating: parseFloat(formData.heating) || 0,
+          showerMinutes: parseFloat(formData.showerMinutes) || 0,
+          laundry: parseFloat(formData.laundry) || 0,
+          diet: formData.diet,
+          recycling: formData.recycling,
+        }),
+      })
 
-    const score = Math.max(0, 100 - (carbon / 10 + water / 1000))
+      if (!response.ok) {
+        throw new Error('Failed to calculate impact')
+      }
 
-    setResult({
-      carbon: carbon.toFixed(1),
-      water: water.toFixed(0),
-      score: score.toFixed(0),
-      rating: score > 80 ? 'Excellent' : score > 60 ? 'Good' : score > 40 ? 'Fair' : 'Needs Improvement'
-    })
+      const data = await response.json()
+      setResult(data)
+    } catch (error) {
+      console.error('Error calculating impact:', error)
+      // Fallback to client-side calculation
+      const carbon = (
+        (parseFloat(formData.carMiles) || 0) * 0.4 +
+        (parseFloat(formData.flights) || 0) * 90 +
+        (parseFloat(formData.electricity) || 0) * 0.5
+      )
+      
+      const water = (
+        (parseFloat(formData.showerMinutes) || 0) * 9 * 30 +
+        (parseFloat(formData.laundry) || 0) * 40
+      )
+
+      const score = Math.max(0, 100 - (carbon / 10 + water / 1000))
+
+      setResult({
+        carbon: carbon.toFixed(1),
+        water: water.toFixed(0),
+        score: score.toFixed(0),
+        rating: score > 80 ? 'Excellent' : score > 60 ? 'Good' : score > 40 ? 'Fair' : 'Needs Improvement',
+        recommendations: ['Unable to connect to server. Please try again.']
+      })
+    }
   }
 
   return (
