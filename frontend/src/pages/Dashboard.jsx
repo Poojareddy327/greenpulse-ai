@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { TrendingDown, Droplets, Zap, Award, Target, Calendar } from 'lucide-react'
+import { TrendingDown, Droplets, Zap, Award, Target, Calendar, CheckCircle, Plus, Flame, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   // Mock data
@@ -27,6 +28,19 @@ const Dashboard = () => {
     { name: 'Green Warrior', icon: '⚔️', unlocked: true },
     { name: 'Carbon Cutter', icon: '✂️', unlocked: false },
     { name: 'Planet Hero', icon: '🦸', unlocked: false },
+  ]
+
+  const recentActivities = [
+    { action: 'Completed calculator assessment', points: '+50', time: '2 hours ago', icon: '📊' },
+    { action: 'Joined "Zero Plastic Week" challenge', points: '+100', time: '1 day ago', icon: '🎯' },
+    { action: 'Earned "Water Saver" badge', points: '+200', time: '3 days ago', icon: '🏆' },
+    { action: 'Used public transport', points: '+25', time: '5 days ago', icon: '🚌' },
+  ]
+
+  const goals = [
+    { title: 'Reduce carbon by 20%', current: 180, target: 200, percentage: 90 },
+    { title: 'Save 1000L water/month', current: 2800, target: 3000, percentage: 93 },
+    { title: 'Complete 5 challenges', current: 3, target: 5, percentage: 60 },
   ]
 
   return (
@@ -129,7 +143,7 @@ const Dashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-card p-6"
+          className="glass-card p-6 mb-8"
         >
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
             <Award className="w-5 h-5 text-primary" />
@@ -140,16 +154,150 @@ const Dashboard = () => {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className={`p-4 rounded-xl text-center ${
+                className={`p-4 rounded-xl text-center cursor-pointer ${
                   badge.unlocked
-                    ? 'bg-gradient-green shadow-glow-green'
-                    : 'bg-cardDark/30 opacity-50'
+                    ? 'bg-gradient-rainbow shadow-glow-rainbow'
+                    : 'bg-cardDark/30 opacity-50 grayscale'
                 }`}
               >
                 <div className="text-4xl mb-2">{badge.icon}</div>
                 <div className="text-sm font-semibold">{badge.name}</div>
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Goals & Activities Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {/* Goals Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="glass-card p-6"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <Target className="w-5 h-5 text-primary" />
+                Your Goals
+              </h3>
+              <button className="text-primary hover:text-secondary transition-colors">
+                <Plus className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="space-y-4">
+              {goals.map((goal, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className="p-4 bg-cardDark/30 rounded-lg"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-sm">{goal.title}</span>
+                    <span className="text-primary text-sm font-bold">{goal.percentage}%</span>
+                  </div>
+                  <div className="w-full bg-bgDark rounded-full h-2.5">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${goal.percentage}%` }}
+                      transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
+                      className="bg-gradient-rainbow h-2.5 rounded-full"
+                    />
+                  </div>
+                  <div className="text-xs text-textMuted mt-1">
+                    {goal.current}/{goal.target}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Recent Activities */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="glass-card p-6"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <Flame className="w-5 h-5 text-warning" />
+                Recent Activity
+              </h3>
+            </div>
+            <div className="space-y-3">
+              {recentActivities.map((activity, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  className="flex items-center gap-3 p-3 bg-cardDark/30 rounded-lg cursor-pointer hover:bg-cardDark/50 transition-all"
+                >
+                  <div className="text-2xl">{activity.icon}</div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">{activity.action}</div>
+                    <div className="text-xs text-textMuted">{activity.time}</div>
+                  </div>
+                  <div className="text-primary font-bold text-sm">{activity.points}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="glass-card p-6"
+        >
+          <h3 className="text-xl font-bold mb-6">Quick Actions</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link to="/calculator">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl text-center cursor-pointer border border-primary/30 hover:border-primary transition-all group"
+              >
+                <div className="text-3xl mb-2">📊</div>
+                <div className="text-sm font-semibold">Calculate Impact</div>
+                <ArrowRight className="w-4 h-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            </Link>
+            <Link to="/challenges">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-xl text-center cursor-pointer border border-secondary/30 hover:border-secondary transition-all group"
+              >
+                <div className="text-3xl mb-2">🎯</div>
+                <div className="text-sm font-semibold">Join Challenge</div>
+                <ArrowRight className="w-4 h-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            </Link>
+            <Link to="/ai-advisor">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 bg-gradient-to-br from-accent/20 to-primary/20 rounded-xl text-center cursor-pointer border border-accent/30 hover:border-accent transition-all group"
+              >
+                <div className="text-3xl mb-2">🤖</div>
+                <div className="text-sm font-semibold">Ask AI Advisor</div>
+                <ArrowRight className="w-4 h-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            </Link>
+            <Link to="/learning">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="p-4 bg-gradient-to-br from-warning/20 to-primary/20 rounded-xl text-center cursor-pointer border border-warning/30 hover:border-warning transition-all group"
+              >
+                <div className="text-3xl mb-2">📚</div>
+                <div className="text-sm font-semibold">Learn More</div>
+                <ArrowRight className="w-4 h-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            </Link>
           </div>
         </motion.div>
       </div>
