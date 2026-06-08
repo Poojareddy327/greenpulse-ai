@@ -1,0 +1,23 @@
+{
+  "name": "greenpulse-ai",
+  "version": "1.0.0",
+  "description": "AI-powered Sustainability & Environmental Impact Tracker",
+  "scripts": {
+    "install:all": "cd frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && uvicorn main:app --reload",
+    "build:frontend": "cd frontend && npm run build",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
+  },
+  "keywords": [
+    "sustainability",
+    "environment",
+    "carbon-footprint",
+    "ai",
+    "react",
+    "fastapi"
+  ],
+  "author": "GreenPulse Team",
+  "license": "MIT"
+}
