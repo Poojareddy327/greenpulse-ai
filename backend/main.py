@@ -7,14 +7,15 @@ from datetime import datetime
 
 app = FastAPI(title="GreenPulse AI API", version="1.0.0")
 
-# CORS middleware
+# CORS middleware - Allow all Vercel domains
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
+        "https://greenpulse-platform.vercel.app",
+        "https://greenpulse-platform-*.vercel.app",
         "https://*.vercel.app",
-        "https://greenpulse-ai.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -49,74 +50,103 @@ def read_root():
     return {
         "message": "Welcome to GreenPulse AI API",
         "version": "1.0.0",
-        "status": "active"
+        "status": "active",
+        "endpoints": {
+            "calculate": "/api/calculate-impact",
+            "ai-advisor": "/api/ai-advisor",
+            "challenges": "/api/challenges",
+            "dashboard": "/api/dashboard/{user_id}"
+        }
+    }
+
+@app.get("/health")
+def health_check():
+    """Health check endpoint for monitoring"""
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat()
+    }
+
+@app.get("/api/test")
+def test_api():
+    """Test endpoint to verify API is working"""
+    return {
+        "status": "success",
+        "message": "API is working correctly!",
+        "timestamp": datetime.now().isoformat()
     }
 
 @app.post("/api/calculate-impact", response_model=ImpactResult)
 def calculate_impact(data: ImpactCalculation):
     """Calculate environmental impact based on user habits"""
     
-    # Carbon calculation (kg CO2 per month)
-    carbon_transport = (data.carMiles or 0) * 0.4 * 4  # per month
-    carbon_flights = (data.flights or 0) * 90 / 12  # annual to monthly
-    carbon_electricity = (data.electricity or 0) * 0.5
-    carbon_heating = (data.heating or 0) * 5.3
-    
-    # Diet impact
-    diet_factors = {
-        "vegan": 1.5,
-        "vegetarian": 1.7,
-        "mixed": 2.5,
-        "meat-heavy": 3.3
-    }
-    carbon_diet = diet_factors.get(data.diet, 2.5) * 30
-    
-    total_carbon = carbon_transport + carbon_flights + carbon_electricity + carbon_heating + carbon_diet
-    
-    # Water calculation (liters per month)
-    water_shower = (data.showerMinutes or 0) * 9 * 30
-    water_laundry = (data.laundry or 0) * 40 * 4
-    water_diet = diet_factors.get(data.diet, 2.5) * 1000
-    
-    total_water = water_shower + water_laundry + water_diet
-    
-    # Score calculation (0-100, higher is better)
-    carbon_penalty = min(total_carbon / 10, 50)
-    water_penalty = min(total_water / 1000, 30)
-    recycling_bonus = {"always": 10, "often": 7, "sometimes": 3, "rarely": 0}.get(data.recycling, 0)
-    
-    score = max(0, 100 - carbon_penalty - water_penalty + recycling_bonus)
-    
-    # Rating
-    if score >= 80:
-        rating = "Excellent"
-    elif score >= 60:
-        rating = "Good"
-    elif score >= 40:
-        rating = "Fair"
-    else:
-        rating = "Needs Improvement"
-    
-    # Recommendations
-    recommendations = []
-    if carbon_transport > 50:
-        recommendations.append("Consider using public transport or carpooling to reduce transport emissions")
-    if carbon_electricity > 150:
-        recommendations.append("Switch to LED bulbs and energy-efficient appliances")
-    if water_shower > 3000:
-        recommendations.append("Reduce shower time to 5-7 minutes to save water")
-    if data.diet == "meat-heavy":
-        recommendations.append("Try incorporating more plant-based meals")
-    if data.recycling in ["sometimes", "rarely"]:
-        recommendations.append("Improve recycling habits to reduce waste")
-    
-    return ImpactResult(
-        carbon=round(total_carbon, 1),
-        water=round(total_water, 0),
-        score=round(score, 1),
-        rating=rating,
-        recommendations=recommendations[:3]
-    )
+    try:
+        # Carbon calculation (kg CO2 per month)
+        carbon_transport = (data.carMiles or 0) * 0.4 * 4  # per month
+        carbon_flights = (data.flights or 0) * 90 / 12  # annual to monthly
+        carbon_electricity = (data.electricity or 0) * 0.5
+        carbon_heating = (data.heating or 0) * 5.3
+        
+        # Diet impact
+        diet_factors = {
+            "vegan": 1.5,
+            "vegetarian": 1.7,
+            "mixed": 2.5,
+            "meat-heavy": 3.3
+        }
+        carbon_diet = diet_factors.get(data.diet, 2.5) * 30
+        
+        total_carbon = carbon_transport + carbon_flights + carbon_electricity + carbon_heating + carbon_diet
+        
+        # Water calculation (liters per month)
+        water_shower = (data.showerMinutes or 0) * 9 * 30
+        water_laundry = (data.laundry or 0) * 40 * 4
+        water_diet = diet_factors.get(data.diet, 2.5) * 1000
+        
+        total_water = water_shower + water_laundry + water_diet
+        
+        # Score calculation (0-100, higher is better)
+        carbon_penalty = min(total_carbon / 10, 50)
+        water_penalty = min(total_water / 1000, 30)
+        recycling_bonus = {"always": 10, "often": 7, "sometimes": 3, "rarely": 0}.get(data.recycling, 0)
+        
+        score = max(0, 100 - carbon_penalty - water_penalty + recycling_bonus)
+        
+        # Rating
+        if score >= 80:
+            rating = "Excellent"
+        elif score >= 60:
+            rating = "Good"
+        elif score >= 40:
+            rating = "Fair"
+        else:
+            rating = "Needs Improvement"
+        
+        # Recommendations
+        recommendations = []
+        if carbon_transport > 50:
+            recommendations.append("Consider using public transport or carpooling to reduce transport emissions")
+        if carbon_electricity > 150:
+            recommendations.append("Switch to LED bulbs and energy-efficient appliances")
+        if water_shower > 3000:
+            recommendations.append("Reduce shower time to 5-7 minutes to save water")
+        if data.diet == "meat-heavy":
+            recommendations.append("Try incorporating more plant-based meals")
+        if data.recycling in ["sometimes", "rarely"]:
+            recommendations.append("Improve recycling habits to reduce waste")
+        
+        if not recommendations:
+            recommendations.append("Great job! Keep up the sustainable lifestyle!")
+        
+        return ImpactResult(
+            carbon=round(total_carbon, 1),
+            water=round(total_water, 0),
+            score=round(score, 1),
+            rating=rating,
+            recommendations=recommendations[:3]
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Calculation error: {str(e)}")
 
 @app.post("/api/ai-advisor")
 def ai_advisor(query: AIQuery):
