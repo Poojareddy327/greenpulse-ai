@@ -20,7 +20,7 @@
 
 <br/>
 
-[🎯 View Live Demo](https://greenpulse-platform.vercel.app) • [📖 Documentation](#-table-of-contents) • [🚀 Quick Start](#-installation) • [📸 Screenshots](#-screenshots)
+[🎯 View Live Demo](https://greenpulse-platform.vercel.app) • [📖 Documentation](#-table-of-contents) • [🚀 Quick Start](#-installation) 
 
 <br/>
 
@@ -310,26 +310,6 @@ POST /api/benchmark
 ```
 
 **Full API Documentation:** https://greenpulse-api-wv14.onrender.com/docs
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-### Home Page
-![Home Page](https://via.placeholder.com/800x400?text=Home+Page+Screenshot)
-
-### Calculator
-![Calculator](https://via.placeholder.com/800x400?text=Calculator+Screenshot)
-
-### Dashboard
-![Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Screenshot)
-
-### Analytics
-![Analytics](https://via.placeholder.com/800x400?text=Analytics+Screenshot)
-
-</div>
 
 ---
 
