@@ -1,9 +1,21 @@
+"""
+GreenPulse AI Backend API
+A comprehensive carbon footprint tracking and environmental awareness platform.
+
+This module provides REST API endpoints for:
+- Carbon footprint calculation
+- AI-powered eco-advice
+- Predictive analytics
+- Benchmarking and comparisons
+- User challenges and gamification
+"""
+
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, validator
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Any, Tuple
 import os
 from datetime import datetime, timedelta
 import json
@@ -21,7 +33,7 @@ app = FastAPI(
 
 # Security Headers Middleware
 @app.middleware("http")
-async def add_security_headers(request: Request, call_next):
+async def add_security_headers(request: Request, call_next) -> JSONResponse:
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
@@ -35,7 +47,7 @@ async def add_security_headers(request: Request, call_next):
 request_counts = {}
 
 @app.middleware("http")
-async def rate_limit_middleware(request: Request, call_next):
+async def rate_limit_middleware(request: Request, call_next) -> JSONResponse:
     client_ip = request.client.host
     current_time = time.time()
     
@@ -126,8 +138,7 @@ user_notifications = {}
 carbon_insights_cache = {}
 
 @app.get("/")
-def read_root():
-def read_root():
+def read_root() -> Dict[str, Any]:
     return {
         "message": "Welcome to GreenPulse AI API",
         "version": "1.0.0",
@@ -144,7 +155,7 @@ def read_root():
     }
 
 @app.get("/health")
-def health_check():
+def health_check() -> Dict[str, str]:
     """Health check endpoint for monitoring"""
     return {
         "status": "healthy",
@@ -152,7 +163,7 @@ def health_check():
     }
 
 @app.get("/api/test")
-def test_api():
+def test_api() -> Dict[str, str]:
     """Test endpoint to verify API is working"""
     return {
         "status": "success",
@@ -161,7 +172,7 @@ def test_api():
     }
 
 @app.post("/api/calculate-impact", response_model=ImpactResult)
-def calculate_impact(data: ImpactCalculation):
+def calculate_impact(data: ImpactCalculation) -> ImpactResult:
     """Calculate environmental impact based on user habits"""
     
     try:
@@ -233,7 +244,7 @@ def calculate_impact(data: ImpactCalculation):
         raise HTTPException(status_code=500, detail=f"Calculation error: {str(e)}")
 
 @app.post("/api/ai-advisor")
-def ai_advisor(query: AIQuery):
+def ai_advisor(query: AIQuery) -> Dict[str, Any]:
     """AI-powered eco advisor (mock implementation)"""
     message = query.message.lower()
     
@@ -260,7 +271,7 @@ def ai_advisor(query: AIQuery):
     return response
 
 @app.get("/api/challenges")
-def get_challenges():
+def get_challenges() -> Dict[str, List[Dict[str, Any]]]:
     """Get available eco challenges"""
     return {
         "active": [
@@ -287,7 +298,7 @@ def get_challenges():
     }
 
 @app.get("/api/dashboard/{user_id}")
-def get_dashboard(user_id: str):
+def get_dashboard(user_id: str) -> Dict[str, Any]:
     """Get user dashboard data"""
     return {
         "monthlyData": [
@@ -319,7 +330,7 @@ if __name__ == "__main__":
 
 # Advanced prediction endpoint using linear regression
 @app.post("/api/predict-impact")
-def predict_impact(data: PredictionRequest):
+def predict_impact(data: PredictionRequest) -> Dict[str, Any]:
     """
     Predict future carbon footprint using machine learning algorithms
     Uses linear regression with trend analysis
@@ -396,7 +407,7 @@ def predict_impact(data: PredictionRequest):
 
 # Benchmark comparison endpoint
 @app.post("/api/benchmark")
-def get_benchmark(data: BenchmarkRequest):
+def get_benchmark(data: BenchmarkRequest) -> Dict[str, Any]:
     """
     Compare user's metrics against global, national, and efficient household averages
     """
@@ -462,7 +473,7 @@ def get_benchmark(data: BenchmarkRequest):
 
 # Analytics endpoint with advanced metrics
 @app.get("/api/analytics")
-def get_analytics():
+def get_analytics() -> Dict[str, Any]:
     """
     Get platform-wide analytics and statistics
     """
@@ -488,7 +499,7 @@ def get_analytics():
 
 # Enhanced AI advisor with context awareness
 @app.post("/api/ai-advisor-advanced")
-def ai_advisor_advanced(query: AIQuery):
+def ai_advisor_advanced(query: AIQuery) -> Dict[str, Any]:
     """
     Advanced AI advisor with contextual responses and personalized recommendations
     """
