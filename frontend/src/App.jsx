@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Calculator from './pages/Calculator'
 import Dashboard from './pages/Dashboard'
+import Analytics from './pages/Analytics'
 import AIAdvisor from './pages/AIAdvisor'
 import Challenges from './pages/Challenges'
 import Learning from './pages/Learning'
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/analytics" element={<Analytics />} />
             <Route path="/comparison" element={<CarbonComparison />} />
             <Route path="/offsets" element={<CarbonOffsets />} />
             <Route path="/ai-advisor" element={<AIAdvisor />} />
