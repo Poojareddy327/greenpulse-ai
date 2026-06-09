@@ -171,7 +171,7 @@ const Home = () => {
                     >
                       {stat.value}
                     </motion.div>
-                    <div className="text-xs md:text-sm text-textMuted">{stat.label}</div>
+                    <div className="text-xs md:text-sm text-textLight font-medium">{stat.label}</div>
                   </div>
                 </motion.div>
               )
@@ -182,17 +182,20 @@ const Home = () => {
 
       {/* Features Section with Carbon Analytics Focus */}
       <section className="relative py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+        {/* Dark overlay for better text visibility */}
+        <div className="absolute inset-0 bg-bgDark/30" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">
-              Advanced Features for <span className="gradient-text">Carbon Intelligence</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter text-white drop-shadow-lg">
+              Advanced Features for <span className="gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]">Carbon Intelligence</span>
             </h2>
-            <p className="text-lg md:text-xl text-textMuted max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-textLight max-w-2xl mx-auto">
               Understand your carbon footprint with precision. Forecast future emissions. Implement data-backed strategies.
             </p>
           </motion.div>
@@ -221,8 +224,8 @@ const Home = () => {
                     >
                       <Icon className="w-10 h-10 text-white drop-shadow-lg" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold mb-3 group-hover:gradient-text transition-all">{feature.title}</h3>
-                    <p className="text-textMuted leading-relaxed">{feature.description}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-white group-hover:gradient-text transition-all">{feature.title}</h3>
+                    <p className="text-textLight/90 leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
               )
@@ -233,11 +236,14 @@ const Home = () => {
 
       {/* Ultra CTA Section */}
       <section className="relative py-20 px-4">
+        {/* Dark overlay for better text visibility */}
+        <div className="absolute inset-0 bg-bgDark/30" />
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden neon-border"
+          className="max-w-4xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden neon-border z-10"
         >
           <div className="absolute inset-0 bg-gradient-analytics opacity-5" />
           <div className="shimmer absolute inset-0" />
@@ -250,13 +256,13 @@ const Home = () => {
               transition={{ type: "spring", stiffness: 200 }}
             >
               <motion.h2 
-                className="text-3xl md:text-5xl font-bold mb-4 tracking-tighter"
+                className="text-3xl md:text-5xl font-bold mb-4 tracking-tighter text-white"
                 animate={{ textShadow: ['0 0 20px rgba(37, 99, 235, 0.5)', '0 0 40px rgba(124, 58, 237, 0.5)', '0 0 20px rgba(37, 99, 235, 0.5)'] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
                 Start Your Carbon Analytics Journey
               </motion.h2>
-              <p className="text-lg md:text-xl text-textMuted mb-8">
+              <p className="text-lg md:text-xl text-textLight mb-8">
                 Join thousands analyzing their emissions. Track trends. Forecast reductions. Build low-carbon habits. 📊⚡
               </p>
               <Link to="/register" className="btn-primary inline-flex items-center gap-2 group text-lg px-10">
