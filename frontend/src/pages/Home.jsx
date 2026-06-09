@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { TrendingDown, BarChart3, Zap, Users, ArrowRight, Activity, Target, Brain } from 'lucide-react'
+import InteractiveCarbonWheel from '../components/InteractiveCarbonWheel'
+import { useState } from 'react'
 
 const Home = () => {
   const stats = [

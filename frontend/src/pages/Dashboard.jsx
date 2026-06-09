@@ -9,6 +9,8 @@ import ComparisonWidget from '../components/ComparisonWidget'
 import PredictionChart from '../components/PredictionChart'
 import ProgressTracker from '../components/ProgressTracker'
 import NotificationSystem, { showNotification } from '../components/NotificationSystem'
+import LiveCarbonCounter from '../components/LiveCarbonCounter'
+import Leaderboard from '../components/Leaderboard'
 
 const Dashboard = () => {
   const [showExportMenu, setShowExportMenu] = useState(false)
@@ -176,6 +178,12 @@ const Dashboard = () => {
 
         {/* Progress Tracker */}
         <ProgressTracker level={5} xp={1250} nextLevelXP={1500} />
+
+        {/* Live Carbon Counter - NEW! */}
+        <LiveCarbonCounter />
+
+        {/* Global Leaderboard - NEW! */}
+        <Leaderboard />
 
         {/* Advanced Metrics */}
         <AdvancedMetrics 
