@@ -1,17 +1,28 @@
-# 🌍 GreenPulse AI - Carbon Footprint Intelligence Platform
-
 <div align="center">
 
-![GreenPulse AI Banner](https://img.shields.io/badge/GreenPulse%20AI-Carbon%20Intelligence-2563EB?style=for-the-badge)
-[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-brightgreen?style=for-the-badge)](https://greenpulse-platform.vercel.app)
-[![Backend API](https://img.shields.io/badge/📡%20API-active-blue?style=for-the-badge)](https://greenpulse-api-wv14.onrender.com)
+# 🌍 GreenPulse AI
+### Carbon Footprint Intelligence Platform
+
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-brightgreen?style=for-the-badge&logo=vercel)](https://greenpulse-platform.vercel.app)
+[![Backend API](https://img.shields.io/badge/API-Active-blue?style=for-the-badge&logo=fastapi)](https://greenpulse-api-wv14.onrender.com)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Poojareddy327/greenpulse-ai)
 
-**PromptWars Virtual 2026 - Main Challenge 3 Submission**
+<br/>
 
-*An AI-powered platform that transforms daily activities into actionable carbon insights using advanced analytics, machine learning, and real-time data visualization.*
+**🏆 PromptWars Virtual 2026 - Main Challenge 3 Submission 🏆**
 
-[🎯 View Live Demo](https://greenpulse-platform.vercel.app) • [📖 Documentation](#documentation) • [🚀 Quick Start](#installation) • [🎥 Video Demo](#demo)
+<br/>
+
+*An AI-powered platform that transforms daily activities into actionable carbon insights*  
+*using advanced analytics, machine learning, and real-time data visualization.*
+
+<br/>
+
+[🎯 View Live Demo](https://greenpulse-platform.vercel.app) • [📖 Documentation](#-table-of-contents) • [🚀 Quick Start](#-installation) • [📸 Screenshots](#-screenshots)
+
+<br/>
 
 </div>
 
