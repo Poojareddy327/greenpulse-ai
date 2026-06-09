@@ -43,7 +43,10 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4">
-        <div className="relative max-w-7xl mx-auto text-center">
+        {/* Dark overlay for better text visibility */}
+        <div className="absolute inset-0 bg-bgDark/40 backdrop-blur-sm" />
+        
+        <div className="relative max-w-7xl mx-auto text-center z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,10 +90,10 @@ const Home = () => {
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tighter">
                 Measure Every Choice.{' '}
-                <span className="gradient-text relative">
+                <span className="text-white relative drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]">
                   Reduce Every Emission.
                   <motion.span
-                    className="absolute inset-0 bg-gradient-analytics opacity-20 blur-xl"
+                    className="absolute inset-0 bg-gradient-analytics opacity-10 blur-xl"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   />
@@ -101,10 +104,10 @@ const Home = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-xl md:text-2xl text-textMuted mb-10 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-textLight mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              <span className="font-bold text-primary">GreenPulse AI</span> transforms daily activities into actionable carbon insights 
-              using <span className="text-secondary font-semibold">advanced analytics</span> and <span className="text-accent font-semibold">AI-driven recommendations</span>.
+              <span className="font-bold text-white drop-shadow-lg">GreenPulse AI</span> transforms daily activities into actionable carbon insights 
+              using <span className="text-white font-semibold drop-shadow-lg">advanced analytics</span> and <span className="text-white font-semibold drop-shadow-lg">AI-driven recommendations</span>.
             </motion.p>
           </motion.div>
 
