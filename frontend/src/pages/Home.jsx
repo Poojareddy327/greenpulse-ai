@@ -1,44 +1,44 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { TrendingDown, Droplets, Zap, Users, ArrowRight, Leaf, Award, Target } from 'lucide-react'
+import { TrendingDown, BarChart3, Zap, Users, ArrowRight, Activity, Target, Brain } from 'lucide-react'
 
 const Home = () => {
   const stats = [
     { icon: Users, label: 'Active Users', value: '50K+', color: 'text-primary drop-shadow-lg' },
-    { icon: TrendingDown, label: 'CO₂ Reduced', value: '2.5M kg', color: 'text-secondary drop-shadow-lg' },
-    { icon: Droplets, label: 'Water Saved', value: '10M L', color: 'text-blue-400 drop-shadow-lg' },
-    { icon: Zap, label: 'Energy Saved', value: '5M kWh', color: 'text-warning drop-shadow-lg' },
+    { icon: TrendingDown, label: 'CO₂ Tracked', value: '2.5M kg', color: 'text-secondary drop-shadow-lg' },
+    { icon: BarChart3, label: 'Data Points', value: '10M+', color: 'text-accent drop-shadow-lg' },
+    { icon: Zap, label: 'Insights Generated', value: '250K', color: 'text-primary drop-shadow-lg' },
   ]
 
   const features = [
     {
       icon: Target,
-      title: 'Track Your Impact',
-      description: 'Calculate your carbon footprint, water usage, and sustainability score in real-time with advanced analytics.',
-      gradient: 'from-primary to-secondary'
+      title: 'Carbon Breakdown Analyzer',
+      description: 'Analyze transportation, energy, food, and lifestyle emissions with precision. Get detailed insights into every emission source.',
+      gradient: 'gradient-primary'
     },
     {
-      icon: Leaf,
-      title: 'AI-Powered Insights',
-      description: 'Get personalized AI recommendations to reduce your environmental impact effectively and sustainably.',
-      gradient: 'from-secondary to-accent'
+      icon: Brain,
+      title: 'Carbon Intelligence Engine',
+      description: 'AI-powered analysis of emission patterns with personalized carbon reduction strategies based on your lifestyle data.',
+      gradient: 'gradient-secondary'
     },
     {
-      icon: Award,
-      title: 'Earn Rewards',
-      description: 'Complete challenges, unlock badges, and compete with eco-warriors worldwide on our leaderboard.',
-      gradient: 'from-accent to-primary'
+      icon: BarChart3,
+      title: 'Predictive Carbon Analytics',
+      description: 'Forecast future emissions, track reduction trends, and benchmark against global averages with advanced analytics.',
+      gradient: 'gradient-accent'
     }
   ]
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Advanced Animated Background Blobs */}
+      {/* Advanced Animated Background Blobs - Blue/Purple Theme */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="glow-blob w-[600px] h-[600px] bg-gradient-green top-[-10%] left-[-10%] animate-float" style={{ animationDelay: '0s' }} />
-        <div className="glow-blob w-[700px] h-[700px] bg-gradient-ocean bottom-[-15%] right-[-15%] animate-float" style={{ animationDelay: '2s' }} />
-        <div className="glow-blob w-[500px] h-[500px] bg-gradient-sunset top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 animate-float" style={{ animationDelay: '4s' }} />
-        <div className="glow-blob w-[400px] h-[400px] bg-gradient-fire top-[20%] right-[10%] animate-float" style={{ animationDelay: '6s' }} />
+        <div className="glow-blob w-[600px] h-[600px] bg-gradient-primary top-[-10%] left-[-10%] animate-float" style={{ animationDelay: '0s' }} />
+        <div className="glow-blob w-[700px] h-[700px] bg-gradient-secondary bottom-[-15%] right-[-15%] animate-float" style={{ animationDelay: '2s' }} />
+        <div className="glow-blob w-[500px] h-[500px] bg-gradient-carbon top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 animate-float" style={{ animationDelay: '4s' }} />
+        <div className="glow-blob w-[400px] h-[400px] bg-gradient-accent top-[20%] right-[10%] animate-float" style={{ animationDelay: '6s' }} />
       </div>
 
       {/* Hero Section */}
@@ -55,7 +55,7 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.2 }}
               className="mb-8"
             >
-              {/* Floating Emoji Icons */}
+              {/* Analytics Icons */}
               <motion.div 
                 className="flex justify-center gap-4 mb-6"
                 initial={{ opacity: 0 }}
@@ -67,30 +67,30 @@ const Home = () => {
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0 }}
                 >
-                  🌍
+                  📊
                 </motion.span>
                 <motion.span 
                   className="text-6xl"
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
                 >
-                  🌱
+                  🧠
                 </motion.span>
                 <motion.span 
                   className="text-6xl"
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                 >
-                  ♻️
+                  ⚡
                 </motion.span>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Measure, Understand & Reduce Your{' '}
+              <h1 className="text-5xl md:text-7xl font-bold font-display mb-6 leading-tight tracking-tighter">
+                Measure Every Choice.{' '}
                 <span className="gradient-text relative">
-                  Carbon Footprint
+                  Reduce Every Emission.
                   <motion.span
-                    className="absolute inset-0 bg-gradient-rainbow opacity-20 blur-xl"
+                    className="absolute inset-0 bg-gradient-analytics opacity-20 blur-xl"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   />
@@ -103,8 +103,8 @@ const Home = () => {
               transition={{ delay: 0.5 }}
               className="text-xl md:text-2xl text-textMuted mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              AI-powered sustainability platform. Calculate your emissions, 
-              track your impact, and join the fight against climate change 🌍✨
+              <span className="font-bold text-primary">CarbonIQ</span> transforms daily activities into actionable carbon insights 
+              using <span className="text-secondary font-semibold">advanced analytics</span> and <span className="text-accent font-semibold">AI-driven recommendations</span>.
             </motion.p>
           </motion.div>
 
@@ -114,16 +114,16 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20"
           >
-            <Link to="/calculator" className="btn-primary flex items-center gap-2 group">
-              Calculate Your Impact 
+            <Link to="/calculator" className="btn-primary flex items-center gap-2 group text-lg px-10">
+              Calculate My Impact 
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-            <Link to="/dashboard" className="btn-secondary flex items-center gap-2">
-              View Dashboard
+            <Link to="/dashboard" className="btn-secondary flex items-center gap-2 text-lg px-10">
+              View Carbon Dashboard
             </Link>
           </motion.div>
 
-          {/* Enhanced Stats Grid with Neon Effects */}
+          {/* Enhanced Stats Grid with Analytics Theme */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,7 +132,7 @@ const Home = () => {
           >
             {stats.map((stat, index) => {
               const Icon = stat.icon
-              const colors = ['#10B981', '#06B6D4', '#8B5CF6', '#F59E0B']
+              const colors = ['#2563EB', '#7C3AED', '#F97316', '#2563EB']
               return (
                 <motion.div
                   key={index}
@@ -162,7 +162,7 @@ const Home = () => {
                       <Icon className={`w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 ${stat.color}`} />
                     </motion.div>
                     <motion.div 
-                      className="text-2xl md:text-3xl font-bold mb-1"
+                      className="text-2xl md:text-3xl font-bold font-display mb-1"
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
@@ -177,7 +177,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section with Advanced Cards */}
+      {/* Features Section with Carbon Analytics Focus */}
       <section className="relative py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -186,18 +186,17 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Powerful Features for <span className="gradient-text">Sustainable Living</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 tracking-tighter">
+              Advanced Features for <span className="gradient-text">Carbon Intelligence</span>
             </h2>
             <p className="text-lg md:text-xl text-textMuted max-w-2xl mx-auto">
-              Everything you need to understand, track, and reduce your environmental impact
+              Understand your carbon footprint with precision. Forecast future emissions. Implement data-backed strategies.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon
-              const gradients = ['gradient-green', 'gradient-ocean', 'gradient-sunset']
               return (
                 <motion.div
                   key={index}
@@ -212,14 +211,14 @@ const Home = () => {
                     <motion.div 
                       whileHover={{ rotate: 360, scale: 1.2 }}
                       transition={{ duration: 0.8 }}
-                      className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-${gradients[index]} flex items-center justify-center shadow-neon`}
+                      className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-${feature.gradient} flex items-center justify-center shadow-neon`}
                       style={{
-                        boxShadow: '0 0 30px rgba(16, 185, 129, 0.5), 0 0 60px rgba(6, 182, 212, 0.3)'
+                        boxShadow: '0 0 30px rgba(37, 99, 235, 0.5), 0 0 60px rgba(124, 58, 237, 0.3)'
                       }}
                     >
                       <Icon className="w-10 h-10 text-white drop-shadow-lg" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold mb-3 group-hover:gradient-text transition-all">{feature.title}</h3>
+                    <h3 className="text-2xl font-bold font-display mb-3 group-hover:gradient-text transition-all">{feature.title}</h3>
                     <p className="text-textMuted leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
@@ -237,7 +236,7 @@ const Home = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden neon-border"
         >
-          <div className="absolute inset-0 bg-gradient-rainbow opacity-5" />
+          <div className="absolute inset-0 bg-gradient-analytics opacity-5" />
           <div className="shimmer absolute inset-0" />
           <div className="particle-effect absolute inset-0" />
           <div className="relative z-10">
@@ -248,16 +247,16 @@ const Home = () => {
               transition={{ type: "spring", stiffness: 200 }}
             >
               <motion.h2 
-                className="text-3xl md:text-5xl font-bold mb-4"
-                animate={{ textShadow: ['0 0 20px rgba(16, 185, 129, 0.5)', '0 0 40px rgba(6, 182, 212, 0.5)', '0 0 20px rgba(16, 185, 129, 0.5)'] }}
+                className="text-3xl md:text-5xl font-bold font-display mb-4 tracking-tighter"
+                animate={{ textShadow: ['0 0 20px rgba(37, 99, 235, 0.5)', '0 0 40px rgba(124, 58, 237, 0.5)', '0 0 20px rgba(37, 99, 235, 0.5)'] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Ready to Make a Difference?
+                Start Your Carbon Intelligence Journey
               </motion.h2>
               <p className="text-lg md:text-xl text-textMuted mb-8">
-                Start your sustainability journey today and join our community of eco-warriors 🌱✨
+                Join thousands analyzing their emissions. Track trends. Forecast reductions. Build low-carbon habits. 📊⚡
               </p>
-              <Link to="/register" className="btn-primary inline-flex items-center gap-2 group text-lg">
+              <Link to="/register" className="btn-primary inline-flex items-center gap-2 group text-lg px-10">
                 Get Started Free 
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </Link>

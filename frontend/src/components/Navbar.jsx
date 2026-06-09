@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Leaf, Home, Calculator, LayoutDashboard, Bot, Trophy, BookOpen, LogOut, User } from 'lucide-react'
+import { Activity, Home, Calculator, LayoutDashboard, Bot, Trophy, BookOpen, LogOut, User } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
@@ -10,26 +10,29 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/calculator', label: 'Calculator', icon: Calculator },
-    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/ai-advisor', label: 'AI Advisor', icon: Bot },
+    { path: '/dashboard', label: 'Analytics', icon: LayoutDashboard },
+    { path: '/ai-advisor', label: 'Intelligence', icon: Bot },
     { path: '/challenges', label: 'Challenges', icon: Trophy },
     { path: '/learning', label: 'Learning', icon: BookOpen },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-cardDark/80 border-b border-primary/20 shadow-lg">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-cardDark/90 border-b border-primary/20 shadow-glow-blue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
+          <Link to="/" className="flex items-center space-x-3 group">
             <motion.div
               whileHover={{ rotate: 360, scale: 1.1 }}
-              transition={{ duration: 0.5 }}
-              className="p-2 bg-gradient-rainbow rounded-lg shadow-glow-rainbow"
+              transition={{ duration: 0.6 }}
+              className="p-2 bg-gradient-analytics rounded-lg shadow-glow-analytics"
             >
-              <Leaf className="w-6 h-6 text-white drop-shadow-lg" />
+              <Activity className="w-6 h-6 text-white drop-shadow-lg" />
             </motion.div>
-            <span className="text-xl font-bold gradient-text">GreenPulse AI</span>
+            <div>
+              <span className="text-xl font-bold font-display gradient-text tracking-tighter">CarbonIQ</span>
+              <div className="text-[10px] text-textMuted -mt-1 tracking-wide">CARBON INTELLIGENCE</div>
+            </div>
           </Link>
 
           {/* Navigation Links */}
@@ -44,7 +47,7 @@ const Navbar = () => {
                     whileTap={{ scale: 0.95 }}
                     className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-all duration-300 ${
                       isActive
-                        ? 'bg-gradient-to-r from-primary/20 to-secondary/20 text-primary shadow-glow-green border border-primary/30'
+                        ? 'bg-gradient-to-r from-primary/20 to-secondary/20 text-primary shadow-glow-blue border border-primary/40'
                         : 'text-textMuted hover:text-primary hover:bg-primary/10'
                     }`}
                   >
@@ -71,7 +74,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={logout}
-                  className="p-2 text-textMuted hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                  className="p-2 text-textMuted hover:text-danger hover:bg-danger/10 rounded-lg transition-all"
                 >
                   <LogOut className="w-5 h-5" />
                 </motion.button>
