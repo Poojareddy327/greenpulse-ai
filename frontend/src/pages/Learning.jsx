@@ -70,9 +70,9 @@ const Learning = () => {
             <div className="p-3 bg-gradient-green rounded-2xl shadow-glow-green">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold gradient-text">Eco Learning Hub</h1>
+            <h1 className="text-4xl font-bold text-white drop-shadow-lg">Eco Learning Hub</h1>
           </div>
-          <p className="text-textLight/70">
+          <p className="text-textLight">
             Expand your knowledge about sustainability and climate action
           </p>
         </motion.div>

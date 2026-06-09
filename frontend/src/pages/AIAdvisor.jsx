@@ -59,9 +59,9 @@ const AIAdvisor = () => {
             <div className="p-3 bg-gradient-green rounded-2xl shadow-glow-green">
               <Bot className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold gradient-text">AI Eco Advisor</h1>
+            <h1 className="text-4xl font-bold text-white drop-shadow-lg">AI Eco Advisor</h1>
           </div>
-          <p className="text-textLight/70">
+          <p className="text-textLight">
             Get personalized sustainability recommendations powered by AI
           </p>
         </motion.div>

@@ -52,9 +52,9 @@ const Dashboard = () => {
           className="mb-8"
         >
           <h1 className="text-4xl font-bold mb-2">
-            Your <span className="gradient-text">Sustainability Dashboard</span>
+            Your <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Sustainability Dashboard</span>
           </h1>
-          <p className="text-textLight/70">Track your environmental impact over time</p>
+          <p className="text-textLight">Track your environmental impact over time</p>
         </motion.div>
 
         {/* Stats Overview */}

@@ -61,9 +61,9 @@ const CarbonComparison = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Carbon Footprint</span> Comparisons
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Carbon Footprint</span> Comparisons
           </h1>
-          <p className="text-xl text-textLight/70">
+          <p className="text-xl text-textLight">
             Understand your carbon impact in context with global averages
           </p>
         </motion.div>

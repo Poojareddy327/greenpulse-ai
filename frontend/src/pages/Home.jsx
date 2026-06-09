@@ -193,7 +193,7 @@ const Home = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter text-white drop-shadow-lg">
-              Advanced Features for <span className="gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]">Carbon Intelligence</span>
+              Advanced Features for <span className="text-primary drop-shadow-[0_0_30px_rgba(37,99,235,0.9)]">Carbon Intelligence</span>
             </h2>
             <p className="text-lg md:text-xl text-textLight max-w-2xl mx-auto">
               Understand your carbon footprint with precision. Forecast future emissions. Implement data-backed strategies.
@@ -224,7 +224,7 @@ const Home = () => {
                     >
                       <Icon className="w-10 h-10 text-white drop-shadow-lg" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold mb-3 text-white group-hover:gradient-text transition-all">{feature.title}</h3>
+                    <h3 className="text-2xl font-bold mb-3 text-white transition-all">{feature.title}</h3>
                     <p className="text-textLight/90 leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>

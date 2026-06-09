@@ -117,10 +117,10 @@ const Calculator = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Calculate Your <span className="gradient-text">Environmental Impact</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Calculate Your <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Environmental Impact</span>
           </h1>
-          <p className="text-textLight/70 text-lg">
+          <p className="text-textLight text-lg">
             Answer a few questions to understand your carbon and water footprint
           </p>
         </motion.div>

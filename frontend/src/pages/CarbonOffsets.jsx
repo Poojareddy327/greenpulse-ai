@@ -83,9 +83,9 @@ const CarbonOffsets = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Carbon Offset</span> Marketplace
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Carbon Offset</span> Marketplace
           </h1>
-          <p className="text-xl text-textLight/70 mb-8">
+          <p className="text-xl text-textLight mb-8">
             Offset your carbon emissions by supporting verified climate projects
           </p>
 
