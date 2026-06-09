@@ -85,7 +85,7 @@ const Home = () => {
                 </motion.span>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-bold font-display mb-6 leading-tight tracking-tighter">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tighter">
                 Measure Every Choice.{' '}
                 <span className="gradient-text relative">
                   Reduce Every Emission.
@@ -162,7 +162,7 @@ const Home = () => {
                       <Icon className={`w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 ${stat.color}`} />
                     </motion.div>
                     <motion.div 
-                      className="text-2xl md:text-3xl font-bold font-display mb-1"
+                      className="text-2xl md:text-3xl font-bold mb-1"
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
@@ -186,7 +186,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 tracking-tighter">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">
               Advanced Features for <span className="gradient-text">Carbon Intelligence</span>
             </h2>
             <p className="text-lg md:text-xl text-textMuted max-w-2xl mx-auto">
@@ -218,7 +218,7 @@ const Home = () => {
                     >
                       <Icon className="w-10 h-10 text-white drop-shadow-lg" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold font-display mb-3 group-hover:gradient-text transition-all">{feature.title}</h3>
+                    <h3 className="text-2xl font-bold mb-3 group-hover:gradient-text transition-all">{feature.title}</h3>
                     <p className="text-textMuted leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
@@ -247,7 +247,7 @@ const Home = () => {
               transition={{ type: "spring", stiffness: 200 }}
             >
               <motion.h2 
-                className="text-3xl md:text-5xl font-bold font-display mb-4 tracking-tighter"
+                className="text-3xl md:text-5xl font-bold mb-4 tracking-tighter"
                 animate={{ textShadow: ['0 0 20px rgba(37, 99, 235, 0.5)', '0 0 40px rgba(124, 58, 237, 0.5)', '0 0 20px rgba(37, 99, 235, 0.5)'] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
