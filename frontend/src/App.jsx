@@ -19,19 +19,21 @@ function App() {
       <Router>
         <div className="min-h-screen bg-gradient-dark">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/calculator" element={<Calculator />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/comparison" element={<CarbonComparison />} />
-            <Route path="/offsets" element={<CarbonOffsets />} />
-            <Route path="/ai-advisor" element={<AIAdvisor />} />
-            <Route path="/challenges" element={<Challenges />} />
-            <Route path="/learning" element={<Learning />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <main id="main-content" role="main" tabIndex="-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/calculator" element={<Calculator />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/comparison" element={<CarbonComparison />} />
+              <Route path="/offsets" element={<CarbonOffsets />} />
+              <Route path="/ai-advisor" element={<AIAdvisor />} />
+              <Route path="/challenges" element={<Challenges />} />
+              <Route path="/learning" element={<Learning />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </main>
         </div>
       </Router>
     </AuthProvider>

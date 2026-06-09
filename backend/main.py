@@ -1,14 +1,62 @@
-from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field, validator
 from typing import Optional, List, Dict
 import os
 from datetime import datetime, timedelta
 import json
 import random
 import math
+import time
 
-app = FastAPI(title="GreenPulse AI API", version="1.0.0")
+app = FastAPI(
+    title="GreenPulse AI API",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
+
+# Security Headers Middleware
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+    return response
+
+# Rate Limiting Middleware (Simple implementation)
+request_counts = {}
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    client_ip = request.client.host
+    current_time = time.time()
+    
+    # Clean old entries
+    request_counts[client_ip] = [
+        timestamp for timestamp in request_counts.get(client_ip, [])
+        if current_time - timestamp < 60  # 1 minute window
+    ]
+    
+    # Check rate limit (100 requests per minute)
+    if len(request_counts.get(client_ip, [])) >= 100:
+        return JSONResponse(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            content={"detail": "Rate limit exceeded. Please try again later."}
+        )
+    
+    # Add current request
+    request_counts.setdefault(client_ip, []).append(current_time)
+    
+    response = await call_next(request)
+    return response
 
 # CORS middleware - Allow all Vercel domains
 app.add_middleware(
