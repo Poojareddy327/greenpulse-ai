@@ -205,7 +205,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2, type: "spring" }}
                   whileHover={{ scale: 1.08, rotateY: 5 }}
-                  className="feature-card text-center neon-border"
+                  className="feature-card group text-center neon-border"
                 >
                   <div className="relative z-10">
                     <motion.div 
