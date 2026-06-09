@@ -38,8 +38,8 @@ const Login = () => {
           >
             <Activity className="w-10 h-10 text-white" />
           </motion.div>
-          <h1 className="text-3xl font-bold font-display mb-2">Welcome Back to CarbonIQ</h1>
-          <p className="text-textMuted">Continue your carbon intelligence journey</p>
+          <h1 className="text-3xl font-bold font-display mb-2">Welcome Back to GreenPulse AI</h1>
+          <p className="text-textMuted">Continue your carbon analytics journey</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">

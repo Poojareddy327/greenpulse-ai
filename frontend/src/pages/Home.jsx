@@ -103,7 +103,7 @@ const Home = () => {
               transition={{ delay: 0.5 }}
               className="text-xl md:text-2xl text-textMuted mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              <span className="font-bold text-primary">CarbonIQ</span> transforms daily activities into actionable carbon insights 
+              <span className="font-bold text-primary">GreenPulse AI</span> transforms daily activities into actionable carbon insights 
               using <span className="text-secondary font-semibold">advanced analytics</span> and <span className="text-accent font-semibold">AI-driven recommendations</span>.
             </motion.p>
           </motion.div>
@@ -251,7 +251,7 @@ const Home = () => {
                 animate={{ textShadow: ['0 0 20px rgba(37, 99, 235, 0.5)', '0 0 40px rgba(124, 58, 237, 0.5)', '0 0 20px rgba(37, 99, 235, 0.5)'] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Start Your Carbon Intelligence Journey
+                Start Your Carbon Analytics Journey
               </motion.h2>
               <p className="text-lg md:text-xl text-textMuted mb-8">
                 Join thousands analyzing their emissions. Track trends. Forecast reductions. Build low-carbon habits. 📊⚡
