@@ -2,30 +2,30 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { initAnalytics } from './utils/analytics'
 
-// Initialize performance monitoring and analytics
-initAnalytics()
+// Initialize performance monitoring and analytics (with error handling)
+try {
+  import('./utils/analytics').then(({ initAnalytics }) => {
+    initAnalytics()
+  }).catch(error => {
+    console.warn('Analytics initialization skipped:', error.message)
+  })
+} catch (error) {
+  console.warn('Analytics module not found')
+}
 
-// Register service worker for PWA support
-if ('serviceWorker' in navigator) {
+// Register service worker for PWA support (optional - only in production)
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/service-worker.js')
       .then(registration => {
-        console.log('✅ Service Worker registered:', registration.scope)
+        console.log('✅ Service Worker registered')
       })
       .catch(error => {
-        console.log('❌ Service Worker registration failed:', error)
+        console.warn('Service Worker skipped')
       })
   })
-}
-
-// Request notification permission
-if ('Notification' in window && Notification.permission === 'default') {
-  setTimeout(() => {
-    Notification.requestPermission()
-  }, 5000)
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
