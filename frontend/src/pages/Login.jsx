@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Leaf } from 'lucide-react'
+import { Mail, Lock, Activity } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 const Login = () => {
@@ -34,19 +34,19 @@ const Login = () => {
           <motion.div
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex p-4 bg-gradient-green rounded-2xl shadow-glow-green mb-4"
+            className="inline-flex p-4 bg-gradient-analytics rounded-2xl shadow-glow-blue mb-4"
           >
-            <Leaf className="w-10 h-10 text-white" />
+            <Activity className="w-10 h-10 text-white" />
           </motion.div>
-          <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-          <p className="text-textLight/70">Sign in to continue your eco journey</p>
+          <h1 className="text-3xl font-bold font-display mb-2">Welcome Back to CarbonIQ</h1>
+          <p className="text-textMuted">Continue your carbon intelligence journey</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
           <div>
             <label className="block text-sm font-medium mb-2">Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-textLight/40" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-textMuted" />
               <input
                 type="email"
                 value={email}
@@ -61,7 +61,7 @@ const Login = () => {
           <div>
             <label className="block text-sm font-medium mb-2">Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-textLight/40" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-textMuted" />
               <input
                 type="password"
                 value={password}
@@ -82,7 +82,7 @@ const Login = () => {
             Sign In
           </motion.button>
 
-          <p className="text-center text-sm text-textLight/70">
+          <p className="text-center text-sm text-textMuted">
             Don't have an account?{' '}
             <Link to="/register" className="text-primary hover:underline font-semibold">
               Sign up
