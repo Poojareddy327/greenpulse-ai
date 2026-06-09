@@ -1,35 +1,10 @@
 import { motion } from 'framer-motion'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { TrendingDown, Droplets, Zap, Award, Target, Calendar, CheckCircle, Plus, Flame, ArrowRight, Download, Share2, FileText } from 'lucide-react'
+import { TrendingDown, Droplets, Zap, Award, Target, Calendar, Plus, Flame, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { exportToCSV, exportToJSON, exportToPDF, shareData, formatDataForExport } from '../utils/exportData'
-import { useState, useEffect } from 'react'
-import AdvancedMetrics from '../components/AdvancedMetrics'
-import ComparisonWidget from '../components/ComparisonWidget'
-import PredictionChart from '../components/PredictionChart'
-import ProgressTracker from '../components/ProgressTracker'
-import NotificationSystem, { showNotification } from '../components/NotificationSystem'
-import LiveCarbonCounter from '../components/LiveCarbonCounter'
-import Leaderboard from '../components/Leaderboard'
+import { useState } from 'react'
 
 const Dashboard = () => {
-  const [showExportMenu, setShowExportMenu] = useState(false)
-
-  // Show welcome notification on first load
-  useEffect(() => {
-    const hasSeenWelcome = localStorage.getItem('dashboardWelcome')
-    if (!hasSeenWelcome) {
-      setTimeout(() => {
-        showNotification(
-          'Welcome to Your Dashboard! 🎉',
-          'Track your carbon footprint and achieve sustainability goals',
-          'success'
-        )
-        localStorage.setItem('dashboardWelcome', 'true')
-      }, 1000)
-    }
-  }, [])
-
   // Mock data
   const monthlyData = [
     { month: 'Jan', carbon: 320, water: 4200, score: 65 },
@@ -63,142 +38,25 @@ const Dashboard = () => {
     { action: 'Used public transport', points: '+25', time: '5 days ago', icon: '🚌' },
   ]
 
-  const currentStats = {
-    carbon: 180,
-    water: 2800,
-    score: 88,
-    points: 1250
-  }
-
   const goals = [
     { title: 'Reduce carbon by 20%', current: 180, target: 200, percentage: 90 },
     { title: 'Save 1000L water/month', current: 2800, target: 3000, percentage: 93 },
     { title: 'Complete 5 challenges', current: 3, target: 5, percentage: 60 },
   ]
 
-  const handleExportCSV = () => {
-    const exportData = formatDataForExport(monthlyData, currentStats, badges)
-    exportToCSV(exportData.monthlyTrends, 'greenpulse-monthly-data.csv')
-    setShowExportMenu(false)
-    showNotification('Export Successful', 'Your data has been exported as CSV', 'success')
-  }
-
-  const handleExportJSON = () => {
-    const exportData = formatDataForExport(monthlyData, currentStats, badges)
-    exportToJSON(exportData, 'greenpulse-dashboard.json')
-    setShowExportMenu(false)
-    showNotification('Export Successful', 'Your data has been exported as JSON', 'success')
-  }
-
-  const handleExportPDF = () => {
-    exportToPDF('dashboard-content', 'greenpulse-report.pdf')
-    setShowExportMenu(false)
-    showNotification('PDF Generated', 'Your report is ready to print', 'success')
-  }
-
-  const handleShare = async () => {
-    const success = await shareData(
-      'GreenPulse AI - My Carbon Footprint',
-      `I've reduced my carbon footprint by 10% this month! Current score: ${currentStats.score}/100 🌍`,
-      window.location.href
-    )
-    if (success) {
-      setShowExportMenu(false)
-      showNotification('Shared Successfully', 'Keep inspiring others!', 'success')
-    }
-  }
-
   return (
-    <>
-      <NotificationSystem />
-      <div className="min-h-screen py-12 px-4">
-      <div className="max-w-7xl mx-auto" id="dashboard-content">
+    <div className="min-h-screen py-12 px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 flex items-center justify-between"
+          className="mb-8"
         >
-          <div>
-            <h1 className="text-4xl font-bold mb-2">
-              Your <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Sustainability Dashboard</span>
-            </h1>
-            <p className="text-textLight">Track your environmental impact over time</p>
-          </div>
-          
-          {/* Export Menu */}
-          <div className="relative">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowExportMenu(!showExportMenu)}
-              className="glass-card px-6 py-3 flex items-center gap-2 hover:border-primary transition-colors"
-            >
-              <Download className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Export Data</span>
-            </motion.button>
-
-            {showExportMenu && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute right-0 mt-2 w-48 glass-card z-50"
-              >
-                <button
-                  onClick={handleExportCSV}
-                  className="w-full px-4 py-3 text-left hover:bg-primary/10 transition-colors flex items-center gap-2 rounded-t-xl"
-                >
-                  <FileText className="w-4 h-4" />
-                  Export as CSV
-                </button>
-                <button
-                  onClick={handleExportJSON}
-                  className="w-full px-4 py-3 text-left hover:bg-primary/10 transition-colors flex items-center gap-2"
-                >
-                  <FileText className="w-4 h-4" />
-                  Export as JSON
-                </button>
-                <button
-                  onClick={handleExportPDF}
-                  className="w-full px-4 py-3 text-left hover:bg-primary/10 transition-colors flex items-center gap-2"
-                >
-                  <FileText className="w-4 h-4" />
-                  Export as PDF
-                </button>
-                <button
-                  onClick={handleShare}
-                  className="w-full px-4 py-3 text-left hover:bg-primary/10 transition-colors flex items-center gap-2 rounded-b-xl border-t border-white/10"
-                >
-                  <Share2 className="w-4 h-4" />
-                  Share Progress
-                </button>
-              </motion.div>
-            )}
-          </div>
+          <h1 className="text-4xl font-bold mb-2">
+            Your <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Sustainability Dashboard</span>
+          </h1>
+          <p className="text-textLight">Track your environmental impact over time</p>
         </motion.div>
-
-        {/* Progress Tracker */}
-        <ProgressTracker level={5} xp={1250} nextLevelXP={1500} />
-
-        {/* Live Carbon Counter - NEW! */}
-        <LiveCarbonCounter />
-
-        {/* Global Leaderboard - NEW! */}
-        <Leaderboard />
-
-        {/* Advanced Metrics */}
-        <AdvancedMetrics 
-          data={{
-            monthlyData,
-            currentCarbon: currentStats.carbon,
-            currentScore: currentStats.score
-          }}
-        />
-
-        {/* AI Predictions */}
-        <PredictionChart historicalData={monthlyData} />
-
-        {/* Comparison Widget */}
-        <ComparisonWidget userScore={currentStats.score} userCarbon={currentStats.carbon} />
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -444,8 +302,7 @@ const Dashboard = () => {
           </div>
         </motion.div>
       </div>
-      </div>
-    </>
+    </div>
   )
 }
 
