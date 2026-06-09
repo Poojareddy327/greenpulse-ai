@@ -1,0 +1,42 @@
+{
+  "name": "GreenPulse AI - Carbon Intelligence Platform",
+  "short_name": "GreenPulse AI",
+  "description": "AI-powered carbon footprint intelligence platform with predictive analytics",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2563EB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/leaf.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/leaf.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "productivity", "utilities"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Calculator",
+      "short_name": "Calculate",
+      "description": "Calculate your carbon footprint",
+      "url": "/calculator",
+      "icons": [{ "src": "/leaf.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your carbon dashboard",
+      "url": "/dashboard",
+      "icons": [{ "src": "/leaf.svg", "sizes": "192x192" }]
+    }
+  ]
+}
