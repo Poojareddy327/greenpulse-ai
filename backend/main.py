@@ -527,7 +527,7 @@ def ai_advisor_advanced(query: AIQuery) -> Dict[str, Any]:
             "difficulty": "Medium"
         },
         "tips": {
-            "message": "💡 Smart Sustainability Tips:\n\n**Transportation** 🚲\n• Bike/walk for trips < 2 miles\n• Carpool or use public transit\n• Combine errands to reduce trips\n\n**Energy** ⚡\n• Unplug devices when not in use\n• Use programmable thermostat\n• Air dry clothes when possible\n\n**Food** 🍽️\n• Buy local & seasonal produce\n• Reduce food waste by 50%\n• Try "Meatless Mondays"\n\n**Water** 💧\n• Fix leaks immediately\n• Install low-flow fixtures\n• Collect rainwater for plants",
+            "message": "💡 Smart Sustainability Tips:\n\n**Transportation** 🚲\n• Bike/walk for trips < 2 miles\n• Carpool or use public transit\n• Combine errands to reduce trips\n\n**Energy** ⚡\n• Unplug devices when not in use\n• Use programmable thermostat\n• Air dry clothes when possible\n\n**Food** 🍽️\n• Buy local & seasonal produce\n• Reduce food waste by 50%\n• Try 'Meatless Mondays'\n\n**Water** 💧\n• Fix leaks immediately\n• Install low-flow fixtures\n• Collect rainwater for plants",
             "estimatedSavings": "80-120 kg CO₂/month",
             "difficulty": "Easy"
         },
