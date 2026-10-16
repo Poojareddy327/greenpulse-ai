@@ -16,18 +16,36 @@ try {
   console.warn('Analytics module not found')
 }
 
-// Register service worker for PWA support (optional - only in production)
+// Register service worker for PWA support (only in production)
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then(registration => {
-        console.log('✅ Service Worker registered')
-      })
-      .catch(error => {
-        console.warn('Service Worker skipped')
-      })
-  })
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(registration => {
+          registration.update()
+          registration.addEventListener('updatefound', () => {
+            const installingWorker = registration.installing
+            if (installingWorker) {
+              installingWorker.addEventListener('statechange', () => {
+                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // Instant refresh to load new build chunks without showing stale UI
+                  window.location.reload()
+                }
+              })
+            }
+          })
+        })
+        .catch(() => {
+          // Service worker optional
+        })
+    })
+  } else {
+    // In dev: unregister existing service workers to avoid stale cache
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      registrations.forEach(r => r.unregister())
+    })
+  }
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,15 +1,13 @@
-const CACHE_NAME = 'greenpulse-v1.0.0';
-const RUNTIME_CACHE = 'greenpulse-runtime';
+const CACHE_NAME = 'greenpulse-v1.0.2';
+const RUNTIME_CACHE = 'greenpulse-runtime-v1.0.2';
 
-// Assets to cache on install
+// Assets to cache on install (only core shell icons/manifest)
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
   '/leaf.svg',
   '/manifest.json'
 ];
 
-// Install event - cache static assets
+// Install event - cache static assets and skip waiting immediately
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -18,7 +16,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches immediately and take control
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -31,14 +29,34 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - network first, fallback to cache
+// Fetch event
 self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests
   if (!event.request.url.startsWith(self.location.origin)) {
     return;
   }
 
-  // API requests - network first
+  // 1. Navigation requests (HTML): Always NETWORK-FIRST so users get the latest build immediately
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(RUNTIME_CACHE).then(cache => cache.put(event.request, responseClone));
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(event.request);
+          if (cached) return cached;
+          return caches.match('/index.html');
+        })
+    );
+    return;
+  }
+
+  // 2. API requests: network first
   if (event.request.url.includes('/api/')) {
     event.respondWith(
       fetch(event.request)
@@ -53,23 +71,21 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets - cache first
+  // 3. Static assets: Stale-while-revalidate (serve cache immediately if available, but update cache in background)
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200 || response.type === 'error') {
-            return response;
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request)
+        .then(networkResponse => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(RUNTIME_CACHE).then(cache => cache.put(event.request, responseClone));
           }
-          const responseToCache = response.clone();
-          caches.open(RUNTIME_CACHE)
-            .then(cache => cache.put(event.request, responseToCache));
-          return response;
-        });
-      })
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || fetchPromise;
+    })
   );
 });
 
@@ -81,7 +97,6 @@ self.addEventListener('sync', (event) => {
 });
 
 async function syncCalculations() {
-  // Sync offline calculations when back online
   const cache = await caches.open(RUNTIME_CACHE);
   const requests = await cache.keys();
   
@@ -122,7 +137,7 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/')
+      self.clients.openWindow('/')
     );
   }
 });
