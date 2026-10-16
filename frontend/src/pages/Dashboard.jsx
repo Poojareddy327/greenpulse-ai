@@ -1,6 +1,26 @@
 import { motion } from 'framer-motion'
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { TrendingDown, Droplets, Zap, Award, Target, Calendar, Plus, Flame, ArrowRight } from 'lucide-react'
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
+import {
+  TrendingDown,
+  Droplets,
+  Zap,
+  Award,
+  Target,
+  Calendar,
+  Plus,
+  Flame,
+  ArrowRight,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -33,7 +53,12 @@ const Dashboard = () => {
 
   const recentActivities = [
     { action: 'Completed calculator assessment', points: '+50', time: '2 hours ago', icon: '📊' },
-    { action: 'Joined "Zero Plastic Week" challenge', points: '+100', time: '1 day ago', icon: '🎯' },
+    {
+      action: 'Joined "Zero Plastic Week" challenge',
+      points: '+100',
+      time: '1 day ago',
+      icon: '🎯',
+    },
     { action: 'Earned "Water Saver" badge', points: '+200', time: '3 days ago', icon: '🏆' },
     { action: 'Used public transport', points: '+25', time: '5 days ago', icon: '🚌' },
   ]
@@ -47,13 +72,12 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
-            Your <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Sustainability Dashboard</span>
+            Your{' '}
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+              Sustainability Dashboard
+            </span>
           </h1>
           <p className="text-textLight">Track your environmental impact over time</p>
         </motion.div>
@@ -81,13 +105,7 @@ const Dashboard = () => {
             change="+3%"
             positive={true}
           />
-          <StatCard
-            icon={Award}
-            label="Green Points"
-            value="1,250"
-            change="+150"
-            positive={true}
-          />
+          <StatCard icon={Award} label="Green Points" value="1,250" change="+150" positive={true} />
         </div>
 
         {/* Charts */}
@@ -307,10 +325,7 @@ const Dashboard = () => {
 }
 
 const StatCard = ({ icon: Icon, label, value, change, positive }) => (
-  <motion.div
-    whileHover={{ scale: 1.02, y: -5 }}
-    className="glass-card p-6"
-  >
+  <motion.div whileHover={{ scale: 1.02, y: -5 }} className="glass-card p-6">
     <div className="flex items-center justify-between mb-4">
       <Icon className="w-8 h-8 text-primary" />
       <span className={`text-sm font-semibold ${positive ? 'text-green-400' : 'text-red-400'}`}>

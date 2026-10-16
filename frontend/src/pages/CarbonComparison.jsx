@@ -8,7 +8,7 @@ const CarbonComparison = () => {
     { region: 'European Union', annual: 7000, color: 'bg-orange-500' },
     { region: 'China', annual: 8000, color: 'bg-yellow-500' },
     { region: 'India', annual: 1900, color: 'bg-green-500' },
-    { region: 'Target (Paris Agreement)', annual: 2000, color: 'bg-primary' }
+    { region: 'Target (Paris Agreement)', annual: 2000, color: 'bg-primary' },
   ]
 
   const comparisons = [
@@ -18,8 +18,8 @@ const CarbonComparison = () => {
       equivalents: [
         'Driving 400 km in a petrol car',
         '1 short-haul flight',
-        '50 kg of beef consumption'
-      ]
+        '50 kg of beef consumption',
+      ],
     },
     {
       icon: TreePine,
@@ -27,8 +27,8 @@ const CarbonComparison = () => {
       equivalents: [
         'Needs 40 trees to absorb per year',
         'Average person in 2.5 months',
-        'One transatlantic flight'
-      ]
+        'One transatlantic flight',
+      ],
     },
     {
       icon: Globe,
@@ -36,9 +36,9 @@ const CarbonComparison = () => {
       equivalents: [
         'Average US citizen: 44 kg CO₂/day',
         'Average EU citizen: 19 kg CO₂/day',
-        'Target: 5.5 kg CO₂/day'
-      ]
-    }
+        'Target: 5.5 kg CO₂/day',
+      ],
+    },
   ]
 
   const activities = [
@@ -49,7 +49,7 @@ const CarbonComparison = () => {
     { activity: 'Vegetables (1 kg)', carbon: 2, icon: '🥗' },
     { activity: 'Electricity (1 kWh)', carbon: 0.5, icon: '⚡' },
     { activity: 'Flight (1000 km)', carbon: 250, icon: '✈️' },
-    { activity: 'Train (1000 km)', carbon: 14, icon: '🚂' }
+    { activity: 'Train (1000 km)', carbon: 14, icon: '🚂' },
   ]
 
   return (
@@ -61,7 +61,10 @@ const CarbonComparison = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Carbon Footprint</span> Comparisons
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+              Carbon Footprint
+            </span>{' '}
+            Comparisons
           </h1>
           <p className="text-xl text-textLight">
             Understand your carbon impact in context with global averages
@@ -83,11 +86,15 @@ const CarbonComparison = () => {
                 transition={{ delay: index * 0.1 }}
                 className="glass-card p-6"
               >
-                <div className={`w-12 h-12 ${region.color} rounded-lg mb-4 flex items-center justify-center`}>
+                <div
+                  className={`w-12 h-12 ${region.color} rounded-lg mb-4 flex items-center justify-center`}
+                >
                   <TrendingDown className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{region.region}</h3>
-                <p className="text-3xl font-bold text-primary mb-1">{region.annual.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-primary mb-1">
+                  {region.annual.toLocaleString()}
+                </p>
                 <p className="text-sm text-textLight/60">kg CO₂ per year</p>
                 <div className="mt-4 h-2 bg-bgDark rounded-full overflow-hidden">
                   <div

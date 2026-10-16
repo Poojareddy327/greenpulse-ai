@@ -6,28 +6,28 @@ class PerformanceMonitor {
       pageLoadTime: 0,
       apiCalls: [],
       errors: [],
-      userActions: []
-    };
+      userActions: [],
+    }
   }
 
   // Track page load performance
   trackPageLoad() {
     if (typeof window !== 'undefined' && window.performance) {
-      const perfData = window.performance.timing;
-      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-      
-      this.metrics.pageLoadTime = pageLoadTime;
-      
+      const perfData = window.performance.timing
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart
+
+      this.metrics.pageLoadTime = pageLoadTime
+
       return {
         pageLoadTime,
         domContentLoaded: perfData.domContentLoadedEventEnd - perfData.navigationStart,
         resourcesLoaded: perfData.loadEventEnd - perfData.domContentLoadedEventEnd,
         dns: perfData.domainLookupEnd - perfData.domainLookupStart,
         tcp: perfData.connectEnd - perfData.connectStart,
-        ttfb: perfData.responseStart - perfData.requestStart
-      };
+        ttfb: perfData.responseStart - perfData.requestStart,
+      }
     }
-    return null;
+    return null
   }
 
   // Track API call performance
@@ -36,12 +36,12 @@ class PerformanceMonitor {
       endpoint,
       duration,
       success,
-      timestamp: Date.now()
-    });
+      timestamp: Date.now(),
+    })
 
     // Keep only last 50 calls
     if (this.metrics.apiCalls.length > 50) {
-      this.metrics.apiCalls.shift();
+      this.metrics.apiCalls.shift()
     }
   }
 
@@ -51,10 +51,10 @@ class PerformanceMonitor {
       message: error.message,
       stack: error.stack,
       context,
-      timestamp: Date.now()
-    });
+      timestamp: Date.now(),
+    })
 
-    console.error('Error tracked:', error, context);
+    console.error('Error tracked:', error, context)
   }
 
   // Track user actions
@@ -62,24 +62,29 @@ class PerformanceMonitor {
     this.metrics.userActions.push({
       action,
       details,
-      timestamp: Date.now()
-    });
+      timestamp: Date.now(),
+    })
 
     // Keep only last 100 actions
     if (this.metrics.userActions.length > 100) {
-      this.metrics.userActions.shift();
+      this.metrics.userActions.shift()
     }
   }
 
   // Get performance report
   getReport() {
-    const avgApiTime = this.metrics.apiCalls.length > 0
-      ? this.metrics.apiCalls.reduce((sum, call) => sum + call.duration, 0) / this.metrics.apiCalls.length
-      : 0;
+    const avgApiTime =
+      this.metrics.apiCalls.length > 0
+        ? this.metrics.apiCalls.reduce((sum, call) => sum + call.duration, 0) /
+          this.metrics.apiCalls.length
+        : 0
 
-    const successRate = this.metrics.apiCalls.length > 0
-      ? (this.metrics.apiCalls.filter(call => call.success).length / this.metrics.apiCalls.length) * 100
-      : 100;
+    const successRate =
+      this.metrics.apiCalls.length > 0
+        ? (this.metrics.apiCalls.filter(call => call.success).length /
+            this.metrics.apiCalls.length) *
+          100
+        : 100
 
     return {
       pageLoadTime: this.metrics.pageLoadTime,
@@ -89,8 +94,8 @@ class PerformanceMonitor {
       totalErrors: this.metrics.errors.length,
       totalUserActions: this.metrics.userActions.length,
       recentErrors: this.metrics.errors.slice(-5),
-      recentActions: this.metrics.userActions.slice(-10)
-    };
+      recentActions: this.metrics.userActions.slice(-10),
+    }
   }
 
   // Clear metrics
@@ -99,150 +104,150 @@ class PerformanceMonitor {
       pageLoadTime: 0,
       apiCalls: [],
       errors: [],
-      userActions: []
-    };
+      userActions: [],
+    }
   }
 }
 
 // Create singleton instance
-export const performanceMonitor = new PerformanceMonitor();
+export const performanceMonitor = new PerformanceMonitor()
 
 // Track page visibility
-export const trackPageVisibility = (callback) => {
+export const trackPageVisibility = callback => {
   if (typeof document !== 'undefined') {
     document.addEventListener('visibilitychange', () => {
-      callback(document.hidden ? 'hidden' : 'visible');
-    });
+      callback(document.hidden ? 'hidden' : 'visible')
+    })
   }
-};
+}
 
 // Track network status
-export const trackNetworkStatus = (callback) => {
+export const trackNetworkStatus = callback => {
   if (typeof window !== 'undefined') {
-    window.addEventListener('online', () => callback('online'));
-    window.addEventListener('offline', () => callback('offline'));
+    window.addEventListener('online', () => callback('online'))
+    window.addEventListener('offline', () => callback('offline'))
   }
-};
+}
 
 // Measure component render time
 export const measureRenderTime = (componentName, callback) => {
-  const startTime = performance.now();
-  callback();
-  const endTime = performance.now();
-  const renderTime = endTime - startTime;
-  
+  const startTime = performance.now()
+  callback()
+  const endTime = performance.now()
+  const renderTime = endTime - startTime
+
   performanceMonitor.trackUserAction('component_render', {
     component: componentName,
-    renderTime: renderTime.toFixed(2)
-  });
-  
-  return renderTime;
-};
+    renderTime: renderTime.toFixed(2),
+  })
+
+  return renderTime
+}
 
 // Track user engagement
 export const trackEngagement = () => {
-  let startTime = Date.now();
-  let isActive = true;
+  let startTime = Date.now()
+  let isActive = true
 
   const calculateEngagementTime = () => {
     if (isActive) {
-      return Date.now() - startTime;
+      return Date.now() - startTime
     }
-    return 0;
-  };
+    return 0
+  }
 
   // Track when user leaves/returns
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      isActive = false;
+      isActive = false
       performanceMonitor.trackUserAction('page_blur', {
-        engagementTime: calculateEngagementTime()
-      });
+        engagementTime: calculateEngagementTime(),
+      })
     } else {
-      isActive = true;
-      startTime = Date.now();
+      isActive = true
+      startTime = Date.now()
     }
-  });
+  })
 
   // Track before unload
   window.addEventListener('beforeunload', () => {
     performanceMonitor.trackUserAction('page_unload', {
-      totalEngagementTime: calculateEngagementTime()
-    });
-  });
+      totalEngagementTime: calculateEngagementTime(),
+    })
+  })
 
   return {
-    getEngagementTime: calculateEngagementTime
-  };
-};
+    getEngagementTime: calculateEngagementTime,
+  }
+}
 
 // Initialize analytics
 export const initAnalytics = () => {
   // Track page load
   if (typeof window !== 'undefined') {
     window.addEventListener('load', () => {
-      const perfMetrics = performanceMonitor.trackPageLoad();
-      console.log('Performance Metrics:', perfMetrics);
-    });
+      const perfMetrics = performanceMonitor.trackPageLoad()
+      console.log('Performance Metrics:', perfMetrics)
+    })
   }
 
   // Track engagement
-  trackEngagement();
+  trackEngagement()
 
   // Track network status
-  trackNetworkStatus((status) => {
-    performanceMonitor.trackUserAction('network_status', { status });
-  });
+  trackNetworkStatus(status => {
+    performanceMonitor.trackUserAction('network_status', { status })
+  })
 
   // Track page visibility
-  trackPageVisibility((status) => {
-    performanceMonitor.trackUserAction('page_visibility', { status });
-  });
+  trackPageVisibility(status => {
+    performanceMonitor.trackUserAction('page_visibility', { status })
+  })
 
   // Global error handler
-  window.addEventListener('error', (event) => {
+  window.addEventListener('error', event => {
     performanceMonitor.trackError(event.error, {
       filename: event.filename,
       lineno: event.lineno,
-      colno: event.colno
-    });
-  });
+      colno: event.colno,
+    })
+  })
 
   // Promise rejection handler
-  window.addEventListener('unhandledrejection', (event) => {
+  window.addEventListener('unhandledrejection', event => {
     performanceMonitor.trackError(new Error(event.reason), {
-      type: 'unhandled_promise_rejection'
-    });
-  });
-};
+      type: 'unhandled_promise_rejection',
+    })
+  })
+}
 
 // Standalone exported analytics functions for testing and lightweight tracking
-let pageViewsList = [];
-let eventsList = [];
-let errorsList = [];
+let pageViewsList = []
+let eventsList = []
+let errorsList = []
 
-export const trackPageView = (page) => {
-  const data = { page, timestamp: Date.now() };
-  pageViewsList.push(data);
-  return data;
-};
+export const trackPageView = page => {
+  const data = { page, timestamp: Date.now() }
+  pageViewsList.push(data)
+  return data
+}
 
-export const trackEvent = (eventData) => {
-  const data = { ...eventData, timestamp: Date.now() };
-  eventsList.push(data);
-  return data;
-};
+export const trackEvent = eventData => {
+  const data = { ...eventData, timestamp: Date.now() }
+  eventsList.push(data)
+  return data
+}
 
 export const trackError = (error, context = {}) => {
   const data = {
     message: error?.message || 'Unknown error',
     stack: error?.stack,
     context: context || {},
-    timestamp: Date.now()
-  };
-  errorsList.push(data);
-  return data;
-};
+    timestamp: Date.now(),
+  }
+  errorsList.push(data)
+  return data
+}
 
 export const getAnalytics = () => ({
   pageViews: pageViewsList.length,
@@ -250,8 +255,8 @@ export const getAnalytics = () => ({
   errors: errorsList.length,
   performance: {
     pageLoadTime: performanceMonitor?.metrics?.pageLoadTime || 0,
-    apiCalls: performanceMonitor?.metrics?.apiCalls?.length || 0
-  }
-});
+    apiCalls: performanceMonitor?.metrics?.apiCalls?.length || 0,
+  },
+})
 
-export default performanceMonitor;
+export default performanceMonitor

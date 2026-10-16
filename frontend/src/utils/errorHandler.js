@@ -35,15 +35,12 @@ export class AppError extends Error {
  * @param {Error} error - Error object from API call
  * @returns {AppError} Parsed error object
  */
-export const parseAPIError = (error) => {
+export const parseAPIError = error => {
   // Network error
   if (!error.response) {
-    return new AppError(
-      'Network error. Please check your connection.',
-      ErrorTypes.NETWORK,
-      0,
-      { originalError: error.message }
-    )
+    return new AppError('Network error. Please check your connection.', ErrorTypes.NETWORK, 0, {
+      originalError: error.message,
+    })
   }
 
   const { status, data } = error.response
@@ -51,50 +48,29 @@ export const parseAPIError = (error) => {
   // Parse based on status code
   switch (status) {
     case 400:
-      return new AppError(
-        data.detail || 'Invalid request',
-        ErrorTypes.VALIDATION,
-        400,
-        data
-      )
-    
+      return new AppError(data.detail || 'Invalid request', ErrorTypes.VALIDATION, 400, data)
+
     case 401:
-      return new AppError(
-        'Please log in to continue',
-        ErrorTypes.AUTH,
-        401
-      )
-    
+      return new AppError('Please log in to continue', ErrorTypes.AUTH, 401)
+
     case 403:
       return new AppError(
         'You do not have permission to perform this action',
         ErrorTypes.PERMISSION,
         403
       )
-    
+
     case 404:
-      return new AppError(
-        'Resource not found',
-        ErrorTypes.NOT_FOUND,
-        404
-      )
-    
+      return new AppError('Resource not found', ErrorTypes.NOT_FOUND, 404)
+
     case 429:
-      return new AppError(
-        'Too many requests. Please try again later.',
-        ErrorTypes.NETWORK,
-        429
-      )
-    
+      return new AppError('Too many requests. Please try again later.', ErrorTypes.NETWORK, 429)
+
     case 500:
     case 502:
     case 503:
-      return new AppError(
-        'Server error. Please try again later.',
-        ErrorTypes.SERVER,
-        status
-      )
-    
+      return new AppError('Server error. Please try again later.', ErrorTypes.SERVER, status)
+
     default:
       return new AppError(
         data.detail || 'An unexpected error occurred',
@@ -137,7 +113,7 @@ export const logError = (error, context = {}) => {
  * @param {Error|AppError} error - Error object
  * @returns {string} User-friendly message
  */
-export const getUserMessage = (error) => {
+export const getUserMessage = error => {
   if (error instanceof AppError) {
     return error.message
   }
@@ -159,7 +135,7 @@ export const getUserMessage = (error) => {
  * @param {Function} fn - Async function to wrap
  * @returns {Function} Wrapped function
  */
-export const asyncHandler = (fn) => {
+export const asyncHandler = fn => {
   return async (...args) => {
     try {
       return await fn(...args)
@@ -224,7 +200,7 @@ export const handleReactError = (error, errorInfo) => {
  * @param {Object} errors - Validation errors
  * @returns {string} Combined error message
  */
-export const formatValidationErrors = (errors) => {
+export const formatValidationErrors = errors => {
   if (Array.isArray(errors)) {
     return errors.join('. ')
   }
@@ -243,11 +219,8 @@ export const formatValidationErrors = (errors) => {
  * @param {Error|AppError} error - Error to check
  * @returns {boolean} True if recoverable
  */
-export const isRecoverable = (error) => {
-  const recoverableTypes = [
-    ErrorTypes.NETWORK,
-    ErrorTypes.VALIDATION,
-  ]
+export const isRecoverable = error => {
+  const recoverableTypes = [ErrorTypes.NETWORK, ErrorTypes.VALIDATION]
 
   return error instanceof AppError && recoverableTypes.includes(error.type)
 }
@@ -257,7 +230,7 @@ export const isRecoverable = (error) => {
  * @param {Error|AppError} error - Error object
  * @returns {Object} Notification object
  */
-export const createErrorNotification = (error) => {
+export const createErrorNotification = error => {
   return {
     type: 'error',
     title: 'Error',

@@ -5,7 +5,7 @@ import { Cone, Cylinder } from '@react-three/drei'
 function Tree({ position, scale = 1 }) {
   const groupRef = useRef()
 
-  useFrame((state) => {
+  useFrame(state => {
     if (groupRef.current) {
       groupRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1
     }
@@ -59,11 +59,7 @@ const TreeCounter3D = ({ treesNeeded = 40 }) => {
           return (
             <Tree
               key={i}
-              position={[
-                (col - 1.5) * 1.5,
-                0,
-                (row - 1) * 2
-              ]}
+              position={[(col - 1.5) * 1.5, 0, (row - 1) * 2]}
               scale={0.8 + Math.random() * 0.4}
             />
           )

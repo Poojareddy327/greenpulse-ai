@@ -23,9 +23,7 @@ const ProgressTracker = ({ level = 5, xp = 1250, nextLevelXP = 1500 }) => {
             Level {level}
             <span className="text-accent">Eco Champion</span>
           </h3>
-          <p className="text-sm text-textMuted mt-1">
-            {nextLevelXP - xp} XP to next level
-          </p>
+          <p className="text-sm text-textMuted mt-1">{nextLevelXP - xp} XP to next level</p>
         </div>
         <div className="text-5xl">🏆</div>
       </div>
@@ -34,13 +32,15 @@ const ProgressTracker = ({ level = 5, xp = 1250, nextLevelXP = 1500 }) => {
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-textLight">Experience Points</span>
-          <span className="font-bold text-primary">{xp} / {nextLevelXP} XP</span>
+          <span className="font-bold text-primary">
+            {xp} / {nextLevelXP} XP
+          </span>
         </div>
         <div className="w-full bg-bgDark rounded-full h-4 relative overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, ease: 'easeOut' }}
             className="h-4 rounded-full bg-gradient-to-r from-primary via-secondary to-accent relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
@@ -70,9 +70,11 @@ const ProgressTracker = ({ level = 5, xp = 1250, nextLevelXP = 1500 }) => {
                     : 'bg-cardDark/30 opacity-40 grayscale'
                 }`}
               >
-                <Icon className={`w-6 h-6 mx-auto mb-1 ${
-                  achievement.unlocked ? 'text-accent' : 'text-textMuted'
-                }`} />
+                <Icon
+                  className={`w-6 h-6 mx-auto mb-1 ${
+                    achievement.unlocked ? 'text-accent' : 'text-textMuted'
+                  }`}
+                />
                 <div className="text-[10px] font-medium">{achievement.label}</div>
               </motion.div>
             )

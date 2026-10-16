@@ -16,7 +16,7 @@ const CarbonOffsets = () => {
       description: 'Plant and protect trees in the Amazon rainforest',
       impact: '1 ton = 40 trees planted',
       verified: 'Gold Standard',
-      image: '🌳'
+      image: '🌳',
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ const CarbonOffsets = () => {
       description: 'Support wind energy generation',
       impact: '1 ton = 2,000 kWh clean energy',
       verified: 'VCS Certified',
-      image: '💨'
+      image: '💨',
     },
     {
       id: 3,
@@ -40,7 +40,7 @@ const CarbonOffsets = () => {
       description: 'Install solar panels in rural communities',
       impact: '1 ton = Power for 1 family/year',
       verified: 'Gold Standard',
-      image: '☀️'
+      image: '☀️',
     },
     {
       id: 4,
@@ -52,14 +52,14 @@ const CarbonOffsets = () => {
       description: 'Remove plastic and restore marine ecosystems',
       impact: '1 ton = 500 kg plastic removed',
       verified: 'Blue Carbon',
-      image: '🌊'
-    }
+      image: '🌊',
+    },
   ]
 
   const packages = [
     { tons: 1, price: 12, popular: false },
     { tons: 5, price: 55, popular: true, savings: 15 },
-    { tons: 10, price: 100, popular: false, savings: 20 }
+    { tons: 10, price: 100, popular: false, savings: 20 },
   ]
 
   const addToCart = (project, tons) => {
@@ -83,7 +83,10 @@ const CarbonOffsets = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Carbon Offset</span> Marketplace
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+              Carbon Offset
+            </span>{' '}
+            Marketplace
           </h1>
           <p className="text-xl text-textLight mb-8">
             Offset your carbon emissions by supporting verified climate projects
@@ -97,15 +100,9 @@ const CarbonOffsets = () => {
               className="inline-flex items-center gap-4 glass-card px-6 py-3 mb-6"
             >
               <ShoppingCart className="w-5 h-5 text-primary" />
-              <span className="font-semibold">
-                {getTotalOffset()} tons CO₂ offset
-              </span>
-              <span className="text-primary font-bold">
-                ${getTotalPrice()}
-              </span>
-              <button className="btn-primary text-sm py-2">
-                Checkout
-              </button>
+              <span className="font-semibold">{getTotalOffset()} tons CO₂ offset</span>
+              <span className="text-primary font-bold">${getTotalPrice()}</span>
+              <button className="btn-primary text-sm py-2">Checkout</button>
             </motion.div>
           )}
         </motion.div>
@@ -134,9 +131,7 @@ const CarbonOffsets = () => {
                 <div className="text-sm text-textLight/60 mb-4">Tons CO₂</div>
                 <div className="text-3xl font-bold mb-2">${pkg.price}</div>
                 {pkg.savings && (
-                  <div className="text-sm text-green-400 mb-4">
-                    Save ${pkg.savings}!
-                  </div>
+                  <div className="text-sm text-green-400 mb-4">Save ${pkg.savings}!</div>
                 )}
                 <button
                   onClick={() => addToCart(offsetProjects[0], pkg.tons)}
@@ -189,10 +184,7 @@ const CarbonOffsets = () => {
                       </span>
                       <span className="text-sm text-textLight/60">/ton CO₂</span>
                     </div>
-                    <button
-                      onClick={() => addToCart(project, 1)}
-                      className="btn-secondary"
-                    >
+                    <button onClick={() => addToCart(project, 1)} className="btn-secondary">
                       Add 1 Ton
                     </button>
                   </div>

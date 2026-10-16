@@ -1,9 +1,27 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Car, Zap, Droplets, Utensils, Trash2, ArrowRight, TrendingDown, 
-  Sparkles, Check, Info, Plane, Bus, Flame, TreePine, Award, 
-  Gauge, RefreshCw, HelpCircle, CheckCircle2, ChevronRight, Sliders
+import {
+  Car,
+  Zap,
+  Droplets,
+  Utensils,
+  Trash2,
+  ArrowRight,
+  TrendingDown,
+  Sparkles,
+  Check,
+  Info,
+  Plane,
+  Bus,
+  Flame,
+  TreePine,
+  Award,
+  Gauge,
+  RefreshCw,
+  HelpCircle,
+  CheckCircle2,
+  ChevronRight,
+  Sliders,
 } from 'lucide-react'
 import AnimatedStats from '../components/AnimatedStats'
 import ParticleBackground from '../components/ParticleBackground'
@@ -24,7 +42,7 @@ const Calculator = () => {
       showerMinutes: 6,
       laundry: 1,
       diet: 'vegetarian',
-      recycling: 'always'
+      recycling: 'always',
     },
     city: {
       label: 'Urban Professional',
@@ -38,7 +56,7 @@ const Calculator = () => {
       showerMinutes: 9,
       laundry: 2,
       diet: 'mixed',
-      recycling: 'often'
+      recycling: 'often',
     },
     family: {
       label: 'Family Household',
@@ -52,8 +70,8 @@ const Calculator = () => {
       showerMinutes: 14,
       laundry: 5,
       diet: 'meat-heavy',
-      recycling: 'sometimes'
-    }
+      recycling: 'sometimes',
+    },
   }
 
   // Unit settings: Miles vs Kilometers
@@ -91,7 +109,13 @@ const Calculator = () => {
     const dietFactors = { vegan: 1.5, vegetarian: 1.7, mixed: 2.5, 'meat-heavy': 3.3 }
     const carbonDiet = (dietFactors[formData.diet] || 2.5) * 30
 
-    const totalCarbon = carbonTransport + carbonFlights + carbonElectricity + carbonHeating + carbonDiet - carbonTransit
+    const totalCarbon =
+      carbonTransport +
+      carbonFlights +
+      carbonElectricity +
+      carbonHeating +
+      carbonDiet -
+      carbonTransit
 
     // Water breakdown (Liters / month)
     const waterShower = (formData.showerMinutes || 0) * 9 * 30
@@ -102,8 +126,12 @@ const Calculator = () => {
     // Score calculation (0 to 100 scale)
     const carbonPenalty = Math.min(totalCarbon / 12, 50)
     const waterPenalty = Math.min(totalWater / 1200, 30)
-    const recyclingBonus = { always: 12, often: 8, sometimes: 4, rarely: 0 }[formData.recycling] || 0
-    const score = Math.min(100, Math.max(15, Math.round(100 - carbonPenalty - waterPenalty + recyclingBonus)))
+    const recyclingBonus =
+      { always: 12, often: 8, sometimes: 4, rarely: 0 }[formData.recycling] || 0
+    const score = Math.min(
+      100,
+      Math.max(15, Math.round(100 - carbonPenalty - waterPenalty + recyclingBonus))
+    )
 
     // Benchmark comparison (Average citizen = 420 kg CO₂ / mo)
     const nationalAverage = 420
@@ -112,19 +140,29 @@ const Calculator = () => {
     // Dynamic tailored recommendations
     const recommendations = []
     if (carbonTransport > 60) {
-      recommendations.push('Replacing 1-2 driving days with metro or cycling cuts ~45 kg CO₂ monthly.')
+      recommendations.push(
+        'Replacing 1-2 driving days with metro or cycling cuts ~45 kg CO₂ monthly.'
+      )
     }
     if (formData.electricity > 300) {
-      recommendations.push('Setting AC to 24°C and switching to LED fixtures saves ~30% on electricity emissions.')
+      recommendations.push(
+        'Setting AC to 24°C and switching to LED fixtures saves ~30% on electricity emissions.'
+      )
     }
     if (formData.showerMinutes > 10) {
-      recommendations.push('Shortening daily showers to 6-7 minutes saves over 1,200 liters of water every month.')
+      recommendations.push(
+        'Shortening daily showers to 6-7 minutes saves over 1,200 liters of water every month.'
+      )
     }
     if (formData.diet === 'meat-heavy') {
-      recommendations.push('Trying 2 plant-forward dinners each week lowers dietary emissions by ~25%.')
+      recommendations.push(
+        'Trying 2 plant-forward dinners each week lowers dietary emissions by ~25%.'
+      )
     }
     if (recommendations.length === 0) {
-      recommendations.push('Outstanding footprint! Maintain your low-carbon habits and inspire others.')
+      recommendations.push(
+        'Outstanding footprint! Maintain your low-carbon habits and inspire others.'
+      )
     }
 
     return {
@@ -134,20 +172,34 @@ const Calculator = () => {
       treesNeeded: Math.ceil(totalCarbon / 22),
       diffPercent,
       isGreener: diffPercent >= 0,
-      rating: score >= 80 ? 'Excellent' : score >= 65 ? 'Good' : score >= 45 ? 'Fair' : 'Needs Improvement',
-      ratingColor: score >= 80 ? 'text-emerald-400' : score >= 65 ? 'text-primary' : score >= 45 ? 'text-amber-400' : 'text-red-400',
+      rating:
+        score >= 80
+          ? 'Excellent'
+          : score >= 65
+            ? 'Good'
+            : score >= 45
+              ? 'Fair'
+              : 'Needs Improvement',
+      ratingColor:
+        score >= 80
+          ? 'text-emerald-400'
+          : score >= 65
+            ? 'text-primary'
+            : score >= 45
+              ? 'text-amber-400'
+              : 'text-red-400',
       breakdown: {
         transport: Math.max(10, Math.round(carbonTransport + carbonFlights)),
         energy: Math.max(10, Math.round(carbonElectricity + carbonHeating)),
         diet: Math.max(10, Math.round(carbonDiet)),
-        water: Math.max(5, Math.round(totalWater / 500))
+        water: Math.max(5, Math.round(totalWater / 500)),
       },
-      recommendations
+      recommendations,
     }
   }, [formData, unitSystem])
 
   // Select Quick Persona
-  const applyPersona = (key) => {
+  const applyPersona = key => {
     setActivePersona(key)
     setFormData(personas[key])
   }
@@ -159,13 +211,13 @@ const Calculator = () => {
   }
 
   // Dedicated Diet selection
-  const handleDietSelect = (dietId) => {
+  const handleDietSelect = dietId => {
     setActivePersona(null)
     setFormData(prev => ({ ...prev, diet: dietId }))
   }
 
   // Dedicated Recycling selection
-  const handleRecyclingSelect = (recyclingId) => {
+  const handleRecyclingSelect = recyclingId => {
     setActivePersona(null)
     setFormData(prev => ({ ...prev, recycling: recyclingId }))
   }
@@ -203,7 +255,6 @@ const Calculator = () => {
       <ParticleBackground />
 
       <div className="max-w-6xl mx-auto relative z-10 space-y-8">
-        
         {/* ============================================================ */}
         {/* HEADER SECTION */}
         {/* ============================================================ */}
@@ -216,10 +267,14 @@ const Calculator = () => {
             <Sparkles className="w-3.5 h-3.5" /> Interactive Real-Time Calculator
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Calculate Your <span className="text-primary drop-shadow-[0_0_25px_rgba(37,99,235,0.8)]">Carbon Footprint & Impact</span>
+            Calculate Your{' '}
+            <span className="text-primary drop-shadow-[0_0_25px_rgba(37,99,235,0.8)]">
+              Carbon Footprint & Impact
+            </span>
           </h1>
           <p className="text-textLight max-w-2xl mx-auto text-sm md:text-base">
-            Adjust the sliders below to see your monthly carbon and water footprint update live in real time.
+            Adjust the sliders below to see your monthly carbon and water footprint update live in
+            real time.
           </p>
         </motion.div>
 
@@ -270,10 +325,8 @@ const Calculator = () => {
         {/* 2-COLUMN MAIN LAYOUT: SLIDERS (LEFT) & LIVE RESULT (RIGHT) */}
         {/* ============================================================ */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
-          
           {/* LEFT: INTERACTIVE SLIDERS (7 COLS) */}
           <div className="lg:col-span-7 space-y-6">
-
             {/* 1. Transportation */}
             <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-5">
               <div className="flex items-center gap-2.5 text-primary border-b border-white/10 pb-3">
@@ -292,10 +345,10 @@ const Calculator = () => {
                 <input
                   type="range"
                   min="0"
-                  max={unitSystem === 'km' ? "500" : "300"}
+                  max={unitSystem === 'km' ? '500' : '300'}
                   step="5"
                   value={formData.carMiles}
-                  onChange={(e) => handleSliderChange('carMiles', e.target.value)}
+                  onChange={e => handleSliderChange('carMiles', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-primary"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -319,7 +372,7 @@ const Calculator = () => {
                   max="20"
                   step="1"
                   value={formData.publicTransport}
-                  onChange={(e) => handleSliderChange('publicTransport', e.target.value)}
+                  onChange={e => handleSliderChange('publicTransport', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -343,7 +396,7 @@ const Calculator = () => {
                   max="30"
                   step="1"
                   value={formData.flights}
-                  onChange={(e) => handleSliderChange('flights', e.target.value)}
+                  onChange={e => handleSliderChange('flights', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -375,7 +428,7 @@ const Calculator = () => {
                   max="700"
                   step="10"
                   value={formData.electricity}
-                  onChange={(e) => handleSliderChange('electricity', e.target.value)}
+                  onChange={e => handleSliderChange('electricity', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-yellow-400"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -399,7 +452,7 @@ const Calculator = () => {
                   max="90"
                   step="5"
                   value={formData.heating}
-                  onChange={(e) => handleSliderChange('heating', e.target.value)}
+                  onChange={e => handleSliderChange('heating', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-orange-500"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -431,7 +484,7 @@ const Calculator = () => {
                   max="25"
                   step="1"
                   value={formData.showerMinutes}
-                  onChange={(e) => handleSliderChange('showerMinutes', e.target.value)}
+                  onChange={e => handleSliderChange('showerMinutes', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
                 <div className="flex justify-between text-[11px] text-textMuted">
@@ -455,7 +508,7 @@ const Calculator = () => {
                   max="8"
                   step="1"
                   value={formData.laundry}
-                  onChange={(e) => handleSliderChange('laundry', e.target.value)}
+                  onChange={e => handleSliderChange('laundry', e.target.value)}
                   className="w-full h-2 bg-bgDark rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
               </div>
@@ -478,10 +531,36 @@ const Calculator = () => {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[
-                    { id: 'vegan', label: 'Vegan', icon: '🌱', tip: '-55% CO₂', activeColor: 'border-emerald-500 bg-emerald-500/25 ring-2 ring-emerald-400 text-white' },
-                    { id: 'vegetarian', label: 'Vegetarian', icon: '🧀', tip: '-40% CO₂', activeColor: 'border-amber-400 bg-amber-400/25 ring-2 ring-amber-300 text-white' },
-                    { id: 'mixed', label: 'Mixed', icon: '🥗', tip: 'Baseline', activeColor: 'border-primary bg-primary/25 ring-2 ring-primary text-white' },
-                    { id: 'meat-heavy', label: 'Meat Heavy', icon: '🥩', tip: '+35% CO₂', activeColor: 'border-red-500 bg-red-500/25 ring-2 ring-red-400 text-white' }
+                    {
+                      id: 'vegan',
+                      label: 'Vegan',
+                      icon: '🌱',
+                      tip: '-55% CO₂',
+                      activeColor:
+                        'border-emerald-500 bg-emerald-500/25 ring-2 ring-emerald-400 text-white',
+                    },
+                    {
+                      id: 'vegetarian',
+                      label: 'Vegetarian',
+                      icon: '🧀',
+                      tip: '-40% CO₂',
+                      activeColor:
+                        'border-amber-400 bg-amber-400/25 ring-2 ring-amber-300 text-white',
+                    },
+                    {
+                      id: 'mixed',
+                      label: 'Mixed',
+                      icon: '🥗',
+                      tip: 'Baseline',
+                      activeColor: 'border-primary bg-primary/25 ring-2 ring-primary text-white',
+                    },
+                    {
+                      id: 'meat-heavy',
+                      label: 'Meat Heavy',
+                      icon: '🥩',
+                      tip: '+35% CO₂',
+                      activeColor: 'border-red-500 bg-red-500/25 ring-2 ring-red-400 text-white',
+                    },
                   ].map(d => {
                     const isSelected = formData.diet === d.id
                     return (
@@ -500,7 +579,9 @@ const Calculator = () => {
                         )}
                         <div className="text-2xl mb-1">{d.icon}</div>
                         <div className="text-xs font-bold truncate">{d.label}</div>
-                        <div className={`text-[10px] mt-0.5 font-semibold ${isSelected ? 'text-white' : 'text-emerald-400'}`}>
+                        <div
+                          className={`text-[10px] mt-0.5 font-semibold ${isSelected ? 'text-white' : 'text-emerald-400'}`}
+                        >
                           {d.tip}
                         </div>
                       </button>
@@ -512,7 +593,9 @@ const Calculator = () => {
               {/* Recycling Selection Chips */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <label className="font-semibold text-white">How Consistently Do You Recycle?</label>
+                  <label className="font-semibold text-white">
+                    How Consistently Do You Recycle?
+                  </label>
                   <span className="text-primary font-bold uppercase tracking-wider text-[11px]">
                     Current: {formData.recycling}
                   </span>
@@ -522,7 +605,7 @@ const Calculator = () => {
                     { id: 'always', label: 'Always (+12 pts)', icon: '♻️' },
                     { id: 'often', label: 'Often (+8 pts)', icon: '👍' },
                     { id: 'sometimes', label: 'Sometimes (+4 pts)', icon: '📦' },
-                    { id: 'rarely', label: 'Rarely (0 pts)', icon: '🗑️' }
+                    { id: 'rarely', label: 'Rarely (0 pts)', icon: '🗑️' },
                   ].map(r => {
                     const isSelected = formData.recycling === r.id
                     return (
@@ -543,16 +626,13 @@ const Calculator = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* RIGHT: LIVE RESULT & BENCHMARK SCORE (5 COLS STICKY) */}
           <div className="lg:col-span-5 space-y-6 sticky top-24">
-            
             {/* Live Score Dial Card */}
             <CSS3DCard>
               <div className="glass-card p-6 md:p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-cardDark/95 via-cardDark/85 to-bgDark text-center relative overflow-hidden shadow-2xl">
-                
                 {/* Radial Glow */}
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -563,7 +643,12 @@ const Calculator = () => {
 
                 {/* Animated Circular Progress Gauge */}
                 <div className="relative flex justify-center items-center my-2">
-                  <svg width="220" height="220" viewBox="0 0 220 220" className="transform -rotate-90">
+                  <svg
+                    width="220"
+                    height="220"
+                    viewBox="0 0 220 220"
+                    className="transform -rotate-90"
+                  >
                     {/* Background Circle */}
                     <circle
                       cx="110"
@@ -584,8 +669,10 @@ const Calculator = () => {
                       strokeLinecap="round"
                       strokeDasharray="565.48"
                       initial={{ strokeDashoffset: 565.48 }}
-                      animate={{ strokeDashoffset: 565.48 - (565.48 * calculationResult.score) / 100 }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      animate={{
+                        strokeDashoffset: 565.48 - (565.48 * calculationResult.score) / 100,
+                      }}
+                      transition={{ duration: 0.6, ease: 'easeOut' }}
                     />
                     <defs>
                       <linearGradient id="calculatorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -598,7 +685,7 @@ const Calculator = () => {
 
                   {/* Centered Score Number */}
                   <div className="absolute flex flex-col items-center justify-center">
-                    <motion.span 
+                    <motion.span
                       key={calculationResult.score}
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
@@ -625,7 +712,9 @@ const Calculator = () => {
                     <span className="text-textLight">Your Footprint:</span>
                     <span className="text-primary">{calculationResult.carbon} kg CO₂ / mo</span>
                   </div>
-                  <div className={`pt-1 text-[11px] font-bold ${calculationResult.isGreener ? 'text-emerald-400' : 'text-amber-400'}`}>
+                  <div
+                    className={`pt-1 text-[11px] font-bold ${calculationResult.isGreener ? 'text-emerald-400' : 'text-amber-400'}`}
+                  >
                     {calculationResult.isGreener
                       ? `🎉 ${calculationResult.diffPercent}% cleaner than the national average!`
                       : `⚠️ ${Math.abs(calculationResult.diffPercent)}% higher than the national baseline.`}
@@ -648,7 +737,10 @@ const Calculator = () => {
                     <Sparkles className="w-3.5 h-3.5 text-accent" /> High-Impact Reductions:
                   </h4>
                   {calculationResult.recommendations.map((rec, i) => (
-                    <div key={i} className="flex items-start gap-2 p-2.5 rounded-xl bg-primary/10 border border-primary/20 text-xs text-textLight/90">
+                    <div
+                      key={i}
+                      className="flex items-start gap-2 p-2.5 rounded-xl bg-primary/10 border border-primary/20 text-xs text-textLight/90"
+                    >
                       <ChevronRight className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                       <span>{rec}</span>
                     </div>
@@ -669,17 +761,17 @@ const Calculator = () => {
                     ) : (
                       <ArrowRight className="w-4 h-4" />
                     )}
-                    <span>{savedSuccess ? 'Saved to Your Profile! 🎉' : 'Calculate & Save Impact to Dashboard'}</span>
+                    <span>
+                      {savedSuccess
+                        ? 'Saved to Your Profile! 🎉'
+                        : 'Calculate & Save Impact to Dashboard'}
+                    </span>
                   </button>
                 </div>
-
               </div>
             </CSS3DCard>
-
           </div>
-
         </div>
-
       </div>
     </div>
   )

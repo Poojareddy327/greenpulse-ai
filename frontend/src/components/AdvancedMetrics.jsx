@@ -3,7 +3,7 @@ import { TrendingUp, TrendingDown, Activity, Zap, Target } from 'lucide-react'
 
 const AdvancedMetrics = ({ data }) => {
   // Calculate advanced metrics
-  const calculateTrend = (values) => {
+  const calculateTrend = values => {
     if (values.length < 2) return 0
     const recent = values.slice(-3)
     const avg = recent.reduce((a, b) => a + b, 0) / recent.length
@@ -71,9 +71,7 @@ const AdvancedMetrics = ({ data }) => {
             {treesEquivalent}
           </div>
           <div className="text-sm text-textLight/70">Trees Equivalent</div>
-          <div className="mt-3 text-xs text-textMuted">
-            To offset your monthly CO₂
-          </div>
+          <div className="mt-3 text-xs text-textMuted">To offset your monthly CO₂</div>
         </div>
       </motion.div>
 
@@ -94,9 +92,7 @@ const AdvancedMetrics = ({ data }) => {
             {efficiencyScore}
           </div>
           <div className="text-sm text-textLight/70">Efficiency Score</div>
-          <div className="mt-3 text-xs text-textMuted">
-            Improvement velocity metric
-          </div>
+          <div className="mt-3 text-xs text-textMuted">Improvement velocity metric</div>
         </div>
       </motion.div>
     </div>

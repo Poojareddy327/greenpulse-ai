@@ -1,5 +1,15 @@
 import { motion } from 'framer-motion'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Area,
+  AreaChart,
+} from 'recharts'
 import { TrendingDown, Brain, Sparkles } from 'lucide-react'
 
 const PredictionChart = ({ historicalData }) => {
@@ -31,20 +41,23 @@ const PredictionChart = ({ historicalData }) => {
 
       // Add some realistic variation (±5%)
       const variation = (Math.random() - 0.5) * 0.1
-      predictedCarbon *= (1 + variation)
+      predictedCarbon *= 1 + variation
 
       // Ensure downward trend with improvement factor
       const improvementFactor = 0.95 // 5% improvement per month
       predictedCarbon *= Math.pow(improvementFactor, i + 1)
 
       // Calculate predicted score based on carbon reduction
-      const predictedScore = Math.min(100, lastMonth.score + (lastMonth.carbon - predictedCarbon) / 10)
+      const predictedScore = Math.min(
+        100,
+        lastMonth.score + (lastMonth.carbon - predictedCarbon) / 10
+      )
 
       predictions.push({
         month: months[i],
         carbon: Math.max(100, Math.round(predictedCarbon)),
         score: Math.round(predictedScore),
-        isPredicted: true
+        isPredicted: true,
       })
     }
 
@@ -57,7 +70,7 @@ const PredictionChart = ({ historicalData }) => {
   // Calculate potential savings
   const currentCarbon = historicalData[historicalData.length - 1]?.carbon || 0
   const futureCarbon = predictions[predictions.length - 1]?.carbon || 0
-  const savings = ((currentCarbon - futureCarbon) / currentCarbon * 100).toFixed(0)
+  const savings = (((currentCarbon - futureCarbon) / currentCarbon) * 100).toFixed(0)
   const co2Saved = (currentCarbon - futureCarbon).toFixed(0)
 
   return (
@@ -69,9 +82,7 @@ const PredictionChart = ({ historicalData }) => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <Brain className="w-6 h-6 text-secondary" />
-          <h3 className="text-xl font-bold">
-            AI-Powered Predictions
-          </h3>
+          <h3 className="text-xl font-bold">AI-Powered Predictions</h3>
           <Sparkles className="w-5 h-5 text-accent animate-pulse" />
         </div>
         <div className="text-sm px-3 py-1 bg-secondary/20 rounded-full text-secondary border border-secondary/30">
@@ -123,30 +134,23 @@ const PredictionChart = ({ historicalData }) => {
         <AreaChart data={combinedData}>
           <defs>
             <linearGradient id="colorCarbon" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#2563EB" stopOpacity={0.3}/>
-              <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#2563EB" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#2563EB" stopOpacity={0} />
             </linearGradient>
             <linearGradient id="colorPredicted" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.3}/>
-              <stop offset="95%" stopColor="#7C3AED" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
-          <XAxis 
-            dataKey="month" 
-            stroke="#9CA3AF"
-            tick={{ fill: '#9CA3AF' }}
-          />
-          <YAxis 
-            stroke="#9CA3AF"
-            tick={{ fill: '#9CA3AF' }}
-          />
+          <XAxis dataKey="month" stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} />
+          <YAxis stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} />
           <Tooltip
             contentStyle={{
               backgroundColor: '#0F172A',
               border: '1px solid #2563EB',
               borderRadius: '8px',
-              boxShadow: '0 0 20px rgba(37, 99, 235, 0.3)'
+              boxShadow: '0 0 20px rgba(37, 99, 235, 0.3)',
             }}
             labelStyle={{ color: '#F1F5F9' }}
           />
@@ -156,7 +160,7 @@ const PredictionChart = ({ historicalData }) => {
             stroke="#2563EB"
             strokeWidth={3}
             fill="url(#colorCarbon)"
-            strokeDasharray={(data) => data.isPredicted ? "5 5" : "0"}
+            strokeDasharray={data => (data.isPredicted ? '5 5' : '0')}
           />
           <Line
             type="monotone"
@@ -164,7 +168,7 @@ const PredictionChart = ({ historicalData }) => {
             stroke="#22C55E"
             strokeWidth={2}
             dot={{ fill: '#22C55E', r: 4 }}
-            strokeDasharray={(data) => data.isPredicted ? "5 5" : "0"}
+            strokeDasharray={data => (data.isPredicted ? '5 5' : '0')}
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -197,8 +201,10 @@ const PredictionChart = ({ historicalData }) => {
           <div>
             <div className="font-semibold text-sm mb-1 text-secondary">AI Insight</div>
             <p className="text-sm text-textLight/80 leading-relaxed">
-              Based on your current trajectory and behavior patterns, our AI predicts a <span className="font-bold text-green-400">{savings}% reduction</span> in carbon emissions over the next 6 months. 
-              Continue your sustainable habits like using public transport and reducing energy consumption to achieve this goal! 🎯
+              Based on your current trajectory and behavior patterns, our AI predicts a{' '}
+              <span className="font-bold text-green-400">{savings}% reduction</span> in carbon
+              emissions over the next 6 months. Continue your sustainable habits like using public
+              transport and reducing energy consumption to achieve this goal! 🎯
             </p>
           </div>
         </div>

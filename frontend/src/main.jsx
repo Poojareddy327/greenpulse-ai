@@ -5,11 +5,13 @@ import './index.css'
 
 // Initialize performance monitoring and analytics (with error handling)
 try {
-  import('./utils/analytics').then(({ initAnalytics }) => {
-    initAnalytics()
-  }).catch(error => {
-    console.warn('Analytics initialization skipped:', error.message)
-  })
+  import('./utils/analytics')
+    .then(({ initAnalytics }) => {
+      initAnalytics()
+    })
+    .catch(error => {
+      console.warn('Analytics initialization skipped:', error.message)
+    })
 } catch (error) {
   console.warn('Analytics module not found')
 }
@@ -31,5 +33,5 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

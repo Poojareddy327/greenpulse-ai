@@ -22,7 +22,7 @@ describe('Analytics Utility', () => {
       category: 'button',
       action: 'click',
       label: 'submit',
-      value: 1
+      value: 1,
     }
     const result = trackEvent(eventData)
     expect(result).toBeDefined()

@@ -17,7 +17,7 @@ const Login = () => {
     }
   }, [user, navigate])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     await login(email, password)
     navigate('/calculator')
@@ -50,7 +50,7 @@ const Login = () => {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="w-full bg-bgDark/50 border border-white/10 rounded-lg pl-11 pr-4 py-3 focus:outline-none focus:border-primary transition-colors"
                 placeholder="your@email.com"
                 required
@@ -65,7 +65,7 @@ const Login = () => {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 className="w-full bg-bgDark/50 border border-white/10 rounded-lg pl-11 pr-4 py-3 focus:outline-none focus:border-primary transition-colors"
                 placeholder="••••••••"
                 required

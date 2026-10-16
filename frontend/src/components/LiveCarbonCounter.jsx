@@ -19,7 +19,7 @@ const LiveCarbonCounter = () => {
         }
         return newValue
       })
-      
+
       setActiveSavers(prev => prev + Math.floor(Math.random() * 2))
     }, 3000)
 
@@ -75,7 +75,7 @@ const LiveCarbonCounter = () => {
             </div>
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
               className="text-6xl"
             >
               ♻️
@@ -130,9 +130,7 @@ const LiveCarbonCounter = () => {
                 <span className="text-3xl">🔥</span>
               </div>
               <div className="text-sm text-textLight/70">Day Streak</div>
-              <div className="text-xs text-accent mt-2">
-                Keep it going!
-              </div>
+              <div className="text-xs text-accent mt-2">Keep it going!</div>
             </motion.div>
           </div>
 

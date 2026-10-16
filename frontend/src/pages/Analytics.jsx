@@ -1,7 +1,34 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts'
-import { TrendingUp, TrendingDown, Users, Zap, Award, Globe, Target, Activity, Flame, Trophy, Star } from 'lucide-react'
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  AreaChart,
+  Area,
+} from 'recharts'
+import {
+  TrendingUp,
+  TrendingDown,
+  Users,
+  Zap,
+  Award,
+  Globe,
+  Target,
+  Activity,
+  Flame,
+  Trophy,
+  Star,
+} from 'lucide-react'
 
 const Analytics = () => {
   const [activeTab, setActiveTab] = useState('overview')
@@ -9,7 +36,7 @@ const Analytics = () => {
     totalUsers: 15420,
     carbonSaved: 234567,
     activeNow: 1523,
-    challenges: 8934
+    challenges: 8934,
   })
 
   // Real-time counter animation
@@ -19,7 +46,7 @@ const Analytics = () => {
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
         carbonSaved: prev.carbonSaved + Math.floor(Math.random() * 20),
         activeNow: prev.activeNow + Math.floor(Math.random() * 3) - 1,
-        challenges: prev.challenges + Math.floor(Math.random() * 2)
+        challenges: prev.challenges + Math.floor(Math.random() * 2),
       }))
     }, 3000)
     return () => clearInterval(interval)
@@ -32,7 +59,7 @@ const Analytics = () => {
     { month: 'Mar', users: 13600, carbon: 210000 },
     { month: 'Apr', users: 14200, carbon: 220000 },
     { month: 'May', users: 14800, carbon: 228000 },
-    { month: 'Jun', users: 15420, carbon: 234567 }
+    { month: 'Jun', users: 15420, carbon: 234567 },
   ]
 
   const categoryBreakdown = [
@@ -40,7 +67,7 @@ const Analytics = () => {
     { name: 'Energy', value: 28, color: '#7C3AED' },
     { name: 'Food', value: 20, color: '#F97316' },
     { name: 'Waste', value: 12, color: '#10B981' },
-    { name: 'Other', value: 5, color: '#6B7280' }
+    { name: 'Other', value: 5, color: '#6B7280' },
   ]
 
   const regionalData = [
@@ -48,7 +75,7 @@ const Analytics = () => {
     { region: 'Europe', users: 3800, carbon: 62000, color: '#7C3AED' },
     { region: 'Asia', users: 5100, carbon: 78000, color: '#F97316' },
     { region: 'South America', users: 1200, carbon: 18000, color: '#10B981' },
-    { region: 'Others', users: 1120, carbon: 8567, color: '#6B7280' }
+    { region: 'Others', users: 1120, carbon: 8567, color: '#6B7280' },
   ]
 
   const topPerformers = [
@@ -56,32 +83,33 @@ const Analytics = () => {
     { rank: 2, name: 'GreenNinja', score: 9720, reduction: 42, badge: '🥈' },
     { rank: 3, name: 'ClimateHero', score: 9680, reduction: 40, badge: '🥉' },
     { rank: 4, name: 'ZeroWasteKing', score: 9520, reduction: 38, badge: '⭐' },
-    { rank: 5, name: 'SustainQueen', score: 9450, reduction: 36, badge: '⭐' }
+    { rank: 5, name: 'SustainQueen', score: 9450, reduction: 36, badge: '⭐' },
   ]
 
   const impactMetrics = [
     { label: 'Trees Planted', value: '11,170', icon: '🌳', change: '+12%', positive: true },
     { label: 'Energy Saved', value: '281 MWh', icon: '⚡', change: '+8%', positive: true },
     { label: 'Water Saved', value: '3.5M L', icon: '💧', change: '+15%', positive: true },
-    { label: 'Waste Reduced', value: '45 tons', icon: '♻️', change: '+10%', positive: true }
+    { label: 'Waste Reduced', value: '45 tons', icon: '♻️', change: '+10%', positive: true },
   ]
 
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Activity className="w-10 h-10 text-primary animate-pulse" />
             <h1 className="text-4xl font-bold">
-              Platform <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">Analytics</span>
+              Platform{' '}
+              <span className="text-primary drop-shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+                Analytics
+              </span>
             </h1>
           </div>
-          <p className="text-textLight text-lg">Real-time insights across the GreenPulse AI community</p>
+          <p className="text-textLight text-lg">
+            Real-time insights across the GreenPulse AI community
+          </p>
         </motion.div>
 
         {/* Live Stats Grid */}
@@ -155,20 +183,36 @@ const Analytics = () => {
                 <AreaChart data={monthlyGrowth}>
                   <defs>
                     <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#2563EB" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#2563EB" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#2563EB" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="colorCarbon" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
                   <XAxis dataKey="month" stroke="#9CA3AF" />
                   <YAxis stroke="#9CA3AF" />
-                  <Tooltip contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #2563EB' }} />
-                  <Area type="monotone" dataKey="users" stroke="#2563EB" fillOpacity={1} fill="url(#colorUsers)" strokeWidth={3} />
-                  <Area type="monotone" dataKey="carbon" stroke="#10B981" fillOpacity={1} fill="url(#colorCarbon)" strokeWidth={3} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #2563EB' }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="users"
+                    stroke="#2563EB"
+                    fillOpacity={1}
+                    fill="url(#colorUsers)"
+                    strokeWidth={3}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="carbon"
+                    stroke="#10B981"
+                    fillOpacity={1}
+                    fill="url(#colorCarbon)"
+                    strokeWidth={3}
+                  />
                 </AreaChart>
               </ResponsiveContainer>
             </motion.div>
@@ -210,7 +254,10 @@ const Analytics = () => {
                 <h3 className="text-xl font-bold mb-6">Impact Metrics</h3>
                 <div className="space-y-4">
                   {impactMetrics.map((metric, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 bg-cardDark/50 rounded-lg">
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-4 bg-cardDark/50 rounded-lg"
+                    >
                       <div className="flex items-center gap-3">
                         <span className="text-3xl">{metric.icon}</span>
                         <div>
@@ -218,7 +265,9 @@ const Analytics = () => {
                           <div className="text-2xl font-bold text-white">{metric.value}</div>
                         </div>
                       </div>
-                      <div className={`text-sm font-bold ${metric.positive ? 'text-green-400' : 'text-red-400'}`}>
+                      <div
+                        className={`text-sm font-bold ${metric.positive ? 'text-green-400' : 'text-red-400'}`}
+                      >
                         {metric.change}
                       </div>
                     </div>
@@ -231,11 +280,7 @@ const Analytics = () => {
 
         {/* Regional Tab */}
         {activeTab === 'regional' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="glass-card p-6"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass-card p-6">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
               <Globe className="w-6 h-6 text-secondary" />
               Regional Distribution
@@ -245,7 +290,9 @@ const Analytics = () => {
                 <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
                 <XAxis dataKey="region" stroke="#9CA3AF" />
                 <YAxis stroke="#9CA3AF" />
-                <Tooltip contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #7C3AED' }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #7C3AED' }}
+                />
                 <Bar dataKey="users" fill="#2563EB" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="carbon" fill="#10B981" radius={[8, 8, 0, 0]} />
               </BarChart>
@@ -255,17 +302,13 @@ const Analytics = () => {
 
         {/* Leaderboard Tab */}
         {activeTab === 'leaderboard' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="glass-card p-6"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass-card p-6">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
               <Trophy className="w-6 h-6 text-accent" />
               Top Performers
             </h3>
             <div className="space-y-3">
-              {topPerformers.map((user) => (
+              {topPerformers.map(user => (
                 <motion.div
                   key={user.rank}
                   initial={{ opacity: 0, x: -20 }}
@@ -279,10 +322,14 @@ const Analytics = () => {
                     <div className="text-4xl">{user.badge}</div>
                     <div>
                       <div className="font-bold text-white text-lg">{user.name}</div>
-                      <div className="text-sm text-textMuted">{user.reduction}% carbon reduction</div>
+                      <div className="text-sm text-textMuted">
+                        {user.reduction}% carbon reduction
+                      </div>
                     </div>
                   </div>
-                  <div className="text-2xl font-bold text-accent">{user.score.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-accent">
+                    {user.score.toLocaleString()}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -299,9 +346,24 @@ const Analytics = () => {
             >
               <h3 className="text-xl font-bold mb-6">Environmental Impact</h3>
               <div className="space-y-6">
-                <ImpactCard icon="🌍" title="Global Reach" value="42 Countries" description="Active users worldwide" />
-                <ImpactCard icon="🏆" title="Achievements" value="156K" description="Badges earned" />
-                <ImpactCard icon="📈" title="Avg Reduction" value="23%" description="Per user monthly" />
+                <ImpactCard
+                  icon="🌍"
+                  title="Global Reach"
+                  value="42 Countries"
+                  description="Active users worldwide"
+                />
+                <ImpactCard
+                  icon="🏆"
+                  title="Achievements"
+                  value="156K"
+                  description="Badges earned"
+                />
+                <ImpactCard
+                  icon="📈"
+                  title="Avg Reduction"
+                  value="23%"
+                  description="Per user monthly"
+                />
                 <ImpactCard icon="🎯" title="Goals Met" value="89%" description="Success rate" />
               </div>
             </motion.div>
@@ -314,10 +376,30 @@ const Analytics = () => {
             >
               <h3 className="text-xl font-bold mb-6">Community Stats</h3>
               <div className="space-y-6">
-                <ImpactCard icon="💬" title="Active Discussions" value="1,234" description="This week" />
-                <ImpactCard icon="🤝" title="Challenges" value="87" description="Currently active" />
-                <ImpactCard icon="📚" title="Resources Shared" value="2,456" description="Educational content" />
-                <ImpactCard icon="⭐" title="Avg Rating" value="4.8/5" description="User satisfaction" />
+                <ImpactCard
+                  icon="💬"
+                  title="Active Discussions"
+                  value="1,234"
+                  description="This week"
+                />
+                <ImpactCard
+                  icon="🤝"
+                  title="Challenges"
+                  value="87"
+                  description="Currently active"
+                />
+                <ImpactCard
+                  icon="📚"
+                  title="Resources Shared"
+                  value="2,456"
+                  description="Educational content"
+                />
+                <ImpactCard
+                  icon="⭐"
+                  title="Avg Rating"
+                  value="4.8/5"
+                  description="User satisfaction"
+                />
               </div>
             </motion.div>
           </div>

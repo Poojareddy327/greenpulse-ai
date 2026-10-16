@@ -7,7 +7,7 @@
   position: absolute;
   top: -40px;
   left: 0;
-  background: #2563EB;
+  background: #2563eb;
   color: white;
   padding: 8px;
   text-decoration: none;
@@ -20,7 +20,7 @@
 
 /* Accessibility: Focus visible for keyboard navigation */
 *:focus-visible {
-  outline: 2px solid #2563EB;
+  outline: 2px solid #2563eb;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -47,12 +47,17 @@
 @layer base {
   body {
     @apply bg-gradient-dark text-textLight;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     background-attachment: fixed;
     position: relative;
     overflow-x: hidden;
   }
-  
+
   body::before {
     content: '';
     position: fixed;
@@ -60,7 +65,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
       radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
       radial-gradient(circle at 40% 90%, rgba(249, 115, 22, 0.12) 0%, transparent 50%),
@@ -75,13 +80,13 @@
   .glass-card {
     @apply bg-gradient-to-br from-cardDark/70 via-cardDark/60 to-cardLight/50 backdrop-blur-2xl border border-white/10 rounded-2xl;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
+    box-shadow:
       0 8px 32px 0 rgba(0, 0, 0, 0.37),
       inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
   }
-  
+
   .glass-card::before {
     content: '';
     position: absolute;
@@ -89,36 +94,31 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.6s;
   }
-  
+
   .glass-card:hover::before {
     left: 100%;
   }
-  
+
   .glass-card:hover {
     @apply border-primary/40 shadow-glow-multi;
     transform: translateY(-8px) scale(1.02);
   }
-  
+
   .btn-primary {
     @apply relative text-white px-8 py-3.5 rounded-xl font-semibold overflow-hidden;
-    background: linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #F97316 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #f97316 100%);
     background-size: 300% 300%;
     animation: gradientShift 6s ease infinite;
-    box-shadow: 
+    box-shadow:
       0 0 30px rgba(37, 99, 235, 0.4),
       0 0 60px rgba(124, 58, 237, 0.2),
       0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
   }
-  
+
   .btn-primary::before {
     content: '';
     position: absolute;
@@ -129,29 +129,29 @@
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     transition: left 0.6s;
   }
-  
+
   .btn-primary:hover::before {
     left: 100%;
   }
-  
+
   .btn-primary:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 0 40px rgba(37, 99, 235, 0.6),
       0 0 80px rgba(124, 58, 237, 0.3),
       0 8px 25px rgba(0, 0, 0, 0.4);
   }
-  
+
   .btn-primary:active {
     transform: translateY(-1px) scale(1.02);
   }
-  
+
   .btn-secondary {
     @apply bg-gradient-to-r from-cardDark/90 to-cardLight/80 text-textLight px-8 py-3.5 rounded-xl font-semibold 
            border-2 border-primary/40 hover:border-primary transition-all duration-300 
            hover:shadow-glow-multi hover:bg-gradient-to-l relative overflow-hidden;
   }
-  
+
   .btn-secondary::after {
     content: '';
     position: absolute;
@@ -160,23 +160,23 @@
     opacity: 0;
     transition: opacity 0.3s;
   }
-  
+
   .btn-secondary:hover::after {
     opacity: 1;
   }
-  
+
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background: linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #F97316 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #f97316 100%);
     background-size: 300% 300%;
     animation: gradientShift 8s ease infinite;
     filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3));
   }
-  
+
   .stat-card {
     @apply glass-card p-6 text-center relative overflow-hidden;
   }
-  
+
   .stat-card::after {
     content: '';
     position: absolute;
@@ -188,16 +188,16 @@
     opacity: 0;
     transition: opacity 0.4s;
   }
-  
+
   .stat-card:hover::after {
     opacity: 1;
     animation: pulse 2s ease infinite;
   }
-  
+
   .feature-card {
     @apply glass-card p-8 cursor-pointer relative overflow-hidden;
   }
-  
+
   .feature-card::before {
     content: '';
     position: absolute;
@@ -205,19 +205,15 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(
-      transparent,
-      rgba(37, 99, 235, 0.3),
-      transparent 30%
-    );
+    background: conic-gradient(transparent, rgba(37, 99, 235, 0.3), transparent 30%);
     animation: rotate 6s linear infinite;
     opacity: 0;
   }
-  
+
   .feature-card:hover::before {
     opacity: 1;
   }
-  
+
   .glow-blob {
     position: absolute;
     border-radius: 50%;
@@ -226,7 +222,7 @@
     animation: float 10s ease-in-out infinite;
     pointer-events: none;
   }
-  
+
   .shimmer {
     background: linear-gradient(
       90deg,
@@ -237,30 +233,30 @@
     background-size: 200% 100%;
     animation: shimmer 3s infinite;
   }
-  
+
   .neon-border {
     position: relative;
   }
-  
+
   .neon-border::before {
     content: '';
     position: absolute;
     inset: -2px;
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(135deg, #2563EB, #7C3AED, #F97316);
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    background: linear-gradient(135deg, #2563eb, #7c3aed, #f97316);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     animation: neonRotate 3s linear infinite;
   }
-  
+
   .particle-effect {
     position: relative;
   }
-  
+
   .particle-effect::after {
     content: '';
     position: absolute;
@@ -268,12 +264,18 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: 
+    background:
       radial-gradient(circle, rgba(37, 99, 235, 0.8) 1px, transparent 1px),
       radial-gradient(circle, rgba(124, 58, 237, 0.8) 1px, transparent 1px),
       radial-gradient(circle, rgba(249, 115, 22, 0.8) 1px, transparent 1px);
-    background-size: 50px 50px, 80px 80px, 100px 100px;
-    background-position: 0 0, 40px 60px, 130px 270px;
+    background-size:
+      50px 50px,
+      80px 80px,
+      100px 100px;
+    background-position:
+      0 0,
+      40px 60px,
+      130px 270px;
     animation: particleFloat 20s linear infinite;
     pointer-events: none;
     opacity: 0.3;
@@ -296,13 +298,13 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #2563EB, #7C3AED, #F97316);
+  background: linear-gradient(180deg, #2563eb, #7c3aed, #f97316);
   border-radius: 10px;
   border: 2px solid #010409;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #1E40AF, #6D28D9, #EA580C);
+  background: linear-gradient(180deg, #1e40af, #6d28d9, #ea580c);
   box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
 }
 
@@ -314,37 +316,76 @@ html {
 
 /* Animations */
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes neonRotate {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(30px, -30px) rotate(120deg); }
-  66% { transform: translate(-20px, 20px) rotate(240deg); }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes backgroundPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 @keyframes particleFloat {
-  0% { background-position: 0 0, 40px 60px, 130px 270px; }
-  100% { background-position: 50px 50px, 90px 110px, 180px 320px; }
+  0% {
+    background-position:
+      0 0,
+      40px 60px,
+      130px 270px;
+  }
+  100% {
+    background-position:
+      50px 50px,
+      90px 110px,
+      180px 320px;
+  }
 }

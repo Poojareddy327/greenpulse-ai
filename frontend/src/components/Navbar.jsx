@@ -1,6 +1,18 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Activity, Home, Calculator, LayoutDashboard, Bot, Trophy, BookOpen, LogOut, User, Menu, X } from 'lucide-react'
+import {
+  Activity,
+  Home,
+  Calculator,
+  LayoutDashboard,
+  Bot,
+  Trophy,
+  BookOpen,
+  LogOut,
+  User,
+  Menu,
+  X,
+} from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
 
@@ -33,14 +45,18 @@ const Navbar = () => {
               <Activity className="w-6 h-6 text-white drop-shadow-lg" />
             </motion.div>
             <div>
-              <span className="text-xl font-bold text-white tracking-tighter drop-shadow-lg">GreenPulse AI</span>
-              <div className="text-[10px] text-white/90 -mt-1 tracking-wide font-semibold hidden sm:block">CARBON ANALYTICS</div>
+              <span className="text-xl font-bold text-white tracking-tighter drop-shadow-lg">
+                GreenPulse AI
+              </span>
+              <div className="text-[10px] text-white/90 -mt-1 tracking-wide font-semibold hidden sm:block">
+                CARBON ANALYTICS
+              </div>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex space-x-1">
-            {navItems.map((item) => {
+            {navItems.map(item => {
               const Icon = item.icon
               const isActive = location.pathname === item.path
               return (
@@ -66,7 +82,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-4">
             {user ? (
               <>
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20"
                 >
@@ -98,9 +114,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-2">
             {user && (
-              <motion.div 
-                className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20"
-              >
+              <motion.div className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20">
                 <User className="w-4 h-4 text-primary" />
                 <span className="text-xs font-medium">{user.name}</span>
               </motion.div>
@@ -127,7 +141,7 @@ const Navbar = () => {
             className="lg:hidden border-t border-primary/20 bg-cardDark/95 backdrop-blur-xl"
           >
             <div className="px-4 py-4 space-y-2">
-              {navItems.map((item) => {
+              {navItems.map(item => {
                 const Icon = item.icon
                 const isActive = location.pathname === item.path
                 return (
@@ -146,13 +160,16 @@ const Navbar = () => {
                   </Link>
                 )
               })}
-              
+
               {/* Mobile User Actions */}
               <div className="pt-4 border-t border-white/10 space-y-2">
                 {user ? (
                   <motion.button
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    onClick={() => {
+                      logout()
+                      setMobileMenuOpen(false)
+                    }}
                     className="w-full flex items-center space-x-3 px-4 py-3 text-danger hover:bg-danger/10 rounded-lg transition-all"
                   >
                     <LogOut className="w-5 h-5" />

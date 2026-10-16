@@ -97,7 +97,7 @@ describe('Validators', () => {
       const data = {
         transportation: { car_km: 100, public_transport_km: 50, flights: 2 },
         energy: { electricity_kwh: 300, natural_gas_kwh: 150 },
-        food: { meat_servings: 10, dairy_servings: 14 }
+        food: { meat_servings: 10, dairy_servings: 14 },
       }
       const result = validateCarbonInput(data)
       expect(result.isValid).toBe(true)
@@ -106,7 +106,7 @@ describe('Validators', () => {
 
     it('should reject out of range values', () => {
       const data = {
-        transportation: { car_km: 20000 }
+        transportation: { car_km: 20000 },
       }
       const result = validateCarbonInput(data)
       expect(result.isValid).toBe(false)

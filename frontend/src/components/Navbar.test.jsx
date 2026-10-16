@@ -13,9 +13,7 @@ const mockAuthContext = (user = null) => ({
 const renderWithRouter = (component, authValue) => {
   return render(
     <BrowserRouter>
-      <AuthContext.Provider value={authValue}>
-        {component}
-      </AuthContext.Provider>
+      <AuthContext.Provider value={authValue}>{component}</AuthContext.Provider>
     </BrowserRouter>
   )
 }
@@ -58,7 +56,7 @@ describe('Navbar Component', () => {
     const user = { name: 'Test User', email: 'test@test.com' }
     const authValue = mockAuthContext(user)
     renderWithRouter(<Navbar />, authValue)
-    
+
     const logoutButtons = screen.getAllByRole('button')
     const logoutButton = logoutButtons.find(btn => btn.querySelector('svg'))
     if (logoutButton) {

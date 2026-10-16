@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import Calculator from './Calculator'
 
-const renderWithRouter = (component) => {
+const renderWithRouter = component => {
   return render(<BrowserRouter>{component}</BrowserRouter>)
 }
 

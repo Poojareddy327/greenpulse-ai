@@ -8,8 +8,8 @@ describe('Export Data Utility', () => {
     categories: {
       transport: 100,
       energy: 80,
-      food: 70
-    }
+      food: 70,
+    },
   }
 
   it('exports data to CSV format', () => {
@@ -42,7 +42,7 @@ describe('Export Data Utility', () => {
   it('handles array data in CSV export', () => {
     const arrayData = [
       { name: 'Test 1', value: 10 },
-      { name: 'Test 2', value: 20 }
+      { name: 'Test 2', value: 20 },
     ]
     const csv = exportToCSV(arrayData)
     expect(csv).toContain('Test 1')

@@ -61,7 +61,7 @@ export const lazyLoadImages = (selector = 'img[data-src]') => {
  * @param {Function} fn - Function to memoize
  * @returns {Function} Memoized function
  */
-export const memoize = (fn) => {
+export const memoize = fn => {
   const cache = new Map()
   return (...args) => {
     const key = JSON.stringify(args)
@@ -78,7 +78,7 @@ export const memoize = (fn) => {
  * Request Animation Frame wrapper for smooth animations
  * @param {Function} callback - Animation callback
  */
-export const rafThrottle = (callback) => {
+export const rafThrottle = callback => {
   let requestId = null
   return (...args) => {
     if (requestId !== null) {
@@ -100,11 +100,12 @@ export const measurePerformance = (componentName, renderFn) => {
   const start = performance.now()
   const result = renderFn()
   const end = performance.now()
-  
-  if (end - start > 16.67) { // > 60fps threshold
+
+  if (end - start > 16.67) {
+    // > 60fps threshold
     console.warn(`${componentName} render took ${(end - start).toFixed(2)}ms`)
   }
-  
+
   return result
 }
 
@@ -113,7 +114,7 @@ export const measurePerformance = (componentName, renderFn) => {
  * @param {string} src - Script source URL
  * @returns {Promise} Promise that resolves when script loads
  */
-export const loadScript = (src) => {
+export const loadScript = src => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script')
     script.src = src
@@ -154,7 +155,7 @@ export const isLowEndDevice = () => {
  * @param {Function} importFn - Dynamic import function
  * @returns {Promise} Component promise
  */
-export const lazyLoadComponent = (importFn) => {
+export const lazyLoadComponent = importFn => {
   return import(/* webpackChunkName: "lazy" */ importFn)
 }
 
@@ -162,7 +163,8 @@ export const lazyLoadComponent = (importFn) => {
  * Cache API responses
  */
 export class APICache {
-  constructor(ttl = 5 * 60 * 1000) { // 5 minutes default
+  constructor(ttl = 5 * 60 * 1000) {
+    // 5 minutes default
     this.cache = new Map()
     this.ttl = ttl
   }
@@ -170,19 +172,19 @@ export class APICache {
   set(key, value) {
     this.cache.set(key, {
       value,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     })
   }
 
   get(key) {
     const item = this.cache.get(key)
     if (!item) return null
-    
+
     if (Date.now() - item.timestamp > this.ttl) {
       this.cache.delete(key)
       return null
     }
-    
+
     return item.value
   }
 
@@ -204,7 +206,7 @@ export const getVisibleItems = (items, visibleCount, scrollTop, itemHeight) => {
   return {
     items: items.slice(startIndex, endIndex),
     startIndex,
-    offsetY: startIndex * itemHeight
+    offsetY: startIndex * itemHeight,
   }
 }
 
@@ -218,5 +220,5 @@ export default {
   loadScript,
   prefetchResource,
   isLowEndDevice,
-  APICache
+  APICache,
 }

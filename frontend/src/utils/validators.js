@@ -8,7 +8,7 @@
  * @param {string} email - Email address to validate
  * @returns {boolean} True if valid email format
  */
-export const validateEmail = (email) => {
+export const validateEmail = email => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
 }
@@ -18,7 +18,7 @@ export const validateEmail = (email) => {
  * @param {string} password - Password to validate
  * @returns {{isValid: boolean, message: string}} Validation result
  */
-export const validatePassword = (password) => {
+export const validatePassword = password => {
   if (!password || password.length < 8) {
     return { isValid: false, message: 'Password must be at least 8 characters' }
   }
@@ -59,7 +59,7 @@ export const validateRange = (value, min, max) => {
  * @param {string} input - String to sanitize
  * @returns {string} Sanitized string
  */
-export const sanitizeInput = (input) => {
+export const sanitizeInput = input => {
   if (typeof input !== 'string') {
     return ''
   }
@@ -79,21 +79,21 @@ export const sanitizeInput = (input) => {
  * @param {Object} data - Carbon data to validate
  * @returns {{isValid: boolean, errors: string[]}} Validation result
  */
-export const validateCarbonInput = (data) => {
+export const validateCarbonInput = data => {
   const errors = []
 
   // Validate transportation
   if (data.transportation) {
     const { car_km, public_transport_km, flights } = data.transportation
-    
+
     if (car_km !== undefined && !validateRange(car_km, 0, 10000)) {
       errors.push('Car km must be between 0 and 10000')
     }
-    
+
     if (public_transport_km !== undefined && !validateRange(public_transport_km, 0, 10000)) {
       errors.push('Public transport km must be between 0 and 10000')
     }
-    
+
     if (flights !== undefined && !validateRange(flights, 0, 100)) {
       errors.push('Flights must be between 0 and 100')
     }
@@ -102,11 +102,11 @@ export const validateCarbonInput = (data) => {
   // Validate energy
   if (data.energy) {
     const { electricity_kwh, natural_gas_kwh } = data.energy
-    
+
     if (electricity_kwh !== undefined && !validateRange(electricity_kwh, 0, 10000)) {
       errors.push('Electricity must be between 0 and 10000 kWh')
     }
-    
+
     if (natural_gas_kwh !== undefined && !validateRange(natural_gas_kwh, 0, 10000)) {
       errors.push('Natural gas must be between 0 and 10000 kWh')
     }
@@ -115,11 +115,11 @@ export const validateCarbonInput = (data) => {
   // Validate food
   if (data.food) {
     const { meat_servings, dairy_servings } = data.food
-    
+
     if (meat_servings !== undefined && !validateRange(meat_servings, 0, 100)) {
       errors.push('Meat servings must be between 0 and 100')
     }
-    
+
     if (dairy_servings !== undefined && !validateRange(dairy_servings, 0, 100)) {
       errors.push('Dairy servings must be between 0 and 100')
     }
@@ -127,7 +127,7 @@ export const validateCarbonInput = (data) => {
 
   return {
     isValid: errors.length === 0,
-    errors
+    errors,
   }
 }
 
@@ -136,7 +136,7 @@ export const validateCarbonInput = (data) => {
  * @param {string} url - URL to validate
  * @returns {boolean} True if valid URL
  */
-export const validateURL = (url) => {
+export const validateURL = url => {
   try {
     const parsed = new URL(url)
     return ['http:', 'https:'].includes(parsed.protocol)
@@ -150,7 +150,7 @@ export const validateURL = (url) => {
  * @param {string} phone - Phone number to validate
  * @returns {boolean} True if valid format
  */
-export const validatePhone = (phone) => {
+export const validatePhone = phone => {
   const phoneRegex = /^\+?[\d\s-()]+$/
   return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 10
 }
@@ -160,7 +160,7 @@ export const validatePhone = (phone) => {
  * @param {string|Date} date - Date to validate
  * @returns {boolean} True if valid date
  */
-export const validatePastDate = (date) => {
+export const validatePastDate = date => {
   const dateObj = new Date(date)
   const now = new Date()
   return dateObj <= now && !isNaN(dateObj.getTime())
@@ -180,7 +180,7 @@ export const validateRequiredFields = (data, requiredFields) => {
 
   return {
     isValid: missing.length === 0,
-    missing
+    missing,
   }
 }
 
@@ -216,5 +216,5 @@ export default {
   validatePastDate,
   validateRequiredFields,
   validateFileSize,
-  validateFileType
+  validateFileType,
 }

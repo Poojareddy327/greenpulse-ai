@@ -3,12 +3,12 @@ import { describe, it, expect } from 'vitest'
 describe('Utility Functions', () => {
   describe('Carbon Calculations', () => {
     it('should calculate car emissions correctly', () => {
-      const calculateCarEmissions = (km) => km * 0.12
+      const calculateCarEmissions = km => km * 0.12
       expect(calculateCarEmissions(100)).toBe(12)
     })
 
     it('should calculate public transport emissions', () => {
-      const calculatePublicTransport = (km) => km * 0.05
+      const calculatePublicTransport = km => km * 0.05
       expect(calculatePublicTransport(100)).toBe(5)
     })
 
@@ -20,14 +20,14 @@ describe('Utility Functions', () => {
 
   describe('Data Validation', () => {
     it('should validate positive numbers', () => {
-      const isPositive = (num) => num > 0
+      const isPositive = num => num > 0
       expect(isPositive(10)).toBe(true)
       expect(isPositive(-5)).toBe(false)
       expect(isPositive(0)).toBe(false)
     })
 
     it('should validate email format', () => {
-      const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+      const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
       expect(isValidEmail('test@example.com')).toBe(true)
       expect(isValidEmail('invalid')).toBe(false)
     })
@@ -35,7 +35,7 @@ describe('Utility Functions', () => {
 
   describe('Data Transformations', () => {
     it('should format numbers with commas', () => {
-      const formatNumber = (num) => num.toLocaleString('en-US')
+      const formatNumber = num => num.toLocaleString('en-US')
       expect(formatNumber(1000)).toBe('1,000')
       expect(formatNumber(1000000)).toBe('1,000,000')
     })
@@ -47,7 +47,7 @@ describe('Utility Functions', () => {
     })
 
     it('should round to 2 decimal places', () => {
-      const round = (num) => Math.round(num * 100) / 100
+      const round = num => Math.round(num * 100) / 100
       expect(round(3.14159)).toBe(3.14)
       expect(round(2.567)).toBe(2.57)
     })
@@ -55,19 +55,19 @@ describe('Utility Functions', () => {
 
   describe('Array Operations', () => {
     it('should sum array of numbers', () => {
-      const sum = (arr) => arr.reduce((a, b) => a + b, 0)
+      const sum = arr => arr.reduce((a, b) => a + b, 0)
       expect(sum([1, 2, 3, 4, 5])).toBe(15)
       expect(sum([10, 20, 30])).toBe(60)
     })
 
     it('should find maximum value in array', () => {
-      const findMax = (arr) => Math.max(...arr)
+      const findMax = arr => Math.max(...arr)
       expect(findMax([1, 5, 3, 9, 2])).toBe(9)
       expect(findMax([100, 50, 200])).toBe(200)
     })
 
     it('should filter out null values', () => {
-      const removeNulls = (arr) => arr.filter(item => item !== null)
+      const removeNulls = arr => arr.filter(item => item !== null)
       expect(removeNulls([1, null, 2, null, 3])).toEqual([1, 2, 3])
     })
   })

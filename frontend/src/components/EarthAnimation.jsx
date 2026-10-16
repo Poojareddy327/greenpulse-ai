@@ -25,12 +25,7 @@ function Earth() {
       {/* Green landmasses effect */}
       <mesh>
         <sphereGeometry args={[2.01, 32, 32]} />
-        <meshStandardMaterial
-          color="#22C55E"
-          transparent
-          opacity={0.3}
-          roughness={0.9}
-        />
+        <meshStandardMaterial color="#22C55E" transparent opacity={0.3} roughness={0.9} />
       </mesh>
     </mesh>
   )
@@ -39,7 +34,7 @@ function Earth() {
 function Atmosphere() {
   const meshRef = useRef()
 
-  useFrame((state) => {
+  useFrame(state => {
     if (meshRef.current) {
       meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.1
     }
@@ -48,13 +43,7 @@ function Atmosphere() {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[2.3, 64, 64]} />
-      <meshStandardMaterial
-        color="#60A5FA"
-        transparent
-        opacity={0.15}
-        roughness={1}
-        wireframe
-      />
+      <meshStandardMaterial color="#60A5FA" transparent opacity={0.15} roughness={1} wireframe />
     </mesh>
   )
 }
@@ -64,20 +53,12 @@ const EarthAnimation = () => {
     <div className="w-full h-[600px] relative">
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
         <color attach="background" args={['#030712']} />
-        
+
         <ambientLight intensity={0.3} />
         <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
         <pointLight position={[-5, -5, -5]} intensity={0.5} color="#14B8A6" />
 
-        <Stars
-          radius={100}
-          depth={50}
-          count={5000}
-          factor={4}
-          saturation={0}
-          fade
-          speed={0.5}
-        />
+        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={0.5} />
 
         <Earth />
         <Atmosphere />

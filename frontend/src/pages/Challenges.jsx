@@ -1,10 +1,31 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Trophy, Target, CheckCircle, Clock, Award, Users, Flame, Camera, 
-  Sparkles, AlertCircle, ShieldCheck, Gift, Leaf, TreePine, Package, 
-  Upload, X, ArrowRight, RefreshCw, Check, Lock, ChevronRight, Video,
-  Image as ImageIcon, RefreshCcw
+import {
+  Trophy,
+  Target,
+  CheckCircle,
+  Clock,
+  Award,
+  Users,
+  Flame,
+  Camera,
+  Sparkles,
+  AlertCircle,
+  ShieldCheck,
+  Gift,
+  Leaf,
+  TreePine,
+  Package,
+  Upload,
+  X,
+  ArrowRight,
+  RefreshCw,
+  Check,
+  Lock,
+  ChevronRight,
+  Video,
+  Image as ImageIcon,
+  RefreshCcw,
 } from 'lucide-react'
 
 const Challenges = () => {
@@ -13,7 +34,7 @@ const Challenges = () => {
   const [isStreakCompletedToday, setIsStreakCompletedToday] = useState(false)
   const [freezeCount, setFreezeCount] = useState(1)
   const [ecoPoints, setEcoPoints] = useState(1850)
-  
+
   // Snap Camera Modal states
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedDimension, setSelectedDimension] = useState('plastic')
@@ -24,7 +45,7 @@ const Challenges = () => {
   const [isScanning, setIsScanning] = useState(false)
   const [scanResult, setScanResult] = useState(null)
   const [plantModalOpen, setPlantModalOpen] = useState(false)
-  
+
   const videoRef = useRef(null)
   const fileInputRef = useRef(null)
 
@@ -36,8 +57,9 @@ const Challenges = () => {
       icon: '🥤',
       example: 'Steel/copper bottle, cloth tote bag, or reusable cup',
       co2: '0.35 kg',
-      sampleImg: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80',
-      sampleLabel: 'Stainless Steel Water Bottle on Desk'
+      sampleImg:
+        'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80',
+      sampleLabel: 'Stainless Steel Water Bottle on Desk',
     },
     {
       id: 'commute',
@@ -45,8 +67,9 @@ const Challenges = () => {
       icon: '🚲',
       example: 'Bicycle handlebars, walking sneakers, or metro/bus ticket',
       co2: '1.20 kg',
-      sampleImg: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=600&q=80',
-      sampleLabel: 'Bicycle Commute to Work'
+      sampleImg:
+        'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=600&q=80',
+      sampleLabel: 'Bicycle Commute to Work',
     },
     {
       id: 'food',
@@ -54,8 +77,9 @@ const Challenges = () => {
       icon: '🍱',
       example: 'Clean plate after meal, plant-based bowl, or homemade lunchbox',
       co2: '0.85 kg',
-      sampleImg: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
-      sampleLabel: 'Plant-Based Zero-Waste Lunch'
+      sampleImg:
+        'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
+      sampleLabel: 'Plant-Based Zero-Waste Lunch',
     },
     {
       id: 'energy',
@@ -63,9 +87,10 @@ const Challenges = () => {
       icon: '⚡',
       example: 'Working with daylight, AC at 24°C, or watering balcony plants',
       co2: '0.60 kg',
-      sampleImg: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80',
-      sampleLabel: 'Tending to Balcony Plants'
-    }
+      sampleImg:
+        'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80',
+      sampleLabel: 'Tending to Balcony Plants',
+    },
   ]
 
   // Start Live Webcam Stream
@@ -79,7 +104,7 @@ const Challenges = () => {
       }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
-        audio: false
+        audio: false,
       })
       if (videoRef.current) {
         videoRef.current.srcObject = stream
@@ -88,7 +113,9 @@ const Challenges = () => {
       setIsCameraLive(true)
     } catch (err) {
       console.warn('Webcam access error:', err)
-      setCameraError('Camera access was not granted or no camera was found. You can upload an image or choose one of the demo snapshots below.')
+      setCameraError(
+        'Camera access was not granted or no camera was found. You can upload an image or choose one of the demo snapshots below.'
+      )
       setIsCameraLive(false)
     }
   }
@@ -140,10 +167,11 @@ const Challenges = () => {
       date: 'Today, 9:15 AM',
       dimension: 'Zero Single-Use Plastic',
       icon: '🥤',
-      image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=500&q=80',
+      image:
+        'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=500&q=80',
       caption: 'Filled up my 1L copper bottle before leaving home! 💧',
       co2Saved: '0.35 kg CO₂',
-      status: 'Verified Real Proof'
+      status: 'Verified Real Proof',
     },
     {
       id: 2,
@@ -151,10 +179,11 @@ const Challenges = () => {
       date: 'Yesterday, 8:40 AM',
       dimension: 'Green Mobility / Commute',
       icon: '🚲',
-      image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=500&q=80',
+      image:
+        'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=500&q=80',
       caption: 'Pedaled 4 km to university today instead of a cab 🚲',
       co2Saved: '1.20 kg CO₂',
-      status: 'Verified Real Proof'
+      status: 'Verified Real Proof',
     },
     {
       id: 3,
@@ -162,10 +191,11 @@ const Challenges = () => {
       date: '2 days ago, 1:20 PM',
       dimension: 'Zero Food Waste / Eco Meal',
       icon: '🍱',
-      image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80',
+      image:
+        'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80',
       caption: 'Clean plate club! 100% finished without throwing anything away 🌱',
       co2Saved: '0.85 kg CO₂',
-      status: 'Verified Real Proof'
+      status: 'Verified Real Proof',
     },
     {
       id: 4,
@@ -173,11 +203,12 @@ const Challenges = () => {
       date: '3 days ago, 6:00 PM',
       dimension: 'Power Saving & Nature Care',
       icon: '⚡',
-      image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=500&q=80',
+      image:
+        'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=500&q=80',
       caption: 'Watered my terrace jade and snake plants with recycled water 🪴',
       co2Saved: '0.60 kg CO₂',
-      status: 'Verified Real Proof'
-    }
+      status: 'Verified Real Proof',
+    },
   ])
 
   // Active Challenges
@@ -191,7 +222,7 @@ const Challenges = () => {
       points: 250,
       participants: 1250,
       icon: '🌊',
-      color: 'blue'
+      color: 'blue',
     },
     {
       id: 2,
@@ -202,7 +233,7 @@ const Challenges = () => {
       points: 300,
       participants: 890,
       icon: '🍎',
-      color: 'green'
+      color: 'green',
     },
     {
       id: 3,
@@ -213,8 +244,8 @@ const Challenges = () => {
       points: 400,
       participants: 2100,
       icon: '⚡',
-      color: 'yellow'
-    }
+      color: 'yellow',
+    },
   ]
 
   // Completed Challenges
@@ -225,7 +256,7 @@ const Challenges = () => {
       description: 'Saved over 500L of water with bucket baths & aerators',
       points: 200,
       completedDate: '2024-05-20',
-      icon: '💧'
+      icon: '💧',
     },
     {
       id: 5,
@@ -233,8 +264,8 @@ const Challenges = () => {
       description: 'Used metro and bus for 14 continuous days',
       points: 350,
       completedDate: '2024-05-15',
-      icon: '🚌'
-    }
+      icon: '🚌',
+    },
   ]
 
   // Milestones Ladder
@@ -245,7 +276,7 @@ const Challenges = () => {
       reward: 'Flame Master Badge & +250 Points',
       icon: '🥉',
       unlocked: true,
-      current: false
+      current: false,
     },
     {
       days: 30,
@@ -253,7 +284,7 @@ const Challenges = () => {
       reward: 'Digital Sustainability Certificate + 2 Freezes',
       icon: '🥈',
       unlocked: false,
-      current: true
+      current: true,
     },
     {
       days: 60,
@@ -261,21 +292,22 @@ const Challenges = () => {
       reward: 'Organic Bamboo Kit & Exclusive GreenPulse Merch',
       icon: '🥇',
       unlocked: false,
-      current: false
+      current: false,
     },
     {
       days: 100,
       title: '100-DAY GRAND EARTH CHAMPION',
-      reward: '🪴 Real Live Indoor Plant Delivered to Doorstep + 🌳 Tree Planted in Your Name (GPS Cert)',
+      reward:
+        '🪴 Real Live Indoor Plant Delivered to Doorstep + 🌳 Tree Planted in Your Name (GPS Cert)',
       icon: '👑',
       unlocked: false,
       current: false,
-      isGrand: true
-    }
+      isGrand: true,
+    },
   ]
 
   // Handle Photo selection from camera/file
-  const handlePhotoSelect = (e) => {
+  const handlePhotoSelect = e => {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
@@ -289,7 +321,7 @@ const Challenges = () => {
   }
 
   // Handle Quick Sample Photo Test
-  const handleSelectSample = (sampleUrl) => {
+  const handleSelectSample = sampleUrl => {
     stopLiveCamera()
     setPhotoPreview(sampleUrl)
     runAiVerification()
@@ -307,7 +339,7 @@ const Challenges = () => {
         matchScore: '98.4%',
         detectedItem: currentDim?.name || 'Sustainable Action',
         co2Saved: currentDim?.co2 || '0.50 kg',
-        timestamp: 'Live Camera Capture'
+        timestamp: 'Live Camera Capture',
       })
     }, 1800)
   }
@@ -331,7 +363,7 @@ const Challenges = () => {
       image: photoPreview,
       caption: `Day ${newDay} EcoSnap completed! Verified real-life action 🌿`,
       co2Saved: `${currentDim?.co2} CO₂`,
-      status: 'Verified Real Proof'
+      status: 'Verified Real Proof',
     }
 
     setSnapTimeline([newSnap, ...snapTimeline])
@@ -344,7 +376,6 @@ const Challenges = () => {
   return (
     <div className="min-h-screen py-10 px-4">
       <div className="max-w-7xl mx-auto space-y-8">
-        
         {/* Header Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -360,7 +391,9 @@ const Challenges = () => {
             </h1>
           </div>
           <p className="text-textLight max-w-2xl mx-auto text-sm md:text-base">
-            Snap daily proof of practical green habits with live camera, protect your streak, and receive a <span className="text-emerald-400 font-semibold">Real Live Plant</span> at 100 days! 🪴🔥
+            Snap daily proof of practical green habits with live camera, protect your streak, and
+            receive a <span className="text-emerald-400 font-semibold">Real Live Plant</span> at 100
+            days! 🪴🔥
           </p>
         </motion.div>
 
@@ -372,7 +405,7 @@ const Challenges = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="relative glass-card p-6 md:p-8 neon-border overflow-hidden bg-gradient-to-br from-cardDark/90 via-cardDark/70 to-bgDark"
           style={{
-            boxShadow: '0 0 50px rgba(249, 115, 22, 0.25), 0 0 80px rgba(37, 99, 235, 0.15)'
+            boxShadow: '0 0 50px rgba(249, 115, 22, 0.25), 0 0 80px rgba(37, 99, 235, 0.15)',
           }}
         >
           {/* Subtle Background Glow */}
@@ -380,7 +413,6 @@ const Challenges = () => {
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-            
             {/* Left: Streak Counter & Status */}
             <div className="lg:col-span-5 text-center lg:text-left space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-accent text-xs font-semibold uppercase tracking-wider">
@@ -389,7 +421,7 @@ const Challenges = () => {
               </div>
 
               <div className="flex items-center justify-center lg:justify-start gap-4">
-                <motion.div 
+                <motion.div
                   animate={{ scale: [1, 1.12, 1], rotate: [0, -3, 3, 0] }}
                   transition={{ duration: 2.2, repeat: Infinity }}
                   className="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-gradient-to-tr from-amber-600 via-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/40 border border-orange-300/30"
@@ -422,11 +454,15 @@ const Challenges = () => {
               <div className="flex items-center justify-center lg:justify-start gap-3 pt-2 text-xs">
                 <div className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2 text-textLight">
                   <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                  <span>Streak Freeze: <b>{freezeCount}</b> available</span>
+                  <span>
+                    Streak Freeze: <b>{freezeCount}</b> available
+                  </span>
                 </div>
                 <div className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2 text-textLight">
                   <Award className="w-4 h-4 text-yellow-400" />
-                  <span>Total Eco Points: <b>{ecoPoints}</b></span>
+                  <span>
+                    Total Eco Points: <b>{ecoPoints}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -437,7 +473,9 @@ const Challenges = () => {
                 <span className="font-semibold text-white flex items-center gap-1.5">
                   <Leaf className="w-4 h-4 text-emerald-400" /> 100-Day Grand Prize:
                 </span>
-                <span className="text-emerald-400 font-bold">{streakCount}/100 Days ({streakCount}%)</span>
+                <span className="text-emerald-400 font-bold">
+                  {streakCount}/100 Days ({streakCount}%)
+                </span>
               </div>
 
               {/* Animated Progress Bar */}
@@ -445,7 +483,7 @@ const Challenges = () => {
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.min(streakCount, 100)}%` }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  transition={{ duration: 1.2, ease: 'easeOut' }}
                   className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full relative"
                 >
                   <div className="absolute right-0 top-0 bottom-0 w-2 bg-white rounded-full animate-ping opacity-75" />
@@ -480,14 +518,13 @@ const Challenges = () => {
                 className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 text-white font-bold text-base shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 group cursor-pointer"
               >
                 <Camera className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                {isStreakCompletedToday ? "Snap Another Action 📸" : "Snap Today's Eco Action 📸"}
+                {isStreakCompletedToday ? 'Snap Another Action 📸' : "Snap Today's Eco Action 📸"}
               </motion.button>
-              
+
               <p className="text-[11px] text-textMuted text-center">
                 Live Camera Snap or Upload • Real Proof Only
               </p>
             </div>
-
           </div>
         </motion.div>
 
@@ -536,7 +573,8 @@ const Challenges = () => {
                   <span>📸</span> Verified Daily EcoSnaps
                 </h3>
                 <p className="text-xs text-textMuted">
-                  Every photo is analyzed by GreenPulse Vision AI for practical real-life proof before counting towards your streak.
+                  Every photo is analyzed by GreenPulse Vision AI for practical real-life proof
+                  before counting towards your streak.
                 </p>
               </div>
 
@@ -553,7 +591,7 @@ const Challenges = () => {
 
             {/* Grid of Snaps */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {snapTimeline.map((snap) => (
+              {snapTimeline.map(snap => (
                 <motion.div
                   key={snap.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -568,7 +606,7 @@ const Challenges = () => {
                       alt={snap.dimension}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    
+
                     {/* Dark gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-bgDark via-transparent to-black/40" />
 
@@ -625,7 +663,10 @@ const Challenges = () => {
                   The 100-Day Earth Champion Prize
                 </h2>
                 <p className="text-textLight/90 text-sm md:text-base leading-relaxed">
-                  Consistency changes the planet. When you reach 100 days of verified daily eco habits, GreenPulse AI rewards you with a <b>real physical plant shipped to your home address</b>, alongside a geo-tagged tree planted in your name.
+                  Consistency changes the planet. When you reach 100 days of verified daily eco
+                  habits, GreenPulse AI rewards you with a{' '}
+                  <b>real physical plant shipped to your home address</b>, alongside a geo-tagged
+                  tree planted in your name.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-2">
                   <div className="flex items-center gap-2 text-xs bg-black/40 px-3.5 py-2 rounded-xl border border-white/10 text-white">
@@ -642,15 +683,15 @@ const Challenges = () => {
 
             {/* Milestones Timeline */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {milestones.map((m) => (
+              {milestones.map(m => (
                 <motion.div
                   key={m.days}
                   whileHover={{ scale: 1.03 }}
                   className={`glass-card p-6 rounded-2xl border transition-all flex flex-col justify-between ${
-                    m.isGrand 
-                      ? 'border-emerald-400/50 bg-emerald-950/20 shadow-lg shadow-emerald-500/20' 
-                      : m.unlocked 
-                        ? 'border-primary/40 bg-primary/10' 
+                    m.isGrand
+                      ? 'border-emerald-400/50 bg-emerald-950/20 shadow-lg shadow-emerald-500/20'
+                      : m.unlocked
+                        ? 'border-primary/40 bg-primary/10'
                         : 'border-white/10 opacity-80'
                   }`}
                 >
@@ -669,9 +710,7 @@ const Challenges = () => {
                     </div>
 
                     <h3 className="text-lg font-bold text-white mb-2">{m.title}</h3>
-                    <p className="text-xs text-textLight/80 leading-relaxed mb-4">
-                      {m.reward}
-                    </p>
+                    <p className="text-xs text-textLight/80 leading-relaxed mb-4">{m.reward}</p>
                   </div>
 
                   <div className="pt-4 border-t border-white/10 text-xs">
@@ -694,7 +733,7 @@ const Challenges = () => {
         {/* ============================================================ */}
         {activeTab === 'active' && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {activeChallenges.map((challenge) => (
+            {activeChallenges.map(challenge => (
               <ChallengeCard key={challenge.id} challenge={challenge} />
             ))}
           </div>
@@ -705,12 +744,11 @@ const Challenges = () => {
         {/* ============================================================ */}
         {activeTab === 'completed' && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {completedChallenges.map((challenge) => (
+            {completedChallenges.map(challenge => (
               <CompletedCard key={challenge.id} challenge={challenge} />
             ))}
           </div>
         )}
-
       </div>
 
       {/* ============================================================ */}
@@ -742,9 +780,12 @@ const Challenges = () => {
                 <span className="px-3 py-1 rounded-full bg-accent/20 text-accent font-semibold text-xs border border-accent/30 inline-block mb-2">
                   📸 Daily Proof Snap
                 </span>
-                <h2 className="text-2xl font-bold text-white">Capture Today's Real-Life Eco Action</h2>
+                <h2 className="text-2xl font-bold text-white">
+                  Capture Today's Real-Life Eco Action
+                </h2>
                 <p className="text-xs text-textMuted mt-1">
-                  Take a live photo with your camera or upload proof. GreenPulse AI verifies real-life action authenticity.
+                  Take a live photo with your camera or upload proof. GreenPulse AI verifies
+                  real-life action authenticity.
                 </p>
               </div>
 
@@ -754,7 +795,7 @@ const Challenges = () => {
                   1. Select Action Dimension:
                 </label>
                 <div className="grid grid-cols-2 gap-2.5">
-                  {dimensions.map((dim) => (
+                  {dimensions.map(dim => (
                     <button
                       key={dim.id}
                       onClick={() => {
@@ -783,7 +824,7 @@ const Challenges = () => {
                   <label className="text-xs font-semibold text-white/90 uppercase tracking-wider block">
                     2. Capture Photo Proof:
                   </label>
-                  
+
                   {/* Mode Selector Tabs */}
                   {!photoPreview && (
                     <div className="flex items-center bg-bgDark rounded-xl p-1 border border-white/10">
@@ -861,7 +902,9 @@ const Challenges = () => {
                           <div className="p-6 text-center space-y-3 max-w-sm">
                             <AlertCircle className="w-10 h-10 text-amber-400 mx-auto" />
                             <div className="text-sm font-bold text-white">Camera Access Notice</div>
-                            <div className="text-xs text-textMuted leading-relaxed">{cameraError}</div>
+                            <div className="text-xs text-textMuted leading-relaxed">
+                              {cameraError}
+                            </div>
                             <div className="flex gap-2 justify-center pt-2">
                               <button
                                 onClick={() => fileInputRef.current?.click()}
@@ -883,8 +926,12 @@ const Challenges = () => {
                         {!isCameraLive && !cameraError && (
                           <div className="text-center space-y-2 p-6">
                             <RefreshCw className="w-8 h-8 text-accent animate-spin mx-auto" />
-                            <div className="text-sm font-bold text-white">Opening Live Camera...</div>
-                            <div className="text-xs text-textMuted">Please allow browser camera permissions when prompted</div>
+                            <div className="text-sm font-bold text-white">
+                              Opening Live Camera...
+                            </div>
+                            <div className="text-xs text-textMuted">
+                              Please allow browser camera permissions when prompted
+                            </div>
                           </div>
                         )}
 
@@ -893,7 +940,9 @@ const Challenges = () => {
                           <>
                             {/* Viewfinder Target Grid */}
                             <div className="absolute inset-6 border border-white/20 rounded-2xl pointer-events-none flex items-center justify-center">
-                              <span className="text-white/40 text-xs tracking-widest font-mono">ALIGN ECO ACTION</span>
+                              <span className="text-white/40 text-xs tracking-widest font-mono">
+                                ALIGN ECO ACTION
+                              </span>
                             </div>
 
                             {/* Shutter Button Bar */}
@@ -924,8 +973,12 @@ const Challenges = () => {
                         className="border-2 border-dashed border-white/20 hover:border-primary/60 rounded-2xl p-10 text-center cursor-pointer transition bg-bgDark/40 hover:bg-bgDark/70 group"
                       >
                         <Upload className="w-10 h-10 mx-auto mb-3 text-textMuted group-hover:text-primary transition group-hover:scale-110" />
-                        <div className="text-sm font-semibold text-white">Select Photo from Device</div>
-                        <div className="text-xs text-textMuted mt-1">Accepts JPG, PNG, WEBP from your computer or phone gallery</div>
+                        <div className="text-sm font-semibold text-white">
+                          Select Photo from Device
+                        </div>
+                        <div className="text-xs text-textMuted mt-1">
+                          Accepts JPG, PNG, WEBP from your computer or phone gallery
+                        </div>
                       </div>
                     )}
 
@@ -933,7 +986,8 @@ const Challenges = () => {
                     {inputMode === 'presets' && (
                       <div className="space-y-3">
                         <div className="text-xs text-textMuted">
-                          Click any realistic daily snapshot to instantly test the AI verification scanner:
+                          Click any realistic daily snapshot to instantly test the AI verification
+                          scanner:
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           {dimensions.map(d => (
@@ -996,8 +1050,12 @@ const Challenges = () => {
                     {isScanning && (
                       <div className="absolute inset-0 bg-black/65 backdrop-blur-sm flex flex-col items-center justify-center space-y-3">
                         <RefreshCw className="w-8 h-8 text-accent animate-spin" />
-                        <div className="text-sm font-bold text-white">GreenPulse Vision AI Scanning...</div>
-                        <div className="text-xs text-textMuted">Checking real-world object authenticity & EXIF date</div>
+                        <div className="text-sm font-bold text-white">
+                          GreenPulse Vision AI Scanning...
+                        </div>
+                        <div className="text-xs text-textMuted">
+                          Checking real-world object authenticity & EXIF date
+                        </div>
                       </div>
                     )}
 
@@ -1011,7 +1069,8 @@ const Challenges = () => {
                           <span>Confidence: {scanResult.matchScore}</span>
                         </div>
                         <div className="text-[11px] text-textLight/90">
-                          Detected: <b>{scanResult.detectedItem}</b> • Estimated Reduction: <b>{scanResult.co2Saved}</b>
+                          Detected: <b>{scanResult.detectedItem}</b> • Estimated Reduction:{' '}
+                          <b>{scanResult.co2Saved}</b>
                         </div>
                       </div>
                     )}
@@ -1046,7 +1105,6 @@ const Challenges = () => {
                   <Sparkles className="w-4 h-4" /> Post Snap & Extend Streak (+50 pts)
                 </button>
               </div>
-
             </motion.div>
           </div>
         )}
@@ -1075,7 +1133,8 @@ const Challenges = () => {
                 <span className="text-4xl">🪴</span>
                 <h3 className="text-2xl font-bold text-white">How the 100-Day Plant Works</h3>
                 <p className="text-xs text-textMuted">
-                  Every 100 days of verified streaks represents roughly 80+ kg of CO₂ avoided by your conscious choices.
+                  Every 100 days of verified streaks represents roughly 80+ kg of CO₂ avoided by
+                  your conscious choices.
                 </p>
               </div>
 
@@ -1083,25 +1142,31 @@ const Challenges = () => {
                 <div className="flex gap-3">
                   <span className="text-base">1️⃣</span>
                   <div>
-                    <b className="text-white">Hit Day 100:</b> Once your daily streak flame reaches 100 consecutive days without breaking.
+                    <b className="text-white">Hit Day 100:</b> Once your daily streak flame reaches
+                    100 consecutive days without breaking.
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-base">2️⃣</span>
                   <div>
-                    <b className="text-white">Claim Form Unlocks:</b> You enter your shipping address directly in the app.
+                    <b className="text-white">Claim Form Unlocks:</b> You enter your shipping
+                    address directly in the app.
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-base">3️⃣</span>
                   <div>
-                    <b className="text-white">Live Plant Dispatched:</b> A healthy indoor air-purifying plant (Snake Plant or Jade Plant in a biodegradable pot) is delivered to your doorstep.
+                    <b className="text-white">Live Plant Dispatched:</b> A healthy indoor
+                    air-purifying plant (Snake Plant or Jade Plant in a biodegradable pot) is
+                    delivered to your doorstep.
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-base">4️⃣</span>
                   <div>
-                    <b className="text-white">Geo-Tagged Tree Sponsoring:</b> GreenPulse AI plants a native tree in an agroforestry reserve with satellite GPS coordinates in your name!
+                    <b className="text-white">Geo-Tagged Tree Sponsoring:</b> GreenPulse AI plants a
+                    native tree in an agroforestry reserve with satellite GPS coordinates in your
+                    name!
                   </div>
                 </div>
               </div>
@@ -1116,7 +1181,6 @@ const Challenges = () => {
           </div>
         )}
       </AnimatePresence>
-
     </div>
   )
 }

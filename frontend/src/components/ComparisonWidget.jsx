@@ -22,22 +22,22 @@ const ComparisonWidget = ({ userScore, userCarbon }) => {
       label: 'Global Average',
       value: globalAverage,
       difference: percentageBetter,
-      color: getComparisonColor(userCarbon, globalAverage)
+      color: getComparisonColor(userCarbon, globalAverage),
     },
     {
       icon: Users,
       label: 'National Average',
       value: nationalAverage,
       difference: percentageBetterNational,
-      color: getComparisonColor(userCarbon, nationalAverage)
+      color: getComparisonColor(userCarbon, nationalAverage),
     },
     {
       icon: Award,
       label: 'Top 10% Efficient',
       value: efficientHouseholds,
       difference: ((userCarbon / efficientHouseholds - 1) * 100).toFixed(0),
-      color: userCarbon < efficientHouseholds ? 'text-green-400' : 'text-red-400'
-    }
+      color: userCarbon < efficientHouseholds ? 'text-green-400' : 'text-red-400',
+    },
   ]
 
   return (
@@ -54,7 +54,9 @@ const ComparisonWidget = ({ userScore, userCarbon }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {comparisons.map((comparison, index) => {
           const Icon = comparison.icon
-          const isPositive = comparison.difference < 0 || (comparison.label === 'Top 10% Efficient' && userCarbon < comparison.value)
+          const isPositive =
+            comparison.difference < 0 ||
+            (comparison.label === 'Top 10% Efficient' && userCarbon < comparison.value)
 
           return (
             <motion.div
@@ -82,9 +84,7 @@ const ComparisonWidget = ({ userScore, userCarbon }) => {
                 <div className={`text-lg font-bold ${comparison.color}`}>
                   {isPositive ? '↓' : '↑'} {Math.abs(comparison.difference)}%
                 </div>
-                <div className="text-xs text-textMuted">
-                  {isPositive ? 'Better' : 'Higher'}
-                </div>
+                <div className="text-xs text-textMuted">{isPositive ? 'Better' : 'Higher'}</div>
               </div>
 
               {/* Visual bar comparison */}
@@ -95,8 +95,8 @@ const ComparisonWidget = ({ userScore, userCarbon }) => {
                     animate={{ width: `${Math.min(100, (userCarbon / comparison.value) * 100)}%` }}
                     transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
                     className={`h-2 rounded-full ${
-                      userCarbon < comparison.value 
-                        ? 'bg-gradient-to-r from-green-500 to-green-400' 
+                      userCarbon < comparison.value
+                        ? 'bg-gradient-to-r from-green-500 to-green-400'
                         : 'bg-gradient-to-r from-orange-500 to-red-500'
                     }`}
                   />
@@ -122,11 +122,13 @@ const ComparisonWidget = ({ userScore, userCarbon }) => {
           {userCarbon < globalAverage ? (
             <>
               🎉 <span className="font-semibold text-green-400">Great job!</span> You're performing{' '}
-              <span className="font-bold text-primary">{percentageBetter}% better</span> than the global average.
+              <span className="font-bold text-primary">{percentageBetter}% better</span> than the
+              global average.
             </>
           ) : (
             <>
-              💡 <span className="font-semibold text-yellow-400">Opportunity ahead!</span> With small changes, you can reduce your footprint significantly.
+              💡 <span className="font-semibold text-yellow-400">Opportunity ahead!</span> With
+              small changes, you can reduce your footprint significantly.
             </>
           )}
         </p>

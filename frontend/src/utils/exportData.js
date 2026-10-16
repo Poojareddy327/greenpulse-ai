@@ -4,76 +4,91 @@
  * Export data to CSV format
  */
 export const exportToCSV = (data, filename = 'greenpulse-data.csv') => {
-  if (!data || (Array.isArray(data) && data.length === 0) || (typeof data === 'object' && Object.keys(data).length === 0)) {
-    return '';
+  if (
+    !data ||
+    (Array.isArray(data) && data.length === 0) ||
+    (typeof data === 'object' && Object.keys(data).length === 0)
+  ) {
+    return ''
   }
 
-  let csv = '';
+  let csv = ''
   if (Array.isArray(data)) {
-    const headers = Object.keys(data[0] || {}).join(',');
-    const rows = data.map(obj => 
-      Object.values(obj).map(val => 
-        typeof val === 'string' && val.includes(',') ? `"${val}"` : val
-      ).join(',')
-    );
-    csv = [headers, ...rows].join('\n');
+    const headers = Object.keys(data[0] || {}).join(',')
+    const rows = data.map(obj =>
+      Object.values(obj)
+        .map(val => (typeof val === 'string' && val.includes(',') ? `"${val}"` : val))
+        .join(',')
+    )
+    csv = [headers, ...rows].join('\n')
   } else {
-    const headers = Object.keys(data).join(',');
-    const rows = Object.values(data).map(val => 
-      typeof val === 'object' ? JSON.stringify(val) : val
-    ).join(',');
-    csv = `${headers}\n${rows}`;
+    const headers = Object.keys(data).join(',')
+    const rows = Object.values(data)
+      .map(val => (typeof val === 'object' ? JSON.stringify(val) : val))
+      .join(',')
+    csv = `${headers}\n${rows}`
   }
-  
+
   // Create blob and download in browser
-  if (typeof window !== 'undefined' && typeof document !== 'undefined' && typeof URL !== 'undefined' && URL.createObjectURL) {
+  if (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined' &&
+    typeof URL !== 'undefined' &&
+    URL.createObjectURL
+  ) {
     try {
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+      const link = document.createElement('a')
+      const url = URL.createObjectURL(blob)
+      link.setAttribute('href', url)
+      link.setAttribute('download', filename)
+      link.style.visibility = 'hidden'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
     } catch {
       // test environment fallback
     }
   }
 
-  return csv;
-};
+  return csv
+}
 
 /**
  * Export data to JSON format
  */
 export const exportToJSON = (data, filename = 'greenpulse-data.json') => {
-  const payload = typeof data === 'object' && !Array.isArray(data) && data !== null
-    ? { ...data, exportDate: data.exportDate || new Date().toISOString() }
-    : data;
-  const json = JSON.stringify(payload);
+  const payload =
+    typeof data === 'object' && !Array.isArray(data) && data !== null
+      ? { ...data, exportDate: data.exportDate || new Date().toISOString() }
+      : data
+  const json = JSON.stringify(payload)
 
-  if (typeof window !== 'undefined' && typeof document !== 'undefined' && typeof URL !== 'undefined' && URL.createObjectURL) {
+  if (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined' &&
+    typeof URL !== 'undefined' &&
+    URL.createObjectURL
+  ) {
     try {
-      const blob = new Blob([json], { type: 'application/json' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      const blob = new Blob([json], { type: 'application/json' })
+      const link = document.createElement('a')
+      const url = URL.createObjectURL(blob)
+      link.setAttribute('href', url)
+      link.setAttribute('download', filename)
+      link.style.visibility = 'hidden'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
     } catch {
       // test environment fallback
     }
   }
 
-  return json;
-};
+  return json
+}
 
 /**
  * Generate PDF report (requires browser print)
@@ -84,22 +99,22 @@ export const exportToPDF = (elementOrData, filename = 'greenpulse-report.pdf') =
       title: 'GreenPulse AI Carbon Intelligence Report',
       data: elementOrData,
       filename,
-      date: new Date().toISOString()
-    };
+      date: new Date().toISOString(),
+    }
   }
 
   if (typeof document === 'undefined') {
-    return { title: 'GreenPulse AI Report', data: null };
+    return { title: 'GreenPulse AI Report', data: null }
   }
 
-  const element = document.getElementById(elementOrData);
+  const element = document.getElementById(elementOrData)
   if (!element) {
-    console.error('Element not found');
-    return { title: 'GreenPulse AI Report', data: null };
+    console.error('Element not found')
+    return { title: 'GreenPulse AI Report', data: null }
   }
 
   // Create print-friendly version
-  const printWindow = window.open('', '_blank');
+  const printWindow = window.open('', '_blank')
   const styles = `
     <style>
       @media print {
@@ -142,8 +157,8 @@ export const exportToPDF = (elementOrData, filename = 'greenpulse-report.pdf') =
         }
       }
     </style>
-  `;
-  
+  `
+
   printWindow.document.write(`
     <!DOCTYPE html>
     <html>
@@ -164,16 +179,16 @@ export const exportToPDF = (elementOrData, filename = 'greenpulse-report.pdf') =
         </div>
       </body>
     </html>
-  `);
-  
-  printWindow.document.close();
-  printWindow.focus();
-  
+  `)
+
+  printWindow.document.close()
+  printWindow.focus()
+
   setTimeout(() => {
-    printWindow.print();
-    printWindow.close();
-  }, 500);
-};
+    printWindow.print()
+    printWindow.close()
+  }, 500)
+}
 
 /**
  * Share data via Web Share API
@@ -181,24 +196,24 @@ export const exportToPDF = (elementOrData, filename = 'greenpulse-report.pdf') =
 export const shareData = async (title, text, url) => {
   if (navigator.share) {
     try {
-      await navigator.share({ title, text, url });
-      return true;
+      await navigator.share({ title, text, url })
+      return true
     } catch (error) {
-      console.error('Share failed:', error);
-      return false;
+      console.error('Share failed:', error)
+      return false
     }
   } else {
     // Fallback - copy to clipboard
     try {
-      await navigator.clipboard.writeText(`${title}\n${text}\n${url}`);
-      alert('Link copied to clipboard!');
-      return true;
+      await navigator.clipboard.writeText(`${title}\n${text}\n${url}`)
+      alert('Link copied to clipboard!')
+      return true
     } catch (error) {
-      console.error('Clipboard failed:', error);
-      return false;
+      console.error('Clipboard failed:', error)
+      return false
     }
   }
-};
+}
 
 /**
  * Format data for export
@@ -210,14 +225,14 @@ export const formatDataForExport = (monthlyData, currentStats, badges) => {
       currentCarbon: currentStats.carbon,
       currentWater: currentStats.water,
       sustainabilityScore: currentStats.score,
-      totalPoints: currentStats.points
+      totalPoints: currentStats.points,
     },
     monthlyTrends: monthlyData,
     achievements: badges.filter(b => b.unlocked).map(b => b.name),
     metadata: {
       platform: 'GreenPulse AI',
       version: '1.0.0',
-      exportFormat: 'JSON'
-    }
-  };
-};
+      exportFormat: 'JSON',
+    },
+  }
+}

@@ -5,14 +5,14 @@ const CSS3DCard = ({ children, className = '' }) => {
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     const card = e.currentTarget
     const rect = card.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
     const centerX = rect.width / 2
     const centerY = rect.height / 2
-    
+
     const rotX = ((y - centerY) / centerY) * -10
     const rotY = ((x - centerX) / centerX) * 10
 
@@ -30,13 +30,13 @@ const CSS3DCard = ({ children, className = '' }) => {
       className={`relative ${className}`}
       style={{
         perspective: '1000px',
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{
         rotateX,
-        rotateY
+        rotateY,
       }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
@@ -44,13 +44,10 @@ const CSS3DCard = ({ children, className = '' }) => {
         className="absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/20 to-transparent rounded-2xl"
         style={{
           transform: 'translateZ(-20px)',
-          filter: 'blur(10px)'
+          filter: 'blur(10px)',
         }}
       />
-      <div
-        className="relative"
-        style={{ transform: 'translateZ(0px)' }}
-      >
+      <div className="relative" style={{ transform: 'translateZ(0px)' }}>
         {children}
       </div>
     </motion.div>
