@@ -10,8 +10,6 @@
 
 <br/>
 
-**🏆 PromptWars Virtual 2026 - Main Challenge 3 🏆**
-
 *AI-powered platform to track, analyze, and reduce your carbon footprint*
 
 <br/>
@@ -35,7 +33,7 @@
 
 ## 🎯 Overview
 
-**GreenPulse AI** is a carbon footprint awareness platform built for PromptWars Virtual 2026 (Hack2skill × Google for Developers). It helps individuals understand, track, and reduce their environmental impact through AI-driven insights and gamification.
+**GreenPulse AI** is an advanced carbon footprint tracking and environmental awareness platform. It empowers individuals and communities to understand, track, and reduce their environmental impact through AI-driven insights, interactive calculators, habit tracking, and gamification.
 
 ### Problem Statement
 Design a solution that helps people:
@@ -183,15 +181,14 @@ Community eco-challenges and leaderboard
 ## 👨‍💻 Author
 
 **Nalla Poojitha Reddy**  
-PromptWars Virtual 2026 Participant
+[GitHub Profile](https://github.com/Poojareddy327)
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Hack2skill** - For organizing PromptWars Virtual 2026
-- **Google for Developers** - For collaboration
 - Open source community
+- Environmental science datasets and research contributors
 
 ---
 
@@ -206,7 +203,7 @@ MIT License
 ## 🌍 Built for a Sustainable Future
 
 **GreenPulse AI**  
-*PromptWars Virtual 2026 Submission*
+*Empowering individuals through intelligent climate action*
 
 ⭐ **Star this repo if you find it helpful!** ⭐
 
