@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Trophy, Medal, Crown, TrendingUp, Star } from 'lucide-react'
+import { Trophy, Medal, Crown, TrendingUp, Star, Flame } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const Leaderboard = () => {

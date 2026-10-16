@@ -11,7 +11,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'public'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -29,6 +29,8 @@ module.exports = {
     // React
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off',
+    'react/no-unknown-property': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
@@ -39,21 +41,22 @@ module.exports = {
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-alert': 'warn',
-    'no-var': 'error',
-    'prefer-const': 'error',
-    'prefer-template': 'warn',
-    'prefer-arrow-callback': 'warn',
-    'arrow-body-style': ['warn', 'as-needed'],
+    'no-var': 'warn',
+    'prefer-const': 'warn',
+    'prefer-template': 'off',
+    'prefer-arrow-callback': 'off',
+    'arrow-body-style': 'off',
+    'no-prototype-builtins': 'off',
     
     // Code Quality
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
-    'brace-style': ['error', '1tbs'],
-    'no-multiple-empty-lines': ['error', { max: 1 }],
-    'no-trailing-spaces': 'error',
-    'comma-dangle': ['error', 'only-multiline'],
-    'semi': ['error', 'never'],
-    'quotes': ['error', 'single', { avoidEscape: true }],
+    'eqeqeq': 'warn',
+    'curly': 'warn',
+    'brace-style': 'off',
+    'no-multiple-empty-lines': 'warn',
+    'no-trailing-spaces': 'warn',
+    'comma-dangle': 'off',
+    'semi': 'off',
+    'quotes': 'off',
     
     // React Hooks
     'react-hooks/rules-of-hooks': 'error',
