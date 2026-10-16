@@ -65,6 +65,7 @@ export const sanitizeInput = (input) => {
   }
 
   return input
+    .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
@@ -137,8 +138,8 @@ export const validateCarbonInput = (data) => {
  */
 export const validateURL = (url) => {
   try {
-    new URL(url)
-    return true
+    const parsed = new URL(url)
+    return ['http:', 'https:'].includes(parsed.protocol)
   } catch {
     return false
   }

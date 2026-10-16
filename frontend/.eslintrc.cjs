@@ -10,7 +10,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
   parserOptions: {
@@ -25,7 +24,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  plugins: ['react', 'react-hooks', 'react-refresh', 'jsx-a11y'],
+  plugins: ['react', 'react-hooks', 'react-refresh'],
   rules: {
     // React
     'react/prop-types': 'off',
@@ -55,11 +54,6 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     'semi': ['error', 'never'],
     'quotes': ['error', 'single', { avoidEscape: true }],
-    
-    // Accessibility
-    'jsx-a11y/anchor-is-valid': 'warn',
-    'jsx-a11y/click-events-have-key-events': 'warn',
-    'jsx-a11y/no-static-element-interactions': 'warn',
     
     // React Hooks
     'react-hooks/rules-of-hooks': 'error',

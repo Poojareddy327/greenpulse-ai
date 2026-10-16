@@ -48,7 +48,7 @@ describe('Navbar Component', () => {
 
   it('opens mobile menu when hamburger is clicked', () => {
     renderWithRouter(<Navbar />, mockAuthContext())
-    const menuButton = screen.getByRole('button')
+    const menuButton = screen.getByRole('button', { name: /toggle menu/i })
     fireEvent.click(menuButton)
     // Menu should be visible after click
     expect(screen.getAllByText('Home').length).toBeGreaterThan(1)

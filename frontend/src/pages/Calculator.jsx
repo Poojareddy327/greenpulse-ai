@@ -216,7 +216,7 @@ const Calculator = () => {
             <Sparkles className="w-3.5 h-3.5" /> Interactive Real-Time Calculator
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Calculate Your <span className="text-primary drop-shadow-[0_0_25px_rgba(37,99,235,0.8)]">Environmental Impact</span>
+            Calculate Your <span className="text-primary drop-shadow-[0_0_25px_rgba(37,99,235,0.8)]">Carbon Footprint & Impact</span>
           </h1>
           <p className="text-textLight max-w-2xl mx-auto text-sm md:text-base">
             Adjust the sliders below to see your monthly carbon and water footprint update live in real time.
@@ -278,7 +278,7 @@ const Calculator = () => {
             <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-5">
               <div className="flex items-center gap-2.5 text-primary border-b border-white/10 pb-3">
                 <Car className="w-5 h-5" />
-                <h3 className="text-base font-bold text-white">1. Travel & Mobility</h3>
+                <h3 className="text-base font-bold text-white">1. Transportation & Mobility</h3>
               </div>
 
               {/* Car Driving Slider */}
@@ -669,7 +669,7 @@ const Calculator = () => {
                     ) : (
                       <ArrowRight className="w-4 h-4" />
                     )}
-                    <span>{savedSuccess ? 'Saved to Your Profile! 🎉' : 'Save Impact to Dashboard'}</span>
+                    <span>{savedSuccess ? 'Saved to Your Profile! 🎉' : 'Calculate & Save Impact to Dashboard'}</span>
                   </button>
                 </div>
 

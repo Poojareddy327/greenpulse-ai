@@ -21,10 +21,15 @@ describe('Calculator Component', () => {
 
   it('allows user to input data', () => {
     renderWithRouter(<Calculator />)
-    const inputs = screen.getAllByRole('spinbutton')
+    const inputs = screen.queryAllByRole('spinbutton')
     if (inputs.length > 0) {
       fireEvent.change(inputs[0], { target: { value: '100' } })
       expect(inputs[0].value).toBe('100')
+    } else {
+      const sliders = screen.getAllByRole('slider')
+      expect(sliders.length).toBeGreaterThan(0)
+      fireEvent.change(sliders[0], { target: { value: '100' } })
+      expect(sliders[0].value).toBe('100')
     }
   })
 

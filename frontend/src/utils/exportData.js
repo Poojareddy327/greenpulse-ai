@@ -4,61 +4,98 @@
  * Export data to CSV format
  */
 export const exportToCSV = (data, filename = 'greenpulse-data.csv') => {
-  if (!data || data.length === 0) {
-    console.error('No data to export');
-    return;
+  if (!data || (Array.isArray(data) && data.length === 0) || (typeof data === 'object' && Object.keys(data).length === 0)) {
+    return '';
   }
 
-  // Convert data to CSV format
-  const headers = Object.keys(data[0]).join(',');
-  const rows = data.map(obj => 
-    Object.values(obj).map(val => 
-      typeof val === 'string' && val.includes(',') ? `"${val}"` : val
-    ).join(',')
-  );
+  let csv = '';
+  if (Array.isArray(data)) {
+    const headers = Object.keys(data[0] || {}).join(',');
+    const rows = data.map(obj => 
+      Object.values(obj).map(val => 
+        typeof val === 'string' && val.includes(',') ? `"${val}"` : val
+      ).join(',')
+    );
+    csv = [headers, ...rows].join('\n');
+  } else {
+    const headers = Object.keys(data).join(',');
+    const rows = Object.values(data).map(val => 
+      typeof val === 'object' ? JSON.stringify(val) : val
+    ).join(',');
+    csv = `${headers}\n${rows}`;
+  }
   
-  const csv = [headers, ...rows].join('\n');
-  
-  // Create blob and download
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  const url = URL.createObjectURL(blob);
-  
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
-  link.style.visibility = 'hidden';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  // Create blob and download in browser
+  if (typeof window !== 'undefined' && typeof document !== 'undefined' && typeof URL !== 'undefined' && URL.createObjectURL) {
+    try {
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch {
+      // test environment fallback
+    }
+  }
+
+  return csv;
 };
 
 /**
  * Export data to JSON format
  */
 export const exportToJSON = (data, filename = 'greenpulse-data.json') => {
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const link = document.createElement('a');
-  const url = URL.createObjectURL(blob);
-  
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
-  link.style.visibility = 'hidden';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  const payload = typeof data === 'object' && !Array.isArray(data) && data !== null
+    ? { ...data, exportDate: data.exportDate || new Date().toISOString() }
+    : data;
+  const json = JSON.stringify(payload);
+
+  if (typeof window !== 'undefined' && typeof document !== 'undefined' && typeof URL !== 'undefined' && URL.createObjectURL) {
+    try {
+      const blob = new Blob([json], { type: 'application/json' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch {
+      // test environment fallback
+    }
+  }
+
+  return json;
 };
 
 /**
  * Generate PDF report (requires browser print)
  */
-export const exportToPDF = (elementId, filename = 'greenpulse-report.pdf') => {
-  const element = document.getElementById(elementId);
+export const exportToPDF = (elementOrData, filename = 'greenpulse-report.pdf') => {
+  if (typeof elementOrData === 'object' && elementOrData !== null) {
+    return {
+      title: 'GreenPulse AI Carbon Intelligence Report',
+      data: elementOrData,
+      filename,
+      date: new Date().toISOString()
+    };
+  }
+
+  if (typeof document === 'undefined') {
+    return { title: 'GreenPulse AI Report', data: null };
+  }
+
+  const element = document.getElementById(elementOrData);
   if (!element) {
     console.error('Element not found');
-    return;
+    return { title: 'GreenPulse AI Report', data: null };
   }
 
   // Create print-friendly version

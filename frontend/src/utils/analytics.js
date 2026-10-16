@@ -216,4 +216,42 @@ export const initAnalytics = () => {
   });
 };
 
+// Standalone exported analytics functions for testing and lightweight tracking
+let pageViewsList = [];
+let eventsList = [];
+let errorsList = [];
+
+export const trackPageView = (page) => {
+  const data = { page, timestamp: Date.now() };
+  pageViewsList.push(data);
+  return data;
+};
+
+export const trackEvent = (eventData) => {
+  const data = { ...eventData, timestamp: Date.now() };
+  eventsList.push(data);
+  return data;
+};
+
+export const trackError = (error, context = {}) => {
+  const data = {
+    message: error?.message || 'Unknown error',
+    stack: error?.stack,
+    context: context || {},
+    timestamp: Date.now()
+  };
+  errorsList.push(data);
+  return data;
+};
+
+export const getAnalytics = () => ({
+  pageViews: pageViewsList.length,
+  events: eventsList.length,
+  errors: errorsList.length,
+  performance: {
+    pageLoadTime: performanceMonitor?.metrics?.pageLoadTime || 0,
+    apiCalls: performanceMonitor?.metrics?.apiCalls?.length || 0
+  }
+});
+
 export default performanceMonitor;

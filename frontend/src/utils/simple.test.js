@@ -35,7 +35,7 @@ describe('Utility Functions', () => {
 
   describe('Data Transformations', () => {
     it('should format numbers with commas', () => {
-      const formatNumber = (num) => num.toLocaleString()
+      const formatNumber = (num) => num.toLocaleString('en-US')
       expect(formatNumber(1000)).toBe('1,000')
       expect(formatNumber(1000000)).toBe('1,000,000')
     })
