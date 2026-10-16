@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { TrendingDown, BarChart3, Zap, Users, ArrowRight, Activity, Target, Brain } from 'lucide-react'
+import { TrendingDown, BarChart3, Zap, Users, ArrowRight, Activity, Target, Brain, LayoutDashboard, UserPlus } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
 import InteractiveCarbonWheel from '../components/InteractiveCarbonWheel'
 import { useState } from 'react'
 
 const Home = () => {
+  const { user } = useAuth()
   const stats = [
     { icon: Users, label: 'Active Users', value: '50K+', color: 'text-primary drop-shadow-lg' },
     { icon: TrendingDown, label: 'CO₂ Tracked', value: '2.5M kg', color: 'text-secondary drop-shadow-lg' },
@@ -123,62 +125,20 @@ const Home = () => {
               Calculate My Impact 
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-            <Link to="/dashboard" className="btn-secondary flex items-center gap-2 text-lg px-10">
-              View Carbon Dashboard
-            </Link>
+            {user ? (
+              <Link to="/dashboard" className="btn-secondary flex items-center gap-2 text-lg px-10">
+                <LayoutDashboard className="w-5 h-5" />
+                View Carbon Dashboard
+              </Link>
+            ) : (
+              <Link to="/register" className="btn-secondary flex items-center gap-2 text-lg px-10">
+                <UserPlus className="w-5 h-5" />
+                Sign Up / Register
+              </Link>
+            )}
           </motion.div>
 
-          {/* Enhanced Stats Grid with Analytics Theme */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-          >
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              const colors = ['#2563EB', '#7C3AED', '#F97316', '#2563EB']
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  transition={{ 
-                    delay: 1 + index * 0.1,
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    y: -10,
-                    rotateZ: [0, -5, 5, 0],
-                    transition: { duration: 0.3 }
-                  }}
-                  className="stat-card neon-border cursor-pointer"
-                  style={{
-                    boxShadow: `0 0 30px ${colors[index]}40, 0 0 60px ${colors[index]}20`
-                  }}
-                >
-                  <div className="relative z-10">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      <Icon className={`w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 ${stat.color}`} />
-                    </motion.div>
-                    <motion.div 
-                      className="text-2xl md:text-3xl font-bold mb-1"
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-xs md:text-sm text-textLight font-medium">{stat.label}</div>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
+          {/* Features Section with Carbon Analytics Focus */}
         </div>
       </section>
 
@@ -236,16 +196,18 @@ const Home = () => {
         </div>
       </section>
 
+
       {/* Ultra CTA Section */}
       <section className="relative py-20 px-4">
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-bgDark/30" />
-        
+
+        {/* CTA Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden neon-border z-10"
+          className="max-w-4xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden neon-border z-10 mb-16"
         >
           <div className="absolute inset-0 bg-gradient-analytics opacity-5" />
           <div className="shimmer absolute inset-0" />
@@ -267,14 +229,53 @@ const Home = () => {
               <p className="text-lg md:text-xl text-textLight mb-8">
                 Join thousands analyzing their emissions. Track trends. Forecast reductions. Build low-carbon habits. 📊⚡
               </p>
-              <Link to="/register" className="btn-primary inline-flex items-center gap-2 group text-lg px-10">
-                Get Started Free 
+              <Link to={user ? "/dashboard" : "/register"} className="btn-primary inline-flex items-center gap-2 group text-lg px-10">
+                {user ? "Go to Dashboard" : "Get Started Free"} 
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </Link>
             </motion.div>
           </div>
         </motion.div>
+
+        {/* Stats Grid - Total Down / Bottom of page */}
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+          >
+            {stats.map((stat, index) => {
+              const Icon = stat.icon
+              const colors = ['#2563EB', '#7C3AED', '#F97316', '#2563EB']
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
+                  whileHover={{ scale: 1.1, y: -10, rotateZ: [0, -5, 5, 0], transition: { duration: 0.3 } }}
+                  className="stat-card neon-border cursor-pointer"
+                  style={{ boxShadow: `0 0 30px ${colors[index]}40, 0 0 60px ${colors[index]}20` }}
+                >
+                  <div className="relative z-10">
+                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
+                      <Icon className={`w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 ${stat.color}`} />
+                    </motion.div>
+                    <motion.div className="text-2xl md:text-3xl font-bold mb-1" animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                      {stat.value}
+                    </motion.div>
+                    <div className="text-xs md:text-sm text-textLight font-medium">{stat.label}</div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
       </section>
+
     </div>
   )
 }
